@@ -1,0 +1,58 @@
+<%-- 
+    Document   : index.jsp
+    Created on : Jul 6, 2017, 9:12:34 PM
+    Author     : bean51591
+--%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>ThatsMyJam</title>
+
+        <!-- Bootstrap core CSS  -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/loginStyle.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="banner-text">
+            <h2>Thats My Jam!</h2>
+            <p>Welcome to our music store</p>
+        </div>	
+        <section class="login-block">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 login-sec">
+                        <h2 class="text-center">Login</h2>
+                                <!-- Needs to redirect to the servlet at some point  -->
+                        <form method="post" action="/ThatsMyJam_/homepage.jsp"  class="form-horizontal" role="form" align="center">
+                            <div class="form-group">
+                                <label for="username" class="text-uppercase">Username</label>
+                                <input type="text" class="form-control" placeholder="Username">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-uppercase">Password</label>
+                                <input type="password" class="form-control" placeholder="Password">
+                            </div>
+                            <div class="form-check">
+                                <button type="submit" name="login" class="btn btn-login float-right">Login</button>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" name="newAcct"class="btn btn-newAcct float-bottom">Create an Account</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-8 banner-sec">	   
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Bootstrap core Javascript and jQuery  -->
+        <!-- Placed at the end for faster loading of pages -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+    </body>
+</html>
