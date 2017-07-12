@@ -11,7 +11,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>ThatsMyJam</title>
+        <title>That's My Jam</title>
 
         <!-- Bootstrap core CSS  -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -19,7 +19,7 @@
     </head>
     <body>
         <div class="banner-text">
-            <h2>Thats My Jam!</h2>
+            <h2>That's My Jam!</h2>
             <p>Welcome to our music store</p>
         </div>	
         <section class="login-block">
