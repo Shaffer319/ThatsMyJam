@@ -28,10 +28,10 @@
                     <div class="col-md-4 login-sec">
                         <h2 class="text-center">Login</h2>
                                 <!-- Needs to redirect to the servlet at some point  -->
-                        <form method="post" action="/ThatsMyJam_/homepage.jsp"  class="form-horizontal" role="form" align="center">
+                        <form method="post" action="homepage.jsp"  class="form-horizontal" role="form" align="center">
                             <div class="form-group">
                                 <label for="username" class="text-uppercase">Username</label>
-                                <input type="text" class="form-control" placeholder="Username">
+                                <input type="email" class="form-control" placeholder="Username">
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-uppercase">Password</label>
@@ -40,6 +40,8 @@
                             <div class="form-check">
                                 <button type="submit" name="login" class="btn btn-login float-right">Login</button>
                             </div>
+                        </form>
+                        <form method="get" action="/ThatsMyJam/homepage.jsp" class="form-horizontal" role="form" align="center">
                             <div class="form-group">
                                 <button type="submit" name="newAcct"class="btn btn-newAcct float-bottom">Create an Account</button>
                             </div>
