@@ -28,13 +28,13 @@
                 <div class="row">
                     <div class="col-md-4 login-sec">
                         <h2 class="text-center">Login</h2>
-                                <!-- Needs to redirect to the servlet at some point  -->
+                        
                         <form method="post" action="TestServlet"  class="form-horizontal" role="form" align="center">
                             <input type="hidden" name="action" value="<%= Action.ACTION_LOGIN %>" />
 
                             <div class="form-group">
                                 <label for="username" class="text-uppercase">Username</label>
-                                <input type="text" class="form-control" placeholder="Username">
+                                <input type="email" class="form-control" placeholder="Username">
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-uppercase">Password</label>
