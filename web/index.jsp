@@ -4,6 +4,7 @@
     Author     : bean51591
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="com.thatsmyjam.Action, com.thatsmyjam.URL" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -28,7 +29,9 @@
                     <div class="col-md-4 login-sec">
                         <h2 class="text-center">Login</h2>
                                 <!-- Needs to redirect to the servlet at some point  -->
-                        <form method="post" action="/ThatsMyJam_/homepage.jsp"  class="form-horizontal" role="form" align="center">
+                        <form method="post" action="TestServlet"  class="form-horizontal" role="form" align="center">
+                            <input type="hidden" name="action" value="<%= Action.ACTION_LOGIN %>" />
+
                             <div class="form-group">
                                 <label for="username" class="text-uppercase">Username</label>
                                 <input type="text" class="form-control" placeholder="Username">
@@ -38,10 +41,15 @@
                                 <input type="password" class="form-control" placeholder="Password">
                             </div>
                             <div class="form-check">
-                                <button type="submit" name="login" class="btn btn-login float-right">Login</button>
+                                <input type="submit" name="login" value="Login"/>
+                                <!--<button type="submit" name="login" class="btn btn-login float-right">Login</button>-->
                             </div>
+                        </form>
+                            
+                        <form method="post" action="TestServlet"  class="form-horizontal" role="form" align="center">
+                            <input type="hidden" name="action" value="<%= Action.ACTION_SIGNUP %>" />
                             <div class="form-group">
-                                <button type="submit" name="newAcct"class="btn btn-newAcct float-bottom">Create an Account</button>
+                                <button type="submit" name="newAcct" class="btn btn-newAcct float-bottom">Create an Account</button>
                             </div>
                         </form>
                     </div>
