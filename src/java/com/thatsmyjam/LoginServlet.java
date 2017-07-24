@@ -34,12 +34,13 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String action = (String)request.getAttribute("action");
+        String action = (String)request.getParameter("action");
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute("user");
         
         if(user == null){
             user = new User();
+            session.setAttribute("user", user);
         }
         
         // Login page is the index page.
@@ -66,8 +67,11 @@ public class LoginServlet extends HttpServlet {
         }
         else if(action.equals(Action.ACTION_SIGNUP))
         {
-            // Create user account
+            // Allow user to create user account 
             url = URL.URL_SIGNUP;
+        }
+        else if(action.equals(Action.ACTION_CREATE_ACCOUNT)){
+            url = handleCreateUser(request, response);
         }
         else if (action.equals(Action.ACTION_ACCOUNT))
         {
@@ -101,6 +105,53 @@ public class LoginServlet extends HttpServlet {
 //            out.println("</body>");
 //            out.println("</html>");
 //        }
+    }
+    
+    /**
+     * Handle the @see Action.ACTION_CREATE_ACCOUNT
+     * @param request
+     * @param response
+     * @return 
+     */
+    public String handleCreateUser(HttpServletRequest request, HttpServletResponse response){
+    
+            // Pull in user info from form
+            String fname = request.getParameter("fname");
+            String lname = request.getParameter("lname");
+            String email = request.getParameter("email");
+            String pass = request.getParameter("pass");
+            String cpass = request.getParameter("cpass");   
+            
+            request.setAttribute("fname", fname);
+            request.setAttribute("lname", lname);
+            request.setAttribute("email", email);          
+            
+            String url = URL.URL_SIGNUP;
+            
+            // Make sure the user info is valid
+            if(!request.getMethod().equalsIgnoreCase("POST")){
+                request.setAttribute("message", "Invalid request mode.");
+            }else            
+            if(fname == null || fname.isEmpty()){
+                request.setAttribute("message", "Invalid First Name.");
+            }else
+            if(lname == null || lname.isEmpty()){
+                request.setAttribute("message", "Invalid Last Name.");
+            }else
+            if(email == null || email.isEmpty()){
+                request.setAttribute("message", "Invalid Email.");
+            }else
+            if(pass == null || pass.isEmpty()){
+                request.setAttribute("message", "Password is invalid.");                
+            }else 
+            if(!pass.equals(cpass)){
+                request.setAttribute("message", "Passwords did not match.");
+            }else{            
+                // Try to create account
+                // Valid
+                url = URL.URL_INDEX;
+            }
+            return url;
     }
     
     /**

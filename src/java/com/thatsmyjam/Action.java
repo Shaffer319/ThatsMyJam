@@ -18,4 +18,6 @@ public class Action {
     public static final String ACTION_INDEX = "index";
     public static final String ACTION_UPDATE_USER = "updateuser";
     public static final String ACTION_ACCOUNT = "account";
+    public static final String ACTION_CREATE_ACCOUNT = "createaccount";
+
 }

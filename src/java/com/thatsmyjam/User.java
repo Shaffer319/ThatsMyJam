@@ -12,6 +12,8 @@ package com.thatsmyjam;
 public class User {
     
     private boolean loggedIn = false;
+    private String firstName;
+    private String lastName;
     private String email;
     
     public User(){
@@ -26,11 +28,28 @@ public class User {
         return this.loggedIn;
     }
     
-    public String getEmail(){
-        return this.email;
+    public void setFirstName(String firstName){
+        this.firstName = firstName;
+    }
+    
+    public String getFirstName(){
+        return firstName;
+    }
+    
+    public void setLastName(String lastName){
+        this.lastName = lastName;
+    }
+    
+    public String getLastName(){
+        return lastName;
     }
     
     public void setEmail(String email){
         this.email = email;
     }
+    
+    public String getEmail(){
+        return email;
+    }
+    
 }

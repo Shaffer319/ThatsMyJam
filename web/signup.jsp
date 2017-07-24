@@ -24,26 +24,34 @@
         <section class="login-block">
             <div class="container">
                 <!--<div class="row">-->
-                    <div class="col-md-4 login-sec">
+                    <div class="login-sec">
                         <h2 class="text-center">Create Account</h2>
+                        <!--<p><%= request.getAttribute("message") %></p>-->
+                        <center><span style="color:red;">${message}</span></center><br/>
                         <form method="post" action="TestServlet"  class="form-horizontal" role="form" align="center">
-                            <input type="hidden" name="action" value="<%= Action.ACTION_SIGNUP %>" />
+                            <input type="hidden" name="action" value="<%= Action.ACTION_CREATE_ACCOUNT %>" />
 
                             <div class="form-group">
-                                <label for="fname" class="text-uppercase">First name: </label>
-                                <input type="fname" class="form-control" name="fname" required><br>
+                                <label for="fname" class="text-uppercase">First name </label>
+                                <input type="fname" id="fname" value="${fname}" class="form-control" name="fname" id="fname" placeholder="Enter First Name" autocomplete="on" required><br>
 
-                                <label for="lname" class="text-uppercase">Last name: </label>
-                                <input type="lname" class="form-control" name="lname" required><br>
+                                <label for="lname" class="text-uppercase">Last name </label>
+                                <input type="lname" id="lname" value="${lname}" class="form-control" name="lname" placeholder="Enter Last Name" required><br>
+
+                                <label for="email" class="text-uppercase">Email</label>
+                                <input type="email" id="email" value="${email}" class="form-control" name="email" placeholder="Enter Email" required>
                             </div>
+                            
                             <div class="form-group">
-                                <label for="password" class="text-uppercase">Password</label>
-                                <input type="password" class="form-control" placeholder="Password" required>
+                                <label for="pass" class="text-uppercase">Password</label>
+                                <input type="password" id="pass" class="form-control" placeholder="Password" name="pass" required>
                             </div>
+
                             <div class="form-group">
-                                <label for="password" class="text-uppercase">Password</label>
-                                <input type="password" class="form-control" placeholder="Password" required>
+                                <label for="cpass" class="text-uppercase">Confirm Password</label>
+                                <input type="password" id="cpass" class="form-control" placeholder="Confirm Password" name="cpass" required>
                             </div>
+                            
                             <div class="form-check">
                                 <input type="submit" class="btn btn-newAcct float-bottom" name="login" value="Sign Up"/>
                                 <!--<button type="submit" name="login" class="btn btn-login float-right">Login</button>-->
