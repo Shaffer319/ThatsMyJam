@@ -15,6 +15,7 @@ public class Action {
     // This will let us change the action string in one place and have the action update everywhere.
     public static final String ACTION_SIGNUP = "signup";
     public static final String ACTION_LOGIN = "login";
+    public static final String ACTION_LOGOUT = "logout";
     public static final String ACTION_INDEX = "index";
     public static final String ACTION_UPDATE_USER = "updateuser";
     public static final String ACTION_ACCOUNT = "account";

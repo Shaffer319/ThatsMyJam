@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
             // 
             url = URL.URL_INDEX;
         }else if(action.equals(Action.ACTION_LOGIN)){
-            
+            String pass = request.getParameter("pass");
             if(true){
                 user.setLoggedIn(true);
             }
@@ -86,6 +86,12 @@ public class LoginServlet extends HttpServlet {
             
             url = URL.URL_ACCOUNT;
         }
+        else if(action.equals(Action.ACTION_LOGOUT)){
+            // Invalidate the session
+            session.invalidate();
+            // send them back to the index/main/login page
+            url = URL.URL_INDEX;
+        }
         
         getServletContext()
             .getRequestDispatcher(url)
@@ -105,6 +111,14 @@ public class LoginServlet extends HttpServlet {
 //            out.println("</body>");
 //            out.println("</html>");
 //        }
+    }
+    
+    public String handleLogin(HttpServletRequest request, HttpServletResponse response){
+        String url = URL.URL_INDEX;
+        
+        request.getAttribute("pass");
+        
+        return url;
     }
     
     /**

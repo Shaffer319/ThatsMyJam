@@ -53,7 +53,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-8 banner-sec">	   
+                    <div class="col-md-8 banner-sec">
                     </div>
                 </div>
             </div>
