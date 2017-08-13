@@ -6,8 +6,11 @@ package com.thatsmyjam;
  * and open the template in the editor.
  */
 
+import com.thatsmyjam.data.ConnectionPool;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.Statement;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +24,19 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(urlPatterns = {"/TestServlet"})
 public class LoginServlet extends HttpServlet {
+
+    @Override
+    public void init() throws ServletException {
+        super.init(); //To change body of generated methods, choose Tools | Templates.
+        // Get the instance here so that it will be cached
+        ConnectionPool connectionPool = ConnectionPool.getInstance();
+        Connection connection = connectionPool.getConnection();
+//        Statement sqlStatement
         
+    }
+        
+    
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -138,32 +153,29 @@ public class LoginServlet extends HttpServlet {
             
             request.setAttribute("fname", fname);
             request.setAttribute("lname", lname);
-            request.setAttribute("email", email);          
+            request.setAttribute("email", email);
             
             String url = URL.URL_SIGNUP;
             
             // Make sure the user info is valid
             if(!request.getMethod().equalsIgnoreCase("POST")){
                 request.setAttribute("message", "Invalid request mode.");
-            }else            
-            if(fname == null || fname.isEmpty()){
+            }else if(fname == null || fname.isEmpty()){
                 request.setAttribute("message", "Invalid First Name.");
-            }else
-            if(lname == null || lname.isEmpty()){
+            }else if(lname == null || lname.isEmpty()){
                 request.setAttribute("message", "Invalid Last Name.");
-            }else
-            if(email == null || email.isEmpty()){
+            }else if(email == null || email.isEmpty()){
                 request.setAttribute("message", "Invalid Email.");
-            }else
-            if(pass == null || pass.isEmpty()){
+            }else if(pass == null || pass.isEmpty()){
                 request.setAttribute("message", "Password is invalid.");                
-            }else 
-            if(!pass.equals(cpass)){
+            }else if(!pass.equals(cpass)){
                 request.setAttribute("message", "Passwords did not match.");
             }else{            
                 // Try to create account
                 // Valid
-                url = URL.URL_INDEX;
+                
+                // On success
+                url = URL.URL_SIGNUP;
             }
             return url;
     }
