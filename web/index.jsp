@@ -41,7 +41,7 @@
                                 <input type="password" class="form-control" placeholder="Password">
                             </div>
                             <div class="form-check">
-                                <input type="submit" name="login" value="Login"/>
+                                <input type="submit" name="login" class="btn btn-login float-right" value="Login"/>
                                 <!--<button type="submit" name="login" class="btn btn-login float-right">Login</button>-->
                             </div>
                         </form>
