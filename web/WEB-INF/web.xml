@@ -26,16 +26,16 @@
         </user-data-constraint>
     </security-constraint>
     
-<!--    <security-constraint>
+    <security-constraint>
         <web-resource-collection>
-              <web-resouce-name>Protected Area</web-resouce-name>
-              <url-pattern>/admin/*</url-pattern>
+            <web-resource-name>Protected Area</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
           </web-resource-collection>
           <auth-constraint>
-              <role-name>service</role-name>
-              <role-name>admin</role-name>
+            <role-name>service</role-name>
+            <role-name>admin</role-name>
           </auth-constraint>
-    </security-constraint>-->
+    </security-constraint>
     
 <!--    <login-config>
         <auth-method>BASIC</auth-method>
