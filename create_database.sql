@@ -51,19 +51,19 @@ create table Playlist (
 )
 
 insert into Artist(ArtistName, ImageName)
-values ('Halsey', 'Halsey.png')
+values ('Halsey', 'Halsey.jpg')
 
 insert into Artist(ArtistName, ImageName)
-values ('alt-J', 'alt-J.png')
+values ('alt-J', 'alt-J.jpg')
 
 insert into Artist(ArtistName, ImageName)
-values ('Metallica', 'Metallica.png')
+values ('Metallica', 'Metallica.jpg')
 
 insert into Artist(ArtistName, ImageName)
-values ('Kid Cudi', 'Kid_Cudi.png')
+values ('Kid Cudi', 'Kid_Cudi.jpg')
 
 insert into Artist(ArtistName, ImageName)
-values ('Vicetone', 'Vicetone.png')
+values ('Vicetone', 'Vicetone.jpg')
 
 insert into Artist(ArtistName, ImageName)
 values ('Run the Jewels', 'Run_the_Jewels.png')
@@ -125,7 +125,7 @@ insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Hopeless', '1', '2', '2017')
 
 insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Relaxer', '2', '2017', 'Relaxer.png')
+values ('Relaxer', '2', '2017', 'Relaxer.jpg')
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('3WW', '2', '3', '2017')
@@ -145,7 +145,7 @@ insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Pleader', '2', '3', '2017')
 
 insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('This Is All Yours', '2', '2014', 'TIAY.png')
+values ('This Is All Yours', '2', '2014', 'TIAY.jpg')
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Intro', '2', '4', '2014')
@@ -175,7 +175,7 @@ insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Leaving Nara', '2', '4', '2014')
 
 insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Ride the Lightning', '3', '1984', 'RtL.png')
+values ('Ride the Lightning', '3', '1984', 'RtL.jpg')
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Fight Fire with Fire', '3', '5', '1984')
@@ -195,7 +195,7 @@ insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('The Call of Ktulu', '3', '5', '1984')
 
 insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Load', '3', '1996', 'Load.png')
+values ('Load', '3', '1996', 'Load.jpg')
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Aint Mine', '3', '6', '1996')
@@ -227,7 +227,7 @@ insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('The Outlaw Torn', '3', '6', '1996')
 
 insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Man on the Moon II: The Legend of Mr. Rager', '4', '2010', 'MotM.png')
+values ('Man on the Moon II: The Legend of Mr. Rager', '4', '2010', 'MotM.jpg')
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Scott Mescudi vs. the World', '4', '7', '2010')
@@ -261,7 +261,7 @@ insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Trapped In My Mind', '4', '7', '2010')
 
 insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Aurora EP', '5', '2016', 'Aurora.png')
+values ('Aurora EP', '5', '2016', 'Aurora.jpg')
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Bright Side', '5', '8', '2016')
@@ -303,7 +303,7 @@ insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Creown (3D Remix)', '6', '9', '2015')
 
 insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Run the Jewels 3', '6', '2016', 'RtJ3.png')
+values ('Run the Jewels 3', '6', '2016', 'RtJ3.jpg')
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Down', '6', '10', '2016')

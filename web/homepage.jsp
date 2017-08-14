@@ -24,7 +24,7 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Playlists</a></li>
+                    <li><a href="#">My Playlists</a></li>
                     <li><a href="#">Top Albums</a></li>
                 </ul>
                 <form class="navbar-form navbar-left">

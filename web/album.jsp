@@ -1,7 +1,7 @@
 <%-- 
     Document   : HomePage
     Created on : Jul 6, 2017, 11:13:33 PM
-    Author     : bean51591
+    Author     : cpournaras11
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -24,7 +24,7 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#">Playlists</a></li>
+                    <li><a href="#">My Playlists</a></li>
                     <li><a href="#">Top Albums</a></li>
                 </ul>
                 <form class="navbar-form navbar-left">
