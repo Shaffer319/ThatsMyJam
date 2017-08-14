@@ -10,7 +10,7 @@ use thatsmyjam;
 create table User (
   UserID INT NOT NULL AUTO_INCREMENT,
   Email VARCHAR(50),
-  Password VARCHAR(50),
+  Password VARCHAR(100),
   FirstName VARCHAR(50),
   LastName VARCHAR(50),
   # Confirmed BOOLEAN, We could add a confirmation email when making an account 

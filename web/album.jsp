@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <link href="css/homepage.css" rel="stylesheet">
-
+        <jsp:useBean id="infoBean" class="com.thatsmyjam" scope="request" />
     </head>
     <body data-spy="scroll">
         <nav class="navbar navbar-inverse">
@@ -44,7 +44,12 @@
             </div>
         </nav>
         <div class="container">
-
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                <a class="thumbnail">
+                    <img class="img-responsive" src="<jsp" alt="" width="500" height="500">
+                </a>
+            </div>
+            
             
         </div>
             <!-- Bootstrap core Javascript and jQuery  -->
