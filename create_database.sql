@@ -13,8 +13,13 @@ create table User (
   Password VARCHAR(50),
   FirstName VARCHAR(50),
   LastName VARCHAR(50),
+  # Confirmed BOOLEAN, We could add a confirmation email when making an account 
+  # just an idea ill leave this commented out for now
   PRIMARY KEY(UserID) 
 );
+
+insert into User(Email, Password, FirstName, LastName)
+values ('tester@test.com', 'password', 'Tester', 'Tester')
 
 create table Artist (
   ArtistID INT NOT NULL AUTO_INCREMENT,
