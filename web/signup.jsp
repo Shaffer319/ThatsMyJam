@@ -28,7 +28,7 @@
                         <h2 class="text-center">Create Account</h2>
                         <!--<p><%= request.getAttribute("message") %></p>-->
                         <center><span style="color:red;">${message}</span></center><br/>
-                        <form method="post" action="TestServlet"  class="form-horizontal" role="form" align="center">
+                        <form method="post" action="ThatsMyJam"  class="form-horizontal" role="form" align="center">
                             <input type="hidden" name="action" value="<%= Action.ACTION_CREATE_ACCOUNT %>" />
 
                             <div class="form-group">

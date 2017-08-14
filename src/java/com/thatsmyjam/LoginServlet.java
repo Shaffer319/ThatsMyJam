@@ -22,20 +22,17 @@ import javax.servlet.http.HttpSession;
  *
  * @author bean51591
  */
-@WebServlet(urlPatterns = {"/TestServlet"})
+@WebServlet(urlPatterns = {"/ThatsMyJam"})
 public class LoginServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
         super.init(); //To change body of generated methods, choose Tools | Templates.
         // Get the instance here so that it will be cached
-        ConnectionPool connectionPool = ConnectionPool.getInstance();
-        Connection connection = connectionPool.getConnection();
-//        Statement sqlStatement
+//        ConnectionPool connectionPool = ConnectionPool.getInstance();
+//        Connection connection = connectionPool.getConnection();
         
-    }
-        
-    
+    }    
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

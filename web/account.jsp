@@ -18,7 +18,7 @@
         <p>
             Display user account info and allow then to change it.
         </p>
-        <form action="TestServlet" >
+        <form action="ThatsMyJam" >
             <input type="hidden" name="action" value="<%= Action.ACTION_UPDATE_USER %>"
             <input type="fname" />
             <input type="lname" />

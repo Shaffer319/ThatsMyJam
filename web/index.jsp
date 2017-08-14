@@ -29,7 +29,7 @@
                     <div class="col-md-4 login-sec">
                         <h2 class="text-center">Login</h2>
                         
-                        <form method="post" action="TestServlet"  class="form-horizontal" role="form" align="center">
+                        <form method="post" action="ThatsMyJam"  class="form-horizontal" role="form" align="center">
                             <input type="hidden" name="action" value="<%= Action.ACTION_LOGIN %>" />
 
                             <div class="form-group">

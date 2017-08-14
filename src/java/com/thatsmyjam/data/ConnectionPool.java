@@ -16,8 +16,8 @@ public class ConnectionPool {
 //            dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/murach");
             dataSource = (DataSource) ic.lookup("java:/comp/env/jdbc/thatsmyjam");
 
-        } catch (NamingException e) {
-            System.out.println(e);
+        } catch (Exception e) {
+            System.err.println(e);
         }
     }
 

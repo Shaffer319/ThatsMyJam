@@ -4,3 +4,12 @@ Netbeans
 
 https://netbeans.org/kb/articles/mysql.html#tutorials
 MySql
+
+
+SSL
+keytool -genkey -alias tomcat -keyalg RSA
+password sesame
+
+server.xml
+<Connector port="8443 ... 
+    keystoreFile="${user.home}/.keystore" keystorePass="sesame"/>
