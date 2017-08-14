@@ -6,20 +6,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.thatsmyjam.Action, com.thatsmyjam.URL" %>
 <jsp:include page="/includes/header.jsp" />
-<!--<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>That's My Jam</title>
-
-         Bootstrap core CSS  
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/loginStyle.css" rel="stylesheet">
-    </head>
-    <body>-->
     <div class="banner-text">
         <h2>That's My Jam!</h2>
         <p>Welcome to our music store</p>
@@ -29,6 +16,7 @@
             <div class="row">
                 <div class="col-md-4 login-sec">
                     <h2 class="text-center">Login</h2>
+
 
                     <form method="post" action="ThatsMyJam"  class="form-horizontal" role="form" align="center">
                         <input type="hidden" name="action" value="<%= Action.ACTION_LOGIN %>" />
@@ -54,14 +42,14 @@
                         </div>
                     </form>
                 </div>
+               
                 <div class="col-md-8 banner-sec">
+                </div>
+
                 </div>
             </div>
         </div>
     </section>
 
  <jsp:include page="/includes/footer.jsp" />
-<!--
-    </body>
-</html>
--->
+
