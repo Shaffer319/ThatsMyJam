@@ -11,13 +11,13 @@
     </session-config>
     
     <!-- 
-        Enable HTTPS on whole the site
+        Enable HTTPS on whole the site 
     -->
     
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Thats My Jam</web-resource-name>
-            <url-pattern>/ThatsMyJam/*</url-pattern>
+            <url-pattern>/</url-pattern>
             <http-method>GET</http-method>
             <http-method>POST</http-method>
         </web-resource-collection>        
@@ -26,19 +26,22 @@
         </user-data-constraint>
     </security-constraint>
     
-    <security-constraint>
+<!--    <security-constraint>
         <web-resource-collection>
-            <web-resource-name>Protected Area</web-resource-name>
-            <url-pattern>/admin/*</url-pattern>
+              <web-resouce-name>Protected Area</web-resouce-name>
+              <url-pattern>/admin/*</url-pattern>
           </web-resource-collection>
           <auth-constraint>
-            <role-name>service</role-name>
-            <role-name>admin</role-name>
+              <role-name>service</role-name>
+              <role-name>admin</role-name>
           </auth-constraint>
-    </security-constraint>
+    </security-constraint>-->
     
 <!--    <login-config>
         <auth-method>BASIC</auth-method>
         <realm-name>Basic Authentication</realm-name>
     </login-config>    -->
+    <welcome-file-list>
+        <welcome-file>ThatsMyJam</welcome-file>
+    </welcome-file-list>
 </web-app>
