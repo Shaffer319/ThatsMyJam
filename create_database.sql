@@ -39,7 +39,7 @@ create table Album (
 
 create table Song (
   SongID INT NOT NULL AUTO_INCREMENT,
-  SongName VARCHAR(30) NOT NULL,
+  SongName VARCHAR(100) NOT NULL,
   ArtistID INT,
   AlbumID INT,
   ReleaseYear INT,
@@ -49,7 +49,7 @@ create table Song (
 
 create table Playlist (
   PlaylistID INT NOT NULL AUTO_INCREMENT,
-  UserID VARCHAR(15) NOT NULL,
+  UserID INT NOT NULL,
   PlaylistName VARCHAR(30) NOT NULL,
   PRIMARY KEY(PlaylistID),
   FOREIGN KEY(UserID) REFERENCES User(UserID)
