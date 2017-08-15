@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 
 /**
  *
- * @author cpour
+ * @author cpournaras11
  */
 public class InfoBean implements Serializable {
 

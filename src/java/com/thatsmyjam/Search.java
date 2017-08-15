@@ -6,7 +6,6 @@
 package com.thatsmyjam;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.ResultSet;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -18,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author cpour
+ * @author cpournaras11
  */
 @WebServlet(name = "Search", urlPatterns = {"/Search"})
 public class Search extends HttpServlet {
