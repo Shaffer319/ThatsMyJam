@@ -5,8 +5,16 @@
  */
 package com.thatsmyjam;
 
+import com.thatsmyjam.data.ConnectionPool;
+import com.thatsmyjam.data.DBUtil;
 import java.io.Serializable;
+import java.sql.Array;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -16,6 +24,7 @@ public class InfoBean implements Serializable {
 
     private String artistID;
     private String albumID;
+    private boolean isArtist;
     
     public InfoBean()
     {
@@ -62,44 +71,101 @@ public class InfoBean implements Serializable {
     }
     
     /**
-     * Gets the path to the image for the artist using the artist id stored in the bean
+     * Getter method for isArtist
      * 
-     * @return - The Artist's image path
+     * @return - If the infoBean is for an Artist, otherwise Album
      */
-    public String getArtistImageLoc()
+    public boolean getIsArtist()
     {
-        String query = "select ImageName from Artist where ArtistID = " + artistID;
-         
-        return getImageLoc(query);
-    }
-            
-    /**
-     * Gets the path to the image for the album using the album id stored in the bean
-     * @return 
-     */
-    public String getAlbumImageLoc()
-    {
-        String query = "select ImageName from Album where AlbumID = " + albumID;
-        
-        return getImageLoc(query);
+        return isArtist;
     }
     
     /**
-     * Returns the image path based on the query passed in
-     * @param query - Query to find the image of an Artist/Album
-     * @return Relative path to the image
+     * Setter method for isArtist
+     * 
+     * @param isArtist - Boolean to set
      */
-    public String getImageLoc(String query)
+    public void setIsArtist(boolean isArtist)
     {
+        this.isArtist = isArtist;
+    }
+    
+    /**
+     * Gets an HTML formatted section for the album/artist id stored in the bean
+     * 
+     * @return - HTML to display to the user
+     */
+    public String getPage()
+    {
+        String query = "";
+        
+        if(isArtist)
+        {
+            query = "SELECT Album.AlbumID, Album.AlbumName, Album.ReleaseYear, "
+                    + "Album.ImageName as AlbumImage, Artist.ImageName, as ArtistImage, Artist.ArtistName"
+                    + "FROM Album INNER JOIN Artist ON Artist.ArtistID = Album.ArtistID "
+                    + "WHERE ArtistID = " + artistID;
+        }
+        else 
+        {
+            query = "SELECT Artist.ArtistID, Artist.ArtistName, Album.ReleaseYear, "
+                    + "Album.ImageName, Album.AlbumName FROM Artist INNER JOIN Album ON "
+                    + "Album.ArtistID = Artist.ArtistID WHERE AlbumID = " + albumID;
+        }
+        
+        String html = "";
+        
         try
         {
-            ResultSet results = DatabaseConnector.getInstance().executeQuery(query);
-            String path = "images/" + results.getString("ImageName");
-            return path;
+            ResultSet results = DBUtil.executeSelect(query);
+            
+            String image = "<div class=\"col-lg-3 col-md-4 col-xs-6 thumb\">"
+                    + "<img class=\"img-responsive\" src=\"SOURCE\" alt=\"ALT\" "
+                    + "width=\"500\" height=\"500\"></div>";
+            
+            if(isArtist)
+            {
+                boolean first = true;
+                while(results.next())
+                {
+                    if(first)
+                    {
+                        String artist = results.getString("ArtistName");
+                        String newImage = image.replace("SOURCE", "images/" + results.getString("ArtistImage"));
+                        newImage = newImage.replace("ALT", artist);
+                        first = false;
+                        html += newImage + "<h1>" + artist + "</h1>";
+                        
+                        image = image.replaceAll("500", "350");
+                    }
+                    
+                    // TODO Formatting html output
+                    html += image.replace("SOURCE", "images/" + results.getString("AlbumImage"));
+                    html += results.getString("AlbumName") + " " + results.getString("ReleaseYear");
+                }
+            }
+            else
+            {
+                html += "<h1><a href=/Search?artist=" + results.getString("ArtistID") 
+                        + ">" + results.getString(html) + "</a></h1>";
+                
+                query = "SELECT SongName FROM Song INNER JOIN Album ON Album.AlbumID = Song.AlbumID WHERE AlbumID = " + albumID;
+                
+                results = DBUtil.executeSelect(query);
+                
+                // TODO Formatting HTML output
+                html += "<ul style=\"list-style:none;\">";
+                while(results.next())
+                {
+                    html += "<li>" + results.getString("SongName") + "</li>";
+                }
+                html += "</ul>";
+            }
         }
         catch(Exception e)
         {
-            return "";
+            html = "<p>An error occurred while processing the request</p>";
         }
+        return html;
     }
 }

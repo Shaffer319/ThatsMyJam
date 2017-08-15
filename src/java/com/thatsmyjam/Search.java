@@ -60,14 +60,15 @@ public class Search extends HttpServlet {
         {
             try
             {
+                // TODO
                 String query = "select ArtistName from Artist where ArtistName like '%{" + request.getAttribute("search") + "}%'";
-                ResultSet artistsFound = DatabaseConnector.getInstance().executeQuery(query);
+                ResultSet artistsFound = null;//DC.getInstance().executeQuery(query);
 
                 query = "select AlbumName from Album where AlbumName like '%{" + request.getAttribute("search") + "}%'";
-                ResultSet albumsFound = DatabaseConnector.getInstance().executeQuery(query);
+                ResultSet albumsFound = null;//DC.getInstance().executeQuery(query);
 
                 query = "select SongName from Song where SongName like '%{" + request.getAttribute("search") + "}%'";
-                ResultSet songsFound = DatabaseConnector.getInstance().executeQuery(query);
+                ResultSet songsFound = null;//DC.getInstance().executeQuery(query);
 
                 // TODO Use ResultSet to generate html/jsp to display to the user on search results page
                 
