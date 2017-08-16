@@ -1,4 +1,4 @@
-package com.thatsmyjam;
+package com.thatsmyjam.servlets;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -6,6 +6,9 @@ package com.thatsmyjam;
  * and open the template in the editor.
  */
 
+import com.thatsmyjam.constants.Action;
+import com.thatsmyjam.constants.URL;
+import com.thatsmyjam.data.User;
 import com.thatsmyjam.data.ConnectionPool;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -23,7 +26,7 @@ import javax.servlet.http.HttpSession;
  * @author bean51591
  */
 @WebServlet(urlPatterns = {"/ThatsMyJam"})
-public class LoginServlet extends HttpServlet {
+public class Login extends HttpServlet {
 
     @Override
     public void init() throws ServletException {

@@ -12,7 +12,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <jsp:useBean id="infoBean" class="com.thatsmyjam.InfoBean" scope="request" />
+        <jsp:useBean id="infoBean" class="com.thatsmyjam.beans.InfoBean" scope="request" />
         <link href="css/homepage.css" rel="stylesheet">
 
     </head>
@@ -53,9 +53,6 @@
 
                 <%=infoBean.getAlbumGallery()%>
                 
-                <p>Use the .navbar-form class to vertically align form elements (same padding as links) inside the navbar.</p>
-                <p>The .input-group class is a container to enhance an input by adding an icon, text or a button in front or behind it as a "help text".</p>
-                <p>The .input-group-btn class attaches a button next to an input field. This is often used as a search bar:</p>
             </div>
             <!-- Bootstrap core Javascript and jQuery  -->
             <!-- Placed at the end for faster loading of pages -->

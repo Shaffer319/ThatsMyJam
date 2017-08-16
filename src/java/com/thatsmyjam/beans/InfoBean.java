@@ -3,18 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.thatsmyjam;
+package com.thatsmyjam.beans;
 
-import com.thatsmyjam.data.ConnectionPool;
+import static com.thatsmyjam.constants.Constants.*;
+
 import com.thatsmyjam.data.DBUtil;
 import java.io.Serializable;
-import java.sql.Array;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 
 /**
  *
@@ -27,18 +23,6 @@ public class InfoBean implements Serializable {
     private String artistID;
     private String albumID;
     private boolean isArtist;
-    
-    private final String HREF_REP = "HREF_REPLACE";
-    private final String TYPE_REP = "TYPE_REPLACE";
-    private final String HREF_VAL = "HREF_VALUE";
-    private final String HREF_LINK = "href=\"/Search?" + TYPE_REP + "=" + HREF_VAL + "\"";
-    private final String SRC_REP = "SOURCE_REPLACE";
-    private final String ALT_REP = "ALT_REPLACE";
-    private final String SIZE_REP = "SIZE_REPLACE";
-    private final String IMAGE = "<div class=\"col-lg-3 col-md-4 col-xs-6 thumb\">"
-                         + "<a class=\"thumbnail\" " + HREF_REP + ">"
-                         + "<img class=\"img-responsive\" src=\"images/" + SRC_REP + "\" "
-                         + "alt=\"" + ALT_REP + "\" " + SIZE_REP + "></a></div>";
     
     /**
      * Constructor
@@ -153,10 +137,9 @@ public class InfoBean implements Serializable {
                     }
                     String albumImage = IMAGE.replace(SRC_REP, "images/" + results.getString("AlbumImage"))
                                              .replace(ALT_REP, results.getString("AlbumName"))
-                                             .replace(HREF_REP, HREF_LINK)
                                              .replace(TYPE_REP, "album")
                                              .replace(HREF_VAL, results.getString("AlbumID"))
-                                             .replace(SIZE_REP, "width=\"350\" height=\"350\"");
+                                             .replaceAll(PIXEL_REP, "350");
                     // TODO Formatting html output
                     html += albumImage + results.getString("AlbumName") + " " + results.getString("ReleaseYear");
                 }
@@ -185,7 +168,7 @@ public class InfoBean implements Serializable {
         catch(SQLException e)
         {
             System.out.println(e);
-            html = "<p>An error occurred while processing the request</p>";
+            html = "<p>An error occurred while processing the request\n" + e + "</p>";
         }
         finally
         {
@@ -211,9 +194,8 @@ public class InfoBean implements Serializable {
         {
             while(rs.next())
             {
-                htmlOutput += IMAGE.replace(HREF_REP, HREF_LINK)
-                                   .replace(TYPE_REP, "album")
-                                   .replace(HREF_VAL, rs.getString("AlbumID"))
+                htmlOutput += IMAGE.replace(TYPE_REP, "album")
+                                   .replace(HREF_VAL, rs.getString("AlbumID")) 
                                    .replace(SRC_REP, rs.getString("ImageName"))
                                    .replace(ALT_REP, rs.getString("AlbumName"))
                                    .replace(SIZE_REP, "");
@@ -221,7 +203,7 @@ public class InfoBean implements Serializable {
         }
         catch(SQLException e)
         {
-            System.out.println(e);
+            htmlOutput = "<p>" + e + "</p>";
         }
         finally
         {

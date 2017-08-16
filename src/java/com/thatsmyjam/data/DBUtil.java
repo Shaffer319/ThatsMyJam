@@ -77,12 +77,6 @@ public class DBUtil {
         {
             System.out.println(e);
             return null;
-        } 
-        finally 
-        {
-            DBUtil.closeResultSet(rs);
-            DBUtil.closeStatement(s);
-            pool.freeConnection(connection);
         }
     }
     

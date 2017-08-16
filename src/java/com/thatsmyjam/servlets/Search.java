@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.thatsmyjam;
+package com.thatsmyjam.servlets;
 
+import com.thatsmyjam.beans.InfoBean;
 import com.thatsmyjam.data.DBUtil;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -46,18 +47,28 @@ public class Search extends HttpServlet {
         
         if(artistID != null && !artistID.trim().equals(""))
         {
-            request.getSession().setAttribute("artist", artistID);
+            InfoBean bean = new InfoBean();
+            bean.setArtistID(artistID);
+            bean.setIsArtist(true);
+            
+            request.getSession().setAttribute("infoBean", bean);
             dispatcher = servletContext.getRequestDispatcher("/info.jsp");
             dispatcher.forward(request, response);
+            return;
         }
         
         String albumID = (String)request.getAttribute("album");
         
         if(albumID != null && !albumID.trim().equals(""))
         {
-            request.getSession().setAttribute("album", albumID);
+            InfoBean bean = new InfoBean();
+            bean.setAlbumID(albumID);
+            bean.setIsArtist(false);
+            
+            request.getSession().setAttribute("infoBean", bean);
             dispatcher = servletContext.getRequestDispatcher("/info.jsp");
             dispatcher.forward(request, response);
+            return;
         }
         
         String searchValue = (String)request.getAttribute("search");
