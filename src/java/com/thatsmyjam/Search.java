@@ -5,8 +5,10 @@
  */
 package com.thatsmyjam;
 
+import com.thatsmyjam.data.DBUtil;
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -22,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Search", urlPatterns = {"/Search"})
 public class Search extends HttpServlet {
 
+    private String htmlOutput = "";
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -42,7 +46,8 @@ public class Search extends HttpServlet {
         
         if(artistID != null && !artistID.trim().equals(""))
         {
-            dispatcher = servletContext.getRequestDispatcher("/artist.jsp");
+            request.getSession().setAttribute("artist", artistID);
+            dispatcher = servletContext.getRequestDispatcher("/info.jsp");
             dispatcher.forward(request, response);
         }
         
@@ -50,34 +55,84 @@ public class Search extends HttpServlet {
         
         if(albumID != null && !albumID.trim().equals(""))
         {
-            dispatcher = servletContext.getRequestDispatcher("/album.jsp");
+            request.getSession().setAttribute("album", albumID);
+            dispatcher = servletContext.getRequestDispatcher("/info.jsp");
             dispatcher.forward(request, response);
         }
         
         String searchValue = (String)request.getAttribute("search");
         
-        if(!searchValue.trim().equals(""))
+        if(searchValue != null && !searchValue.trim().equals(""))
         {
             try
             {
-                // TODO
-                String query = "select ArtistName from Artist where ArtistName like '%{" + request.getAttribute("search") + "}%'";
-                ResultSet artistsFound = null;//DC.getInstance().executeQuery(query);
+                htmlOutput = "";
+                
+                String query = "SELECT ArtistID, ArtistName FROM Artist "
+                             + "WHERE ArtistName LIKE '%{" + searchValue + "}%'";
+                ResultSet artistsFound = DBUtil.executeSelect(query);
 
-                query = "select AlbumName from Album where AlbumName like '%{" + request.getAttribute("search") + "}%'";
+                boolean artists, albums, songs;
+                artists = albums = songs = false;
+                
+                // This checks if there is a first record otherwise the Artist section will be skipped
+                if(artistsFound.isBeforeFirst())
+                {
+                    artists = true;
+                    htmlOutput += "<h1> Artists </h1><ul>";
+                    while(artistsFound.next())
+                    {
+                        htmlOutput += "<a href=/Search?artist=" + artistsFound.getString("ArtistID") + ">";
+                        htmlOutput += "<li>" + artistsFound.getString("ArtistName") + "</li></a>";
+                    }
+                    htmlOutput += "</ul>";
+                }
+                DBUtil.closeSelectObjects();
+                
+                
+                query = "SELECT AlbumID, AlbumName FROM Album "
+                      + "WHERE AlbumName LIKE '%{" + searchValue + "}%'";
                 ResultSet albumsFound = null;//DC.getInstance().executeQuery(query);
 
-                query = "select SongName from Song where SongName like '%{" + request.getAttribute("search") + "}%'";
-                ResultSet songsFound = null;//DC.getInstance().executeQuery(query);
+                if(albumsFound.isBeforeFirst())
+                {
+                    albums = true;
+                    while(albumsFound.next())
+                    {
 
-                // TODO Use ResultSet to generate html/jsp to display to the user on search results page
+                    }
+                }
+                DBUtil.closeSelectObjects();
+                
+                query = "SELECT AlbumID, SongName FROM Song "
+                      + "INNER JOIN Album ON Album.AlbumID = Song.AlbumID "
+                      + "WHERE SongName LIKE '%{" + searchValue + "}%'";
+                ResultSet songsFound = DBUtil.executeSelect(query);
+
+                if(songsFound.isBeforeFirst())
+                {
+                    songs = true;
+                    while(songsFound.next())
+                    {
+                    }
+                }
+                DBUtil.closeSelectObjects();
+                
+                if(!artists && !albums && !songs)
+                {
+                    htmlOutput = "<p>No results were found</p>";
+                }
                 
                 dispatcher = servletContext.getRequestDispatcher("/searchResults.jsp");
                 dispatcher.forward(request, response);
             }
-            catch(Exception e)
+            catch(SQLException e)
             {
-                // TODO Error message/error page
+                System.out.println(e);
+            }
+            finally
+            {
+                DBUtil.closeSelectObjects();
             }
         } // Do not forward if no search is being performed
     }
@@ -122,4 +177,12 @@ public class Search extends HttpServlet {
                 + "navigates to an Album/Artist when selected.";
     }// </editor-fold>
 
+    /**
+     * Getter method for the htmlOutput results of the search
+     * @return - HTML to display to the user
+     */
+    public String getHtmlOutput()
+    {
+        return htmlOutput;
+    }
 }
