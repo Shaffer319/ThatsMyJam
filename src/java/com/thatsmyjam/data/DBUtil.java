@@ -8,6 +8,7 @@ public class DBUtil {
     private static Connection connection;
     private static Statement s;
     private static ResultSet rs;
+    private static String error = "";
     
     /**
      * Closes the Statement used to query the Database
@@ -59,25 +60,27 @@ public class DBUtil {
      * @param query
      * @return 
      */
-    public static ResultSet executeSelect(String query)
+    public static ResultSet executeSelect(String query) throws SQLException
     {
         pool = ConnectionPool.getInstance();
         connection = pool.getConnection();
         s = null;
         rs = null;
         
-        try
-        {
-            s = connection.createStatement();
-            rs = s.executeQuery(query);
-            
-            return rs;
-        }
-        catch(SQLException e)
-        {
-            System.out.println(e);
-            return null;
-        }
+        s = connection.createStatement();
+        rs = s.executeQuery(query);
+
+        return rs;
+    }
+    
+    /**
+     * Returns an error message from the select query if one occurred
+     * 
+     * @return - Message from the error
+     */
+    public static String getErrorMsg()
+    {
+        return error;
     }
     
     /**

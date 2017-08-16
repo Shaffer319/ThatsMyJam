@@ -43,34 +43,6 @@ public class Search extends HttpServlet {
         RequestDispatcher dispatcher;
         response.setContentType("text/html;charset=UTF-8");
         
-        String artistID = (String)request.getAttribute("artist");
-        
-        if(artistID != null && !artistID.trim().equals(""))
-        {
-            InfoBean bean = new InfoBean();
-            bean.setArtistID(artistID);
-            bean.setIsArtist(true);
-            
-            request.getSession().setAttribute("infoBean", bean);
-            dispatcher = servletContext.getRequestDispatcher("/info.jsp");
-            dispatcher.forward(request, response);
-            return;
-        }
-        
-        String albumID = (String)request.getAttribute("album");
-        
-        if(albumID != null && !albumID.trim().equals(""))
-        {
-            InfoBean bean = new InfoBean();
-            bean.setAlbumID(albumID);
-            bean.setIsArtist(false);
-            
-            request.getSession().setAttribute("infoBean", bean);
-            dispatcher = servletContext.getRequestDispatcher("/info.jsp");
-            dispatcher.forward(request, response);
-            return;
-        }
-        
         String searchValue = (String)request.getAttribute("search");
         
         if(searchValue != null && !searchValue.trim().equals(""))
@@ -99,7 +71,6 @@ public class Search extends HttpServlet {
                     htmlOutput += "</ul>";
                 }
                 DBUtil.closeSelectObjects();
-                
                 
                 query = "SELECT AlbumID, AlbumName FROM Album "
                       + "WHERE AlbumName LIKE '%{" + searchValue + "}%'";
@@ -134,7 +105,7 @@ public class Search extends HttpServlet {
                     htmlOutput = "<p>No results were found</p>";
                 }
                 
-                dispatcher = servletContext.getRequestDispatcher("/searchResults.jsp");
+                dispatcher = servletContext.getRequestDispatcher("/ThatsMyJam/searchResults.jsp");
                 dispatcher.forward(request, response);
             }
             catch(SQLException e)
