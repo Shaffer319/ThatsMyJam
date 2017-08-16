@@ -6,20 +6,29 @@ create database thatsmyjam;
 
 use thatsmyjam;
 
-# add password
-create table User (
+CREATE TABLE User (
   UserID INT NOT NULL AUTO_INCREMENT,
-  Email VARCHAR(50),
-  Password VARCHAR(100),
+  Email VARCHAR(50) NOT NULL,
+  Password varchar(15) NOT NULL,
   FirstName VARCHAR(50),
   LastName VARCHAR(50),
-  # Confirmed BOOLEAN, We could add a confirmation email when making an account 
-  # just an idea ill leave this commented out for now
-  PRIMARY KEY(UserID) 
+  PRIMARY KEY(UserID)
 );
 
-insert into User(Email, Password, FirstName, LastName)
-values ('tester@test.com', 'password', 'Tester', 'Tester');
+CREATE TABLE UserRole (
+  Email VARCHAR(50) not null,
+  Rolename VARCHAR(15) not null,
+  PRIMARY KEY (Email, Rolename)
+);
+
+# Adding user to the 2 relational tables
+# These tables are linked via the primary key UserName
+insert into User( Email, Password, FirstName, LastName)
+values ('root@thatsmyjam.com', 'sesame', 'root', 'root');
+
+insert into UserRole(Email, Rolename)
+value ('root@thatsmyjam.com', 'admin');
+ 
 
 create table Artist (
   ArtistID INT NOT NULL AUTO_INCREMENT,
@@ -31,7 +40,7 @@ create table Artist (
 create table Album (
   AlbumID INT NOT NULL AUTO_INCREMENT,
   AlbumName VARCHAR(50) NOT NULL,
-  ArtistID VARCHAR(30) NOT NULL,
+  ArtistID INT NOT NULL,
   ReleaseYear INT,
   ImageName VARCHAR(30),
   PRIMARY KEY(AlbumID)

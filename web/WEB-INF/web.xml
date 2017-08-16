@@ -26,22 +26,25 @@
         </user-data-constraint>
     </security-constraint>
     
-<!--    <security-constraint>
+    <security-constraint>
         <web-resource-collection>
-              <web-resouce-name>Protected Area</web-resouce-name>
+              <web-resource-name>Protected Area</web-resource-name>
               <url-pattern>/admin/*</url-pattern>
           </web-resource-collection>
           <auth-constraint>
               <role-name>service</role-name>
               <role-name>admin</role-name>
           </auth-constraint>
-    </security-constraint>-->
+    </security-constraint>
     
-<!--    <login-config>
+    <login-config>
         <auth-method>BASIC</auth-method>
         <realm-name>Basic Authentication</realm-name>
-    </login-config>    -->
+    </login-config>    
+    
     <welcome-file-list>
         <welcome-file>ThatsMyJam</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 </web-app>
