@@ -1,12 +1,14 @@
-package com.thatsmyjam;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package com.thatsmyjam.controllers;
 
+import com.thatsmyjam.URL;
+import com.thatsmyjam.User;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,18 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(urlPatterns = {"/ThatsMyJam"})
-public class LoginServlet extends HttpServlet {
+/**
+ *
+ * @author mshaffer
+ */
+@WebServlet(name = "createaccount", urlPatterns = {"/createaccount"})
+public class CreateAccountServlet extends HttpServlet {
 
-    @Override
-    public void init() throws ServletException {
-        super.init(); //To change body of generated methods, choose Tools | Templates.
-        // Get the instance here so that it will be cached
-//        ConnectionPool connectionPool = ConnectionPool.getInstance();
-//        Connection connection = connectionPool.getConnection();
-        
-    }    
-    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,92 +34,18 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         
-        String action = (String)request.getParameter("action");
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute("user");
-
-        if(user == null){
-            user = new User();
-            session.setAttribute("user", user);
-        }
+        String url;
         
-        // Login page is the index page.
-        String url = URL.URL_INDEX;
-        
-        if(action == null){
-            action = Action.ACTION_INDEX;
-        }
-                
-        if(action.equals(Action.ACTION_INDEX)){
-            // 
-            url = URL.URL_INDEX;
-        }else if(action.equals(Action.ACTION_LOGIN)){
-            String pass = request.getParameter("pass");
-            if(true){
-                user.setLoggedIn(true);
-            }
-            // Login to user account
-            if(user.isLoggedIn())
-                url = URL.URL_HOME;
-            else
-                url= URL.URL_INDEX;
-            // On fail got to index / login
-        }
-        else if(action.equals(Action.ACTION_SIGNUP))
-        {
-            // Allow user to create user account 
-            url = URL.URL_SIGNUP;
-        }
-        else if(action.equals(Action.ACTION_CREATE_ACCOUNT)){
-            url = handleCreateUser(request, response);
-        }
-        else if (action.equals(Action.ACTION_ACCOUNT))
-        {
-            // View user account and edit account settings from here
-            url = URL.URL_ACCOUNT;
-        }
-        else if(action.equals(Action.ACTION_UPDATE_USER)){
-            // Pull in data from update user form and edit account
-            
-            String error = updateUser(request, user);
-            request.setAttribute("error", error);
-            
-            url = URL.URL_ACCOUNT;
-        }
-        else if(action.equals(Action.ACTION_LOGOUT)){
-            // Invalidate the session
-            session.invalidate();
-            // send them back to the index/main/login page
-            url = URL.URL_INDEX;
-        }
+        url = handleCreateUser(request, response);
         
         getServletContext()
             .getRequestDispatcher(url)
             .forward(request, response);
         
-//        response.setContentType("text/html;charset=UTF-8");
-//        
-//        try (PrintWriter out = response.getWriter()) {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet TestServlet</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet TestServlet at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        }
-    }
-    
-    public String handleLogin(HttpServletRequest request, HttpServletResponse response){
-        String url = URL.URL_INDEX;
-        
-        request.getAttribute("pass");
-        
-        return url;
     }
     
     /**
@@ -169,23 +92,6 @@ public class LoginServlet extends HttpServlet {
             return url;
     }
     
-    /**
-     * 
-     * @param request
-     * @param user
-     * @return String that indicates the error. If no error then the user is update and null is returned
-     */
-    public String updateUser(HttpServletRequest request, User user)
-    {            
-        String email = request.getParameter("email");
-        if(email.isEmpty())
-        {
-            return "Error email is empty.";
-        }
-        user.setEmail(email);
-        // user.isValid()
-        return null;
-    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
