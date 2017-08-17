@@ -1,4 +1,4 @@
-package com.thatsmyjam;
+package com.thatsmyjam.servlets;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -6,6 +6,10 @@ package com.thatsmyjam;
  * and open the template in the editor.
  */
 
+import com.thatsmyjam.constants.Action;
+import com.thatsmyjam.constants.URL;
+import com.thatsmyjam.data.User;
+import com.thatsmyjam.data.ConnectionPool;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet(urlPatterns = {"/ThatsMyJam"})
-public class LoginServlet extends HttpServlet {
+public class Login extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
@@ -100,21 +104,6 @@ public class LoginServlet extends HttpServlet {
         getServletContext()
             .getRequestDispatcher(url)
             .forward(request, response);
-        
-//        response.setContentType("text/html;charset=UTF-8");
-//        
-//        try (PrintWriter out = response.getWriter()) {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet TestServlet</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet TestServlet at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        }
     }
     
     public String handleLogin(HttpServletRequest request, HttpServletResponse response){

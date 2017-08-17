@@ -3,7 +3,6 @@ package com.thatsmyjam.data;
 import java.sql.*;
 import java.util.ArrayList;
 
-import com.thatsmyjam.User;
 
 public class UserDB {
 

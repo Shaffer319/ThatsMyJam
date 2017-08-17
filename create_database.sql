@@ -109,7 +109,7 @@ insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Ghost', '1', '1', '2015');
 
 insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Hopeless Fountain Kingdom', '1', '2017', 'HFK.png');
+values ('Hopeless Fountain Kingdom', '1', '2017', 'HFK.jpg');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('The Prologue', '1', '2', '2017');

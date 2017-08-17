@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <link href="css/homepage.css" rel="stylesheet">
-        <jsp:useBean id="infoBean" class="com.thatsmyjam.beans.InfoBean" scope="session" />
+        
     </head>
     <body data-spy="scroll">
         <nav class="navbar navbar-inverse">
@@ -44,12 +44,8 @@
             </div>
         </nav>
         <div class="container">
-            <!-- TODO - Deciding on if html should be done here or how it is done currently -->
-            <% if(request.getParameter("artist") != null) { %>
-                <%=infoBean.getPage(true, request.getParameter("artist"))%>
-            <%} else {%>
-                <%=infoBean.getPage(false, request.getParameter("album"))%>
-            <%}%>
+            <!-- TODO - Display results -->
+            <p>Boop</p>
         </div>
             <!-- Bootstrap core Javascript and jQuery  -->
             <!-- Placed at the end for faster loading of pages -->

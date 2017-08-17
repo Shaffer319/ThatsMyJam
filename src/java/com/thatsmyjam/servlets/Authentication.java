@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.thatsmyjam;
+package com.thatsmyjam.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Mike
  */
 @WebServlet(name = "AuthenticationServlet", urlPatterns = {"/Login"})
-public class AuthenticationServlet extends HttpServlet {
+public class Authentication extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
