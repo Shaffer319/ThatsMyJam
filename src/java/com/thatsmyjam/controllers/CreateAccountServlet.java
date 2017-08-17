@@ -5,10 +5,9 @@
  */
 package com.thatsmyjam.controllers;
 
-import com.thatsmyjam.URL;
-import com.thatsmyjam.User;
+import com.thatsmyjam.constants.URL;
+import com.thatsmyjam.data.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
