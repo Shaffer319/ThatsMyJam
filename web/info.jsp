@@ -8,13 +8,19 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>My Account</title>
+        <jsp:useBean id="infoBean" class="com.thatsmyjam.beans.InfoBean" scope="session" />
+        <title>
+            <% if(request.getParameter("artist") != null) { %>
+                <%=infoBean.getTitle(true, request.getParameter("artist"))%>
+            <%} else {%>
+                <%=infoBean.getTitle(false, request.getParameter("album"))%>
+            <%}%>
+        </title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <link href="css/homepage.css" rel="stylesheet">
-        <jsp:useBean id="infoBean" class="com.thatsmyjam.beans.InfoBean" scope="session" />
     </head>
     <body data-spy="scroll">
         <nav class="navbar navbar-inverse">
@@ -44,7 +50,6 @@
             </div>
         </nav>
         <div class="container">
-            <!-- TODO - Deciding on if html should be done here or how it is done currently -->
             <% if(request.getParameter("artist") != null) { %>
                 <%=infoBean.getPage(true, request.getParameter("artist"))%>
             <%} else {%>

@@ -28,6 +28,62 @@ public class InfoBean implements Serializable {
     }
     
     /**
+     * Gets the dynamic title for the information page
+     * 
+     * @param isArtist - Boolean for Artist info, false for Album info
+     * @param id - ID for the Artist/Album
+     * 
+     * @return - Dynamic title for the page
+     */
+    public String getTitle(boolean isArtist, String id)
+    {
+        try
+        {
+            Integer.parseInt(id);
+        }
+        catch(NumberFormatException e)
+        {
+            return "Error occurred";
+        }
+        
+        String query = "";
+        if(isArtist)
+        {
+            query = "SELECT ArtistName FROM Artist WHERE ArtistID = " + id;
+        }
+        else
+        {
+            query = "SELECT AlbumName, ArtistName FROM Album "
+                  + "INNER JOIN Artist ON Artist.ArtistID = Album.ArtistID "
+                  + "WHERE AlbumID = " + id;
+        }
+        
+        String title;
+        try
+        {
+            ResultSet results = DBUtil.executeSelect(query);
+            results.next();
+            if(isArtist)
+            {
+                title = "Artist: " + results.getString("ArtistName");
+            }
+            else
+            {
+                title = results.getString("AlbumName") + " by " + results.getString("ArtistName");
+            }
+        }
+        catch(SQLException e)
+        {
+            title = "Error Occurred";
+        }
+        finally
+        {
+            DBUtil.closeSelectObjects();
+        }
+        return title;
+    }
+    
+    /**
      * Gets an HTML formatted section for the album/artist id stored in the bean
      * 
      * @param isArtist - True if looking for an Artist, false for an Album
