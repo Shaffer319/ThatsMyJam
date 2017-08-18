@@ -145,7 +145,7 @@ public class InfoBean implements Serializable {
      */
     public String getAlbumGallery()
     {
-        String query = "SELECT AlbumID, AlbumName, ImageName FROM ALBUM LIMIT 10;";
+        String query = "SELECT AlbumID, AlbumName, ImageName FROM ALBUM ORDER BY RAND() LIMIT 8;";
         ResultSet rs = null;
         String htmlOutput = "";
         

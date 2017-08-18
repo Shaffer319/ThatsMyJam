@@ -23,7 +23,7 @@
                     <a class="navbar-brand" href="#">That's My Jam</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
+                    <li class="active"><a href="/ThatsMyJam/homepage.jsp">Home</a></li>
                     <li><a href="#">My Playlists</a></li>
                     <li><a href="#">Top Albums</a></li>
                 </ul>

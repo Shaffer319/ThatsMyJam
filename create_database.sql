@@ -64,24 +64,33 @@ create table Playlist (
   FOREIGN KEY(UserID) REFERENCES User(UserID)
 );
 
+# Artists
 insert into Artist(ArtistName, ImageName)
 values ('Halsey', 'Halsey.jpg');
-
 insert into Artist(ArtistName, ImageName)
 values ('alt-J', 'alt-J.jpg');
-
 insert into Artist(ArtistName, ImageName)
 values ('Metallica', 'Metallica.jpg');
-
 insert into Artist(ArtistName, ImageName)
 values ('Kid Cudi', 'Kid_Cudi.jpg');
-
 insert into Artist(ArtistName, ImageName)
 values ('Vicetone', 'Vicetone.jpg');
-
 insert into Artist(ArtistName, ImageName)
 values ('Run the Jewels', 'Run_the_Jewels.png');
+insert into Artist(ArtistName, ImageName)
+values ('Avicii', 'Avicii.jpg');
+insert into Artist(ArtistName, ImageName)
+values ('Calvin Harris', 'CalvinHarris.jpg');
+insert into Artist(ArtistName, ImageName)
+values ('The Weeknd', 'Weeknd.jpg');
+insert into Artist(ArtistName, ImageName)
+values ('MGMT', 'MGMT.jpg');
+insert into Artist(ArtistName, ImageName)
+values ('Blink 182', 'Blink182.jpg');
+insert into Artist(ArtistName, ImageName)
+value  ('Clean Bandit', 'CleanBandit.jpg');
 
+# Albums/Songs
 insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
 values ('Badlands', '1', '2015', 'Badlands.png');
 
@@ -347,3 +356,292 @@ insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Thursday in the Danger Room', '6', '10', '2016');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('A Report to the Shareholders / Kill Your Masters', '6', '10', '2016');
+
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
+values ('Stories', '7', '2015', 'Stories.png');
+
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Waiting for Love', '7', '11', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Talk to Myself', '7', '11', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Touch Me', '7', '11', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Ten More Days', '7', '11', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('For a Better Day', '7', '11', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Broken Arrows', '7', '11', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('True Believer', '7', '11', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('City Lights', '7', '11', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Pure Grinding', '7', '11', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Sunset Jesus', '7', '11', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Cant Catch Me', '7', '11', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Somewhere in Stockholm', '7', '11', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Trouble', '7', '11', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Gonna Love Ya', '7', '11', '2015');
+
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
+values ('True', '7', '2013', 'True.png');
+
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Wake Me Up', '7', '12', '2013');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('You Make Me', '7', '12', '2013');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Hey Brother', '7', '12', '2013');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Addicted To You', '7', '12', '2013');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Dear Boy', '7', '12', '2013');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Liar Liar', '7', '12', '2013');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Shame on Me', '7', '12', '2013');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Lay Me Down', '7', '12', '2013');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Hope Theres Someone', '7', '12', '2013');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Heart Upon My Sleeve', '7', '12', '2013');
+
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
+values ('Funk Wav Bounces Vol. 1', '8', '2017', 'FWBV1.jpg');
+
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Slide', '8', '13', '2017');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Cash Out', '8', '13', '2017');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Heatstoke', '8', '13', '2017');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Rollin', '8', '13', '2017');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Prayers Up', '8', '13', '2017');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Holiday', '8', '13', '2017');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Skrt on Me', '8', '13', '2017');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Feels', '8', '13', '2017');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Faking It', '8', '13', '2017');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Hard to Love', '8', '13', '2017');
+
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
+values ('Motion', '8', '2014', 'Motion.png');
+
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Faith', '8', '14', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Under Control', '8', '14', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Blame', '8', '14', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Love Now', '8', '14', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Slow Acid', '8', '14', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Outside', '8', '14', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('It Was You', '8', '14', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Summer', '8', '14', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Overdrive', '8', '14', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Ecstasy', '8', '14', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Pray to God', '8', '14', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Open Wide', '8', '14', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Together', '8', '14', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Burnin', '8', '14', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Dollar Signs', '8', '14', '2014');
+
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
+values ('Starboy', '9', '2016', 'Starboy.png');
+
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Starboy', '9', '15', '2016');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Party Monster', '9', '15', '2016');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('False Alarm', '9', '15', '2016');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Reminder', '9', '15', '2016');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Rockin', '9', '15', '2016');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Secrets', '9', '15', '2016');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('True Colors', '9', '15', '2016');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Stargirl Interlude', '9', '15', '2016');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Sidewalks', '9', '15', '2016');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Six Feet Under', '9', '15', '2016');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Love to Lay', '9', '15', '2016');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('A Lonely Night', '9', '15', '2016');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Attention', '9', '15', '2016');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Ordinary Life', '9', '15', '2016');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Nothing Without You', '9', '15', '2016');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('All I Know', '9', '15', '2016');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Die for You', '9', '15', '2016');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('I Feel It Coming', '9', '15', '2016');
+
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
+values ('Beauty Behind the Madness', '9', '2015', 'BBtM.png');
+
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Real Life', '9', '16', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Losers', '9', '16', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Tell Your Friends', '9', '16', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Often', '9', '16', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('The Hills', '9', '16', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Acquainted', '9', '16', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Cant Feel My Face', '9', '16', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Shameless', '9', '16', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Earned It', '9', '16', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('In the Night', '9', '16', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('As You Are', '9', '16', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Dark Times', '9', '16', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Prisoner', '9', '16', '2015');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Angel', '9', '16', '2015');
+
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
+values ('Time to Pretend', '10', '2005', 'TimeToPretend.jpg');
+
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Time to Pretend', '10', '17', '2005');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Boogie Down', '10', '17', '2005');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Destrokk', '10', '17', '2005');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Love Always Remains', '10', '17', '2005');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Indie Rokkers', '10', '17', '2005');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Kids', '10', '17', '2005');
+
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
+values ('Climbing to New Lows', '10', '2005', 'ClimbToNewLows.jpg');
+
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Intro(Come on Christmas)', '10', '18', '2005');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('We Care', '10', '18', '2005');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Money to Burn', '10', '18', '2005');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Hot Love Drama', '10', '18', '2005');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('The Kids Quartet', '10', '18', '2005');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Kids', '10', '18', '2005');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Honey Bunny', '10', '18', '2005');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Greyhoundredux', '10', '18', '2005');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Grutu (Just Becuz)', '10', '18', '2005');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('We Dont Care', '10', '18', '2005');
+
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
+values ('Dude Ranch', '11', '1997', 'DudeRanch.jpg');
+
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Pathetic', '11', '19', '1997');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Voyeur', '11', '19', '1997');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Dammit', '11', '19', '1997');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Boring', '11', '19', '1997');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Waggy', '11', '19', '1997');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Enthused', '11', '19', '1997');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Untitled', '11', '19', '1997');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Apple Shampoo', '11', '19', '1997');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Emo', '11', '19', '1997');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Josie', '11', '19', '1997');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('A New Hope', '11', '19', '1997');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Degenerate', '11', '19', '1997');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Lemmings', '11', '19', '1997');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Im Sorry', '11', '19', '1997');
+
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
+values ('New Eyes', '12', '2014', 'NewEyes.png');
+
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Mozarts House', '12', '20', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Extraordinary', '12', '20', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Dust Clears', '12', '20', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Rather Be', '12', '20', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('A+E', '12', '20', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Come Over', '12', '20', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Cologne', '12', '20', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Telephone Banking', '12', '20', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Up Again', '12', '20', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Heart on Fire', '12', '20', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('New Eyes', '12', '20', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Birch', '12', '20', '2014');
+insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
+values ('Outro Movement III', '12', '20', '2014');
+
