@@ -6,6 +6,7 @@ package com.thatsmyjam.servlets;
  * and open the template in the editor.
  */
 
+import com.thatsmyjam.beans.InfoBean;
 import com.thatsmyjam.constants.Action;
 import com.thatsmyjam.constants.URL;
 import com.thatsmyjam.data.User;
@@ -64,6 +65,7 @@ public class Login extends HttpServlet {
         }else if(action.equals(Action.ACTION_LOGIN)){
             String pass = request.getParameter("pass");
             if(true){
+                InfoBean.setCurrentUser(user);
                 user.setLoggedIn(true);
             }
             // Login to user account

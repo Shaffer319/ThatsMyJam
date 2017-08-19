@@ -5,6 +5,7 @@ package com.thatsmyjam.controllers;
  * and open the template in the editor.
  */
 
+import com.thatsmyjam.beans.InfoBean;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,6 +29,7 @@ public class LogoutServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        InfoBean.setCurrentUser(null);
         HttpSession session= request.getSession();
         session.invalidate();
         RequestDispatcher rd = request.getRequestDispatcher("/index.jsp"); //The url where go after logout

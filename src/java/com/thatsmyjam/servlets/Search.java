@@ -65,7 +65,7 @@ public class Search extends HttpServlet {
                     htmlOutput += "<h1> Artists </h1><ul>";
                     while(artistsFound.next())
                     {
-                        htmlOutput += "<a href=/Search?artist=" + artistsFound.getString("ArtistID") + ">";
+                        htmlOutput += "<a href=/info.jsp?artist=" + artistsFound.getString("ArtistID") + ">";
                         htmlOutput += "<li>" + artistsFound.getString("ArtistName") + "</li></a>";
                     }
                     htmlOutput += "</ul>";
@@ -74,28 +74,33 @@ public class Search extends HttpServlet {
                 
                 query = "SELECT AlbumID, AlbumName FROM Album "
                       + "WHERE AlbumName LIKE '%{" + searchValue + "}%'";
-                ResultSet albumsFound = null;//DC.getInstance().executeQuery(query);
+                ResultSet albumsFound = DBUtil.executeSelect(query);
 
                 if(albumsFound.isBeforeFirst())
                 {
                     albums = true;
+                    htmlOutput += "<h1> Albums </h1><ul>";
                     while(albumsFound.next())
                     {
-
+                        htmlOutput += "<a href=/info.jsp?album=" + albumsFound.getString("AlbumID") + ">";
+                        htmlOutput += "<li>" + albumsFound.getString("AlbumName") + "</li></a>";
                     }
+                    htmlOutput += "</ul>";
                 }
                 DBUtil.closeSelectObjects();
                 
-                query = "SELECT AlbumID, SongName FROM Song "
-                      + "INNER JOIN Album ON Album.AlbumID = Song.AlbumID "
+                query = "SELECT SongID, SongName, ArtistName FROM Song "
+                      + "INNER JOIN Artist ON Artist.ArtistName.ArtistID = Song.ArtistID "
                       + "WHERE SongName LIKE '%{" + searchValue + "}%'";
                 ResultSet songsFound = DBUtil.executeSelect(query);
 
                 if(songsFound.isBeforeFirst())
                 {
                     songs = true;
+                    htmlOutput += "<h1> Songs </h1><ul>";
                     while(songsFound.next())
                     {
+                        htmlOutput += "<li>" + songsFound.getString("SongName") + " by " + songsFound.getString("ArtistName") + "</li>";
                     }
                 }
                 DBUtil.closeSelectObjects();
@@ -104,7 +109,9 @@ public class Search extends HttpServlet {
                 {
                     htmlOutput = "<p>No results were found</p>";
                 }
-                
+                InfoBean bean = new InfoBean();
+                bean.setSearchResults(htmlOutput);
+                request.getSession().setAttribute("searchBean", bean);
                 dispatcher = servletContext.getRequestDispatcher("/ThatsMyJam/searchResults.jsp");
                 dispatcher.forward(request, response);
             }

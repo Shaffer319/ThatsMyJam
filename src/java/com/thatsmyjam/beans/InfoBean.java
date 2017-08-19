@@ -8,9 +8,11 @@ package com.thatsmyjam.beans;
 import static com.thatsmyjam.constants.Constants.*;
 
 import com.thatsmyjam.data.DBUtil;
+import com.thatsmyjam.data.User;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,6 +22,16 @@ import java.sql.SQLException;
  */
 public class InfoBean implements Serializable {
 
+    private int albumID;
+    private String albumName,artistName;
+    private int artistID;
+    private int releaseYear;
+    private String imageName;
+    private float albumPrice;
+    private ArrayList<String> songList;
+    private static User currentUser;
+    private String searchResults;
+    
     /**
      * Constructor
      */
@@ -113,7 +125,7 @@ public class InfoBean implements Serializable {
         else 
         {
             query = "SELECT Artist.ArtistID, Artist.ArtistName, Album.ReleaseYear, "
-                    + "Album.ImageName, Album.AlbumName FROM Artist INNER JOIN Album ON "
+                    + "Album.ImageName, Album.AlbumName, Album.AlbumPrice FROM Artist INNER JOIN Album ON "
                     + "Album.ArtistID = Artist.ArtistID WHERE AlbumID = " + id + ";";
         }
         
@@ -126,17 +138,18 @@ public class InfoBean implements Serializable {
             if(isArtist)
             {
                 boolean first = true;
+                
                 while(results.next())
                 {
                     if(first)
                     {
-                        String artist = results.getString("ArtistName");
+                        setArtistName(results.getString("ArtistName"));
                         String newImage = IMAGE.replace(SRC_REP, results.getString("ArtistImage"))
-                                               .replace(ALT_REP, artist)
+                                               .replace(ALT_REP, getArtistName())
                                                .replace(HREF_REP, "")
                                                .replace(SIZE_REP, "width=\"500\" height=\"500\"");
                         first = false;
-                        html += newImage + "<h1>" + artist + "</h1>";
+                        html += newImage + "<h1>" + getArtistName() + "</h1>";
                     }
                     String albumImage = IMAGE.replace(SRC_REP, results.getString("AlbumImage"))
                                              .replace(ALT_REP, results.getString("AlbumName"))
@@ -152,18 +165,36 @@ public class InfoBean implements Serializable {
             {
                 // Move cursor to first result
                 results.next();
-                html += "<table><tr></td>";
+                html += "<table class=\"col-xs-12 col-md-8\"><tr></td>";
                 html += IMAGE.replace(SRC_REP, results.getString("ImageName"))
                              .replace(ALT_REP, results.getString("AlbumName"))
                              .replace(HREF_REP, "")
                              .replace(PIXEL_REP, "500");
                 html += "</td><td>";
-                int releaseYear = results.getInt("ReleaseYear");
-                int artistID = results.getInt("ArtistID");
-                String artistName = results.getString("ArtistName");
+
+                setArtistName(results.getString("ArtistName"));
+                setArtistID(results.getInt("ArtistID"));
+                setAlbumID(Integer.parseInt(id));
+                setAlbumName(results.getString("AlbumName"));
+                setReleaseYear(results.getInt("ReleaseYear"));
+                setImageName(results.getString("ImageName"));
+                setAlbumPrice(results.getFloat("AlbumPrice"));
+				
                 DBUtil.closeSelectObjects();
+              
+                //TODO UNCOMMENT WHEN LOGIN IS WORKING SO A USER CAN BE TRACKED
+                /*  
+                query = "SELECT SongID FROM OwnedSongs WHERE UserID = " + getCurrentUser().getUserID();
                 
-                query = "SELECT SongName, AlbumName FROM Song INNER JOIN Album ON Album.AlbumID = Song.AlbumID WHERE Album.AlbumID = " + id;
+                results = DBUtil.executeSelect(query);
+                ArrayList<Integer> ownedSongs = new ArrayList<Integer>();
+                
+                while(results.next())
+                {
+                    ownedSongs.add(results.getInt("SongID"));
+                }
+                */
+                query = "SELECT SongID, SongName, AlbumName FROM Song INNER JOIN Album ON Album.AlbumID = Song.AlbumID WHERE Album.AlbumID = " + id;
                 
                 results = DBUtil.executeSelect(query);
                 
@@ -173,13 +204,27 @@ public class InfoBean implements Serializable {
                 {
                     if(first)
                     {
-                        html += "<h2>Songs on " + results.getString("AlbumName")  + "<br/>by <a href=/ThatsMyJam/info.jsp?artist=" + artistID +
-"                        + \">" + artistName + "</a></h2><ul style=\"list-style:none;\">";
+                         html += "<h2>Songs on " + results.getString("AlbumName") + "<br/>by <a href=/ThatsMyJam/info.jsp?artist=" + getArtistID()
+                                + ">" + getArtistName() + "</a> released in " + getReleaseYear() + "</h2><ul style=\"list-style:none;\">";
                         first = false;
+                        html += "<strong><em>$" + getAlbumPrice() + "</em></strong><br><br/>";
                     }
-                    html += "<li>" + results.getString("SongName") + "</li>";
+                    
+                    int songID = results.getInt("SongID");
+                //TODO UNCOMMENT WHEN LOGIN IS WORKING    
+                //    if(ownedSongs.contains(songID))
+                //    {
+                //        html += "<li><div style=\"float:left\">" + results.getString("SongName") + "</div>"
+                //                + "<div style=\"flot:right\">Already Owned</li>";
+                //    }
+                //    else
+                //    {
+                        // TODO ADD FUNC TO ADD THE SONG TO THE CART
+                        html += "<li><div class=\"col-xs-12 col-md-8\"><div style=\"float:left\">" + results.getString("SongName") + "</div>"
+                                + "<div style=\"float:right\"><button style=\"height:20px\" type=\"button\">Add to Cart</button></div></div></li>";
+                //    }
                 }
-                html += "</ul></td></tr><tr><td>" + releaseYear + "</td><td></td></tr></table>";
+                html += "</ul></td></tr></table>";
             }
         }
         catch(SQLException e)
@@ -235,4 +280,140 @@ public class InfoBean implements Serializable {
         }
         return htmlOutput;
     }
+    
+    
+  /**
+     * @return the albumID
+     */
+    public int getAlbumID() {
+        return albumID;
+    }
+
+    /**
+     * @param albumID the albumID to set
+     */
+    public void setAlbumID(int albumID) {
+        this.albumID = albumID;
+    }
+
+    /**
+     * @return the albumName
+     */
+    public String getAlbumName() {
+        return albumName;
+    }
+
+    /**
+     * @param albumName the albumName to set
+     */
+    public void setAlbumName(String albumName) {
+        this.albumName = albumName;
+    }
+
+    /**
+     * @return the artistID
+     */
+    public int getArtistID() {
+        return artistID;
+    }
+
+    /**
+     * @param artistID the artistID to set
+     */
+    public void setArtistID(int artistID) {
+        this.artistID = artistID;
+    }
+
+    /**
+     * @return the releaseYear
+     */
+    public int getReleaseYear() {
+        return releaseYear;
+    }
+
+    /**
+     * @param releaseYear the releaseYear to set
+     */
+    public void setReleaseYear(int releaseYear) {
+        this.releaseYear = releaseYear;
+    }
+
+    /**
+     * @return the imageName
+     */
+    public String getImageName() {
+        return imageName;
+    }
+
+    /**
+     * @param imageName the imageName to set
+     */
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+    
+     /**
+     * @return the albumPrice
+     */
+    public float getAlbumPrice() {
+        return albumPrice;
+    }
+
+    /**
+     * @param albumPrice the albumPrice to set
+     */
+    public void setAlbumPrice(float albumPrice) {
+        this.albumPrice = albumPrice;
+    }
+    
+    public void setSongList(ArrayList<String>songList){
+        this.songList=songList;
+    }
+    
+    public ArrayList<String> getSongList(){
+        return songList;
+    }
+    
+    /**
+     * @return the artistName
+     */
+    public String getArtistName() {
+        return artistName;
+    }
+
+    /**
+     * @param artistName the artistName to set
+     */
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
+    }
+
+    /**
+     * @return the currentUser
+     */
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    /**
+     * @param currentUser the currentUser to set
+     */
+    public static void setCurrentUser(User currentUser) {
+        InfoBean.currentUser = currentUser;
+    }
+
+    /**
+     * @return the searchResults
+     */
+    public String getSearchResults() {
+        return searchResults;
+    }
+
+    /**
+     * @param searchResults the searchResults to set
+     */
+    public void setSearchResults(String searchResults) {
+        this.searchResults = searchResults;
+    }
+    
 }

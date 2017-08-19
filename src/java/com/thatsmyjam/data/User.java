@@ -11,6 +11,7 @@ package com.thatsmyjam.data;
  */
 public class User {
     
+    private int userID;
     private boolean loggedIn = false;
     private String firstName;
     private String lastName;
@@ -19,37 +20,74 @@ public class User {
     public User(){
         
     }
-    
-    public void setLoggedIn(boolean loggedIn){
+
+    /**
+     * @return the userID
+     */
+    public int getUserID() {
+        return userID;
+    }
+
+    /**
+     * @param userID the userID to set
+     */
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    /**
+     * @return the loggedIn
+     */
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    /**
+     * @param loggedIn the loggedIn to set
+     */
+    public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
-    
-    public boolean isLoggedIn(){
-        return this.loggedIn;
-    }
-    
-    public void setFirstName(String firstName){
-        this.firstName = firstName;
-    }
-    
-    public String getFirstName(){
+
+    /**
+     * @return the firstName
+     */
+    public String getFirstName() {
         return firstName;
     }
-    
-    public void setLastName(String lastName){
-        this.lastName = lastName;
+
+    /**
+     * @param firstName the firstName to set
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
-    
-    public String getLastName(){
+
+    /**
+     * @return the lastName
+     */
+    public String getLastName() {
         return lastName;
     }
-    
-    public void setEmail(String email){
-        this.email = email;
+
+    /**
+     * @param lastName the lastName to set
+     */
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
-    
-    public String getEmail(){
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
         return email;
     }
-    
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
