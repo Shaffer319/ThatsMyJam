@@ -200,11 +200,13 @@ public class InfoBean implements Serializable {
                 
                 // TODO Formatting HTML output
                 boolean first = true;
+                String albumName = "";
                 while(results.next())
                 {
                     if(first)
                     {
-                         html += "<h2>Songs on " + results.getString("AlbumName") + "<br/>by <a href=/ThatsMyJam/info.jsp?artist=" + getArtistID()
+                        albumName = results.getString("AlbumName");
+                        html += "<h2>Songs on " + albumName + "<br/>by <a href=/ThatsMyJam/info.jsp?artist=" + getArtistID()
                                 + ">" + getArtistName() + "</a> released in " + getReleaseYear() + "</h2><ul style=\"list-style:none;\">";
                         first = false;
                         html += "<strong><em>$" + getAlbumPrice() + "</em></strong><br><br/>";
@@ -220,7 +222,13 @@ public class InfoBean implements Serializable {
                 //    else
                 //    {
                         // TODO ADD FUNC TO ADD THE SONG TO THE CART
-                        html += "<li><div class=\"col-xs-12 col-md-8\"><div style=\"float:left\">" + results.getString("SongName") + "</div>"
+                        String songName = results.getString("SongName");
+                        
+                        html += "<li><div class=\"col-xs-12 col-md-8\">"
+                                + "<a target=\"_blank\" href=http://www.google.com/search?q=youtube+" 
+                                + songName.replaceAll(" ", "+") 
+                                + "+on+album+" + albumName.replaceAll(" ", "+") + "&m=0>"
+                                + "<div style=\"float:left\">" + songName + "</div></a>"
                                 + "<div style=\"float:right\"><button style=\"height:20px\" type=\"button\">Add to Cart</button></div></div></li>";
                 //    }
                 }

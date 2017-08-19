@@ -117,7 +117,11 @@ public class Search extends HttpServlet {
             }
             catch(SQLException e)
             {
-                System.out.println(e);
+                InfoBean bean = new InfoBean();
+                bean.setSearchResults(e.getMessage());
+                request.getSession().setAttribute("searchBean", bean);
+                dispatcher = servletContext.getRequestDispatcher("/ThatsMyJam/searchResults.jsp");
+                dispatcher.forward(request, response);
             }
             finally
             {

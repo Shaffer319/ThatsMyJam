@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <link href="css/homepage.css" rel="stylesheet">
-        <jsp:useBean id="searchBean" class="com.thatsmyjam.beans.InfoBean" scope="session"/>
+        <jsp:useBean id="searchBean" class="com.thatsmyjam.beans.InfoBean" scope="session" />
     </head>
     <body data-spy="scroll">
         <nav class="navbar navbar-inverse">
