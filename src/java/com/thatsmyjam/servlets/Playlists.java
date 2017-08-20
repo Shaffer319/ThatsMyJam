@@ -9,6 +9,7 @@ import com.thatsmyjam.beans.InfoBean;
 import com.thatsmyjam.data.DBUtil;
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -69,7 +70,7 @@ public class Playlists extends HttpServlet {
                 }
                 playlistBean.setPlaylistResults(html);
             }
-            catch(Exception e)
+            catch(SQLException e)
             {
                 String html = "<p> An error occurred while processing your request, try again</p>";
                 playlistBean.setPlaylistResults(html);
@@ -112,7 +113,7 @@ public class Playlists extends HttpServlet {
                 }
                 playlistBean.setPlaylistResults(html);
             }
-            catch(Exception e)
+            catch(SQLException e)
             {
                 String html = "<p>An error occurred while processing your request, try again</p>";
                 playlistBean.setPlaylistResults(html);
