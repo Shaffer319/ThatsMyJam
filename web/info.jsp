@@ -33,7 +33,7 @@
                     <li><a href="#">My Playlists</a></li>
                     <li><a href="#">Top Albums</a></li>
                 </ul>
-                <form class="navbar-form navbar-left" action="/ThatsMyJam/Search" method=GET>>
+                <form class="navbar-form navbar-left" action=<%= response.encodeURL("Search")%> method=GET>
                     <div class="input-group">
                         <input type="text" name="search" class="form-control" placeholder="Search">
                         <div class="input-group-btn">
