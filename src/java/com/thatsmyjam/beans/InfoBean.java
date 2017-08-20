@@ -243,7 +243,7 @@ public class InfoBean implements Serializable {
                                 + "+on+album+" + albumName.replaceAll(" ", "+") + "&m=0>"
                                 + "<div style=\"float:left\">" + songName + "</div></a>"
                                 + "<div style=\"float:right\">"
-                                + "<button title=\"Add to Cart\" style=\"height:20px\" type=\"button\">"
+                                + "<button name=\"song" + songID + "\" title=\"Add to Cart\" style=\"height:20px\" type=\"button\" value=\"" + songID + "\">"
                                 + "<span class=\"glyphicon glyphicon-shopping-cart\"/>"
                                 + "</button></div></div></li>";
                 //    }
