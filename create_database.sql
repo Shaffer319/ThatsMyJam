@@ -43,6 +43,7 @@ create table Album (
   ArtistID INT NOT NULL,
   ReleaseYear INT,
   ImageName VARCHAR(30),
+  AlbumPrice DECIMAL(7,2) NOT NULL,
   PRIMARY KEY(AlbumID)
 );
 
@@ -63,6 +64,7 @@ create table Playlist (
   PRIMARY KEY(PlaylistID),
   FOREIGN KEY(UserID) REFERENCES User(UserID)
 );
+
 
 # Artists
 insert into Artist(ArtistName, ImageName)
@@ -91,8 +93,8 @@ insert into Artist(ArtistName, ImageName)
 value  ('Clean Bandit', 'CleanBandit.jpg');
 
 # Albums/Songs
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Badlands', '1', '2015', 'Badlands.png');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName, AlbumPrice)
+values ('Badlands', '1', '2015', 'Badlands.png', '9.99');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Castle', '1', '1', '2015');
@@ -117,8 +119,8 @@ values ('Young God', '1', '1', '2015');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Ghost', '1', '1', '2015');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Hopeless Fountain Kingdom', '1', '2017', 'HFK.jpg');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName, AlbumPrice)
+values ('Hopeless Fountain Kingdom', '1', '2017', 'HFK.jpg','12.99');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('The Prologue', '1', '2', '2017');
@@ -147,8 +149,8 @@ values ('Devil In Me', '1', '2', '2017');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Hopeless', '1', '2', '2017');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Relaxer', '2', '2017', 'Relaxer.jpg');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName,AlbumPrice)
+values ('Relaxer', '2', '2017', 'Relaxer.jpg','7.99');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('3WW', '2', '3', '2017');
@@ -167,8 +169,8 @@ values ('Last Year', '2', '3', '2017');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Pleader', '2', '3', '2017');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('This Is All Yours', '2', '2014', 'TIAY.jpg');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName,AlbumPrice)
+values ('This Is All Yours', '2', '2014', 'TIAY.jpg','7.62');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Intro', '2', '4', '2014');
@@ -197,8 +199,8 @@ values ('Bloodflood Pt. II', '2', '4', '2014');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Leaving Nara', '2', '4', '2014');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Ride the Lightning', '3', '1984', 'RtL.jpg');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName,AlbumPrice)
+values ('Ride the Lightning', '3', '1984', 'RtL.jpg','9.49');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Fight Fire with Fire', '3', '5', '1984');
@@ -217,8 +219,8 @@ values ('Creeping Death', '3', '5', '1984');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('The Call of Ktulu', '3', '5', '1984');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Load', '3', '1996', 'Load.jpg');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName,AlbumPrice)
+values ('Load', '3', '1996', 'Load.jpg','9.49');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Aint Mine', '3', '6', '1996');
@@ -249,8 +251,8 @@ values ('Ronnie', '3', '6', '1996');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('The Outlaw Torn', '3', '6', '1996');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Man on the Moon II: The Legend of Mr. Rager', '4', '2010', 'MotM.jpg');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName,AlbumPrice)
+values ('Man on the Moon II: The Legend of Mr. Rager', '4', '2010', 'MotM.jpg','8.99');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Scott Mescudi vs. the World', '4', '7', '2010');
@@ -283,8 +285,8 @@ values ('Ghost', '4', '7', '2010');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Trapped In My Mind', '4', '7', '2010');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Aurora EP', '5', '2016', 'Aurora.jpg');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName,AlbumPrice)
+values ('Aurora EP', '5', '2016', 'Aurora.jpg','4.45');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Bright Side', '5', '8', '2016');
@@ -297,8 +299,8 @@ values ('The Otherside', '5', '8', '2016');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Green Eyes', '5', '8', '2016');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Meow the Jewels', '6', '2015', 'Meow.png');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName,AlbumPrice)
+values ('Meow the Jewels', '6', '2015', 'Meow.png','9.49');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Meowpurrdy', '6', '9', '2015');
@@ -325,8 +327,8 @@ values ('Angelsnuggler', '6', '9', '2015');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Creown (3D Remix)', '6', '9', '2015');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Run the Jewels 3', '6', '2016', 'RtJ3.jpg');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName,AlbumPrice)
+values ('Run the Jewels 3', '6', '2016', 'RtJ3.jpg','8.99');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Down', '6', '10', '2016');
@@ -357,8 +359,8 @@ values ('Thursday in the Danger Room', '6', '10', '2016');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('A Report to the Shareholders / Kill Your Masters', '6', '10', '2016');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Stories', '7', '2015', 'Stories.png');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName,AlbumPrice)
+values ('Stories', '7', '2015', 'Stories.png','9.49');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Waiting for Love', '7', '11', '2015');
@@ -389,8 +391,8 @@ values ('Trouble', '7', '11', '2015');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Gonna Love Ya', '7', '11', '2015');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('True', '7', '2013', 'True.png');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName,AlbumPrice)
+values ('True', '7', '2013', 'True.png','9.49');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Wake Me Up', '7', '12', '2013');
@@ -413,8 +415,8 @@ values ('Hope Theres Someone', '7', '12', '2013');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Heart Upon My Sleeve', '7', '12', '2013');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Funk Wav Bounces Vol. 1', '8', '2017', 'FWBV1.jpg');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName,AlbumPrice)
+values ('Funk Wav Bounces Vol. 1', '8', '2017', 'FWBV1.jpg','9.99');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Slide', '8', '13', '2017');
@@ -437,8 +439,8 @@ values ('Faking It', '8', '13', '2017');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Hard to Love', '8', '13', '2017');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Motion', '8', '2014', 'Motion.png');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName,AlbumPrice)
+values ('Motion', '8', '2014', 'Motion.png','11.99');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Faith', '8', '14', '2014');
@@ -471,8 +473,8 @@ values ('Burnin', '8', '14', '2014');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Dollar Signs', '8', '14', '2014');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Starboy', '9', '2016', 'Starboy.png');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName,AlbumPrice)
+values ('Starboy', '9', '2016', 'Starboy.png','13.49');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Starboy', '9', '15', '2016');
@@ -511,8 +513,8 @@ values ('Die for You', '9', '15', '2016');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('I Feel It Coming', '9', '15', '2016');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Beauty Behind the Madness', '9', '2015', 'BBtM.png');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName,AlbumPrice)
+values ('Beauty Behind the Madness', '9', '2015', 'BBtM.png','11.49');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Real Life', '9', '16', '2015');
@@ -543,8 +545,8 @@ values ('Prisoner', '9', '16', '2015');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Angel', '9', '16', '2015');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Time to Pretend', '10', '2005', 'TimeToPretend.jpg');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName,AlbumPrice)
+values ('Time to Pretend', '10', '2005', 'TimeToPretend.jpg','5.34');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Time to Pretend', '10', '17', '2005');
@@ -559,8 +561,8 @@ values ('Indie Rokkers', '10', '17', '2005');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Kids', '10', '17', '2005');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Climbing to New Lows', '10', '2005', 'ClimbToNewLows.jpg');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName,AlbumPrice)
+values ('Climbing to New Lows', '10', '2005', 'ClimbToNewLows.jpg','3.99');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Intro(Come on Christmas)', '10', '18', '2005');
@@ -583,8 +585,8 @@ values ('Grutu (Just Becuz)', '10', '18', '2005');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('We Dont Care', '10', '18', '2005');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('Dude Ranch', '11', '1997', 'DudeRanch.jpg');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName,AlbumPrice)
+values ('Dude Ranch', '11', '1997', 'DudeRanch.jpg','5.99');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Pathetic', '11', '19', '1997');
@@ -615,8 +617,8 @@ values ('Lemmings', '11', '19', '1997');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Im Sorry', '11', '19', '1997');
 
-insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName)
-values ('New Eyes', '12', '2014', 'NewEyes.png');
+insert into Album(AlbumName, ArtistID, ReleaseYear, ImageName,AlbumPrice)
+values ('New Eyes', '12', '2014', 'NewEyes.png','7.99');
 
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Mozarts House', '12', '20', '2014');
@@ -644,4 +646,6 @@ insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Birch', '12', '20', '2014');
 insert into Song(SongName, ArtistID, AlbumID, ReleaseYear)
 values ('Outro Movement III', '12', '20', '2014');
+
+
 

@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <link href="css/homepage.css" rel="stylesheet">
-        
+
     </head>
     <body data-spy="scroll">
         <nav class="navbar navbar-inverse">
@@ -38,7 +38,8 @@
                     </div>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>Account</a></li>
+                     <li><a href="/ThatsMyJam/cart.jsp"><span class= "glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                    <li><a href="/ThatsMyJam/account.jsp"><span class="glyphicon glyphicon-user"></span>Account</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
                 </ul>
             </div>
@@ -47,10 +48,10 @@
             <!-- TODO - Display results -->
             <p>Boop</p>
         </div>
-            <!-- Bootstrap core Javascript and jQuery  -->
-            <!-- Placed at the end for faster loading of pages -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
+        <!-- Bootstrap core Javascript and jQuery  -->
+        <!-- Placed at the end for faster loading of pages -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
     </body>
 </html>
 

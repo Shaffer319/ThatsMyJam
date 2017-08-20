@@ -5,6 +5,8 @@
  */
 package com.thatsmyjam.data;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author cpournaras11
@@ -16,6 +18,8 @@ public class Album
     private int artistID;
     private int releaseYear;
     private String imageName;
+    private float albumPrice;
+    private ArrayList<String> songList;
     
     /**
      * Constructor
@@ -92,4 +96,27 @@ public class Album
     public void setImageName(String imageName) {
         this.imageName = imageName;
     }
+    
+     /**
+     * @return the albumPrice
+     */
+    public float getAlbumPrice() {
+        return albumPrice;
+    }
+
+    /**
+     * @param albumPrice the albumPrice to set
+     */
+    public void setAlbumPrice(float albumPrice) {
+        this.albumPrice = albumPrice;
+    }
+    
+    public void setSongList(ArrayList<String>songList){
+        this.songList=songList;
+    }
+    
+    public ArrayList<String> getSongList(){
+        return songList;
+    }
+    
 }
