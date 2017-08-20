@@ -120,7 +120,8 @@ public class InfoBean implements Serializable {
             query = "SELECT Album.AlbumID, Album.AlbumName, Album.ReleaseYear, "
                     + "Album.ImageName as AlbumImage, Artist.ImageName as ArtistImage, Artist.ArtistName "
                     + "FROM Album INNER JOIN Artist ON Artist.ArtistID = Album.ArtistID "
-                    + "WHERE Artist.ArtistID = " + id + ";";
+                    + "WHERE Artist.ArtistID = " + id + " "
+                    + "ORDER BY ReleaseYear DESC;";
         }
         else 
         {
