@@ -43,7 +43,7 @@ public class Search extends HttpServlet {
         RequestDispatcher dispatcher;
         response.setContentType("text/html;charset=UTF-8");
         
-        String searchValue = (String)request.getAttribute("search");
+        String searchValue = (String)request.getParameter("search");
         
         if(searchValue != null && !searchValue.trim().equals(""))
         {
@@ -52,20 +52,16 @@ public class Search extends HttpServlet {
                 htmlOutput = "";
                 
                 String query = "SELECT ArtistID, ArtistName FROM Artist "
-                             + "WHERE ArtistName LIKE '%{" + searchValue + "}%'";
+                             + "WHERE ArtistName LIKE '%" + searchValue + "%'";
                 ResultSet artistsFound = DBUtil.executeSelect(query);
 
-                boolean artists, albums, songs;
-                artists = albums = songs = false;
-                
                 // This checks if there is a first record otherwise the Artist section will be skipped
                 if(artistsFound.isBeforeFirst())
                 {
-                    artists = true;
                     htmlOutput += "<h1> Artists </h1><ul>";
                     while(artistsFound.next())
                     {
-                        htmlOutput += "<a href=/info.jsp?artist=" + artistsFound.getString("ArtistID") + ">";
+                        htmlOutput += "<a href=/ThatsMyJam/info.jsp?artist=" + artistsFound.getString("ArtistID") + ">";
                         htmlOutput += "<li>" + artistsFound.getString("ArtistName") + "</li></a>";
                     }
                     htmlOutput += "</ul>";
@@ -73,16 +69,15 @@ public class Search extends HttpServlet {
                 DBUtil.closeSelectObjects();
                 
                 query = "SELECT AlbumID, AlbumName FROM Album "
-                      + "WHERE AlbumName LIKE '%{" + searchValue + "}%'";
+                      + "WHERE AlbumName LIKE '%" + searchValue + "%'";
                 ResultSet albumsFound = DBUtil.executeSelect(query);
 
                 if(albumsFound.isBeforeFirst())
                 {
-                    albums = true;
                     htmlOutput += "<h1> Albums </h1><ul>";
                     while(albumsFound.next())
                     {
-                        htmlOutput += "<a href=/info.jsp?album=" + albumsFound.getString("AlbumID") + ">";
+                        htmlOutput += "<a href=/ThatsMyJam/info.jsp?album=" + albumsFound.getString("AlbumID") + ">";
                         htmlOutput += "<li>" + albumsFound.getString("AlbumName") + "</li></a>";
                     }
                     htmlOutput += "</ul>";
@@ -90,13 +85,12 @@ public class Search extends HttpServlet {
                 DBUtil.closeSelectObjects();
                 
                 query = "SELECT SongID, SongName, ArtistName FROM Song "
-                      + "INNER JOIN Artist ON Artist.ArtistName.ArtistID = Song.ArtistID "
-                      + "WHERE SongName LIKE '%{" + searchValue + "}%'";
+                      + "INNER JOIN Artist ON Artist.ArtistID = Song.ArtistID "
+                      + "WHERE SongName LIKE '%" + searchValue + "%'";
                 ResultSet songsFound = DBUtil.executeSelect(query);
 
                 if(songsFound.isBeforeFirst())
                 {
-                    songs = true;
                     htmlOutput += "<h1> Songs </h1><ul>";
                     while(songsFound.next())
                     {
@@ -105,14 +99,14 @@ public class Search extends HttpServlet {
                 }
                 DBUtil.closeSelectObjects();
                 
-                if(!artists && !albums && !songs)
+                if(htmlOutput.equals(""))
                 {
                     htmlOutput = "<p>No results were found</p>";
                 }
                 InfoBean bean = new InfoBean();
                 bean.setSearchResults(htmlOutput);
                 request.getSession().setAttribute("searchBean", bean);
-                dispatcher = servletContext.getRequestDispatcher("/ThatsMyJam/searchResults.jsp");
+                dispatcher = servletContext.getRequestDispatcher("/searchResults.jsp");
                 dispatcher.forward(request, response);
             }
             catch(SQLException e)
@@ -120,7 +114,7 @@ public class Search extends HttpServlet {
                 InfoBean bean = new InfoBean();
                 bean.setSearchResults(e.getMessage());
                 request.getSession().setAttribute("searchBean", bean);
-                dispatcher = servletContext.getRequestDispatcher("/ThatsMyJam/searchResults.jsp");
+                dispatcher = servletContext.getRequestDispatcher("/searchResults.jsp");
                 dispatcher.forward(request, response);
             }
             finally
