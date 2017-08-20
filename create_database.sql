@@ -72,6 +72,7 @@ create table Playlist (
   FOREIGN KEY(UserID) REFERENCES User(UserID)
 );
 
+
 # Artists
 insert into Artist(ArtistName, ImageName)
 values ('Halsey', 'Halsey.jpg');

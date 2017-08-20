@@ -19,5 +19,7 @@ public class URL {
     public static final String URL_SEARCH = "/search.jps"; // Show search results
     public static final String URL_ARTIST = "/artist.jps"; // Show artist/music/album
     public static final String URL_ABOUT_US = "/aboutus.jps"; // Show search results
+    public static final String URL_CART = "/cart.jps"; // Show shopping cart items
+    public static final String URL_CHECKOUT = "/checkout.jps"; // checkout items in shopping cart
     
 }

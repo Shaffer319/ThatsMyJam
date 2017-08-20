@@ -38,8 +38,9 @@
                     </div>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Account</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                    <li><a href="/ThatsMyJam/cart.jsp"><span class= "glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                    <li><a href="/ThatsMyJam/account.jsp"><span class="glyphicon glyphicon-user"></span>Account</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -52,7 +53,7 @@
                 </div>
 
                 <%=infoBean.getAlbumGallery()%>
-                
+
             </div>
             <!-- Bootstrap core Javascript and jQuery  -->
             <!-- Placed at the end for faster loading of pages -->

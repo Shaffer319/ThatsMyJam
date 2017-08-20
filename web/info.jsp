@@ -10,10 +10,10 @@
     <head>
         <jsp:useBean id="infoBean" class="com.thatsmyjam.beans.InfoBean" scope="session" />
         <title>
-            <% if(request.getParameter("artist") != null) { %>
-                <%=infoBean.getTitle(true, request.getParameter("artist"))%>
+            <% if (request.getParameter("artist") != null) {%>
+            <%=infoBean.getTitle(true, request.getParameter("artist"))%>
             <%} else {%>
-                <%=infoBean.getTitle(false, request.getParameter("album"))%>
+            <%=infoBean.getTitle(false, request.getParameter("album"))%>
             <%}%>
         </title>
         <meta charset="utf-8">
@@ -44,22 +44,29 @@
                     </div>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>Account</a></li>
+                    <li><a href="/ThatsMyJam/cart.jsp"><span class= "glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                    <li><a href="/ThatsMyJam/account.jsp"><span class="glyphicon glyphicon-user"></span>Account</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
                 </ul>
             </div>
         </nav>
         <div class="container">
-            <% if(request.getParameter("artist") != null) { %>
+            <form method="post" action=<%= response.encodeURL("ShoppingCart")%> class="form-horizontal" role="form" align="center">
+                <% if (request.getParameter("artist") != null) {%>
                 <%=infoBean.getPage(true, request.getParameter("artist"))%>
-            <%} else {%>
+                <%} else {%>
                 <%=infoBean.getPage(false, request.getParameter("album"))%>
-            <%}%>
+                <br></br>                     
+                <button type="submit" name="addAlbumCart" class="btn btn-default">
+                    Add Album to Cart <span class="glyphicon glyphicon-shopping-cart"></span>
+                </button> 
+                <%}%>
+            </form>
         </div>
-            <!-- Bootstrap core Javascript and jQuery  -->
-            <!-- Placed at the end for faster loading of pages -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
+        <!-- Bootstrap core Javascript and jQuery  -->
+        <!-- Placed at the end for faster loading of pages -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
     </body>
 </html>
 

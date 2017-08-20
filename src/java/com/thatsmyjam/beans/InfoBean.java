@@ -17,7 +17,7 @@ import java.util.ArrayList;
 /**
  *
  * @author cpournaras11
- * 
+ *
  * Bean to obtain generic (not-user based) information from the database
  */
 public class InfoBean implements Serializable {
@@ -35,88 +35,68 @@ public class InfoBean implements Serializable {
     /**
      * Constructor
      */
-    public InfoBean()
-    {
+    public InfoBean() {
     }
-    
+
     /**
      * Gets the dynamic title for the information page
-     * 
+     *
      * @param isArtist - Boolean for Artist info, false for Album info
      * @param id - ID for the Artist/Album
-     * 
+     *
      * @return - Dynamic title for the page
      */
-    public String getTitle(boolean isArtist, String id)
-    {
-        try
-        {
+    public String getTitle(boolean isArtist, String id) {
+        try {
             Integer.parseInt(id);
-        }
-        catch(NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             return "Error occurred";
         }
-        
+
         String query = "";
-        if(isArtist)
-        {
+        if (isArtist) {
             query = "SELECT ArtistName FROM Artist WHERE ArtistID = " + id;
-        }
-        else
-        {
+        } else {
             query = "SELECT AlbumName, ArtistName FROM Album "
-                  + "INNER JOIN Artist ON Artist.ArtistID = Album.ArtistID "
-                  + "WHERE AlbumID = " + id;
+                    + "INNER JOIN Artist ON Artist.ArtistID = Album.ArtistID "
+                    + "WHERE AlbumID = " + id;
         }
-        
+
         String title;
-        try
-        {
+        try {
             ResultSet results = DBUtil.executeSelect(query);
             results.next();
-            if(isArtist)
-            {
+            if (isArtist) {
                 title = "Artist: " + results.getString("ArtistName");
-            }
-            else
-            {
+            } else {
+
                 title = results.getString("AlbumName") + " by " + results.getString("ArtistName");
             }
-        }
-        catch(SQLException e)
-        {
+        } catch (SQLException e) {
             title = "Error Occurred";
-        }
-        finally
-        {
+        } finally {
             DBUtil.closeSelectObjects();
         }
         return title;
     }
-    
+
     /**
      * Gets an HTML formatted section for the album/artist id stored in the bean
-     * 
+     *
      * @param isArtist - True if looking for an Artist, false for an Album
      * @param id - ID of the Artist/Album to get the page information for
      * @return - HTML to display to the user
      */
-    public String getPage(boolean isArtist, String id)
-    {
-        try
-        {
+    public String getPage(boolean isArtist, String id) {
+        try {
             Integer.parseInt(id);
-        }
-        catch(NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             return "<p>The id value entered was not recognized and the request could not be completed";
         }
-        
+
         String query;
-        
-        if(isArtist)
-        {
+
+        if (isArtist) {
             query = "SELECT Album.AlbumID, Album.AlbumName, Album.ReleaseYear, "
                     + "Album.ImageName as AlbumImage, Artist.ImageName as ArtistImage, Artist.ArtistName "
                     + "FROM Album INNER JOIN Artist ON Artist.ArtistID = Album.ArtistID "
@@ -128,16 +108,15 @@ public class InfoBean implements Serializable {
             query = "SELECT Artist.ArtistID, Artist.ArtistName, Album.ReleaseYear, "
                     + "Album.ImageName, Album.AlbumName, Album.AlbumPrice FROM Artist INNER JOIN Album ON "
                     + "Album.ArtistID = Artist.ArtistID WHERE AlbumID = " + id + ";";
+
         }
-        
+
         String html = "";
-        
-        try
-        {
+
+        try {
             ResultSet results = DBUtil.executeSelect(query);
-            
-            if(isArtist)
-            {
+
+            if (isArtist) {
                 boolean first = true;
                 
                 int counter = 0;
@@ -163,10 +142,10 @@ public class InfoBean implements Serializable {
                     }
                     
                     String albumImage = IMAGE.replace(SRC_REP, results.getString("AlbumImage"))
-                                             .replace(ALT_REP, results.getString("AlbumName"))
-                                             .replace(TYPE_REP, "album")
-                                             .replace(HREF_VAL, results.getString("AlbumID"))
-                                             .replaceAll(PIXEL_REP, "350");
+                            .replace(ALT_REP, results.getString("AlbumName"))
+                            .replace(TYPE_REP, "album")
+                            .replace(HREF_VAL, results.getString("AlbumID"))
+                            .replaceAll(PIXEL_REP, "350");
                     // TODO Formatting html output
                     html += albumImage;
                     albumNames[counter++] =  results.getString("AlbumName") + " " + results.getString("ReleaseYear");
@@ -196,16 +175,14 @@ public class InfoBean implements Serializable {
                 }
                 
                 DBUtil.closeSelectObjects();
-            }
-            else
-            {
+            } else {
                 // Move cursor to first result
                 results.next();
                 html += "<table class=\"col-xs-12 col-md-8\"><tr></td>";
                 html += IMAGE.replace(SRC_REP, results.getString("ImageName"))
-                             .replace(ALT_REP, results.getString("AlbumName"))
-                             .replace(HREF_REP, "")
-                             .replace(PIXEL_REP, "500");
+                        .replace(ALT_REP, results.getString("AlbumName"))
+                        .replace(HREF_REP, "")
+                        .replace(PIXEL_REP, "500");
                 html += "</td><td>";
 
                 setArtistName(results.getString("ArtistName"));
@@ -233,7 +210,7 @@ public class InfoBean implements Serializable {
                 query = "SELECT SongID, SongName, AlbumName FROM Song INNER JOIN Album ON Album.AlbumID = Song.AlbumID WHERE Album.AlbumID = " + id;
                 
                 results = DBUtil.executeSelect(query);
-                
+
                 // TODO Formatting HTML output
                 boolean first = true;
                 String albumName = "";
@@ -270,56 +247,42 @@ public class InfoBean implements Serializable {
                 }
                 html += "</ul></td></tr></table>";
             }
-        }
-        catch(SQLException e)
-        {
+        } catch (SQLException e) {
             html += "<p>An error occurred while processing the request<br/><br/>" + e.getMessage() + "<br/><br/>" + query + "</p>";
-        }
-        finally
-        {
+        } finally {
             DBUtil.closeSelectObjects();
         }
-        
+
         return html;
     }
-    
+
     /**
      * Gets the first 10 albums from the database to display on the homepage
-     * 
+     *
      * @return - Formatted HTML to display the first 10 Albums for the database
      */
-    public String getAlbumGallery()
-    {
+    public String getAlbumGallery() {
         String query = "SELECT AlbumID, AlbumName, ImageName FROM ALBUM ORDER BY RAND() LIMIT 8;";
         ResultSet rs = null;
         String htmlOutput = "";
-        
-        try
-        {
+
+        try {
             rs = DBUtil.executeSelect(query);
-        }
-        catch(SQLException e)
-        {
+        } catch (SQLException e) {
             return "<p>An error occurred while processing your request<br/>" + e.getMessage() + "</p>";
         }
-        
-        try
-        {
-            while(rs.next())
-            {
+
+        try {
+            while (rs.next()) {
                 htmlOutput += IMAGE.replace(TYPE_REP, "album")
-                                   .replace(HREF_VAL, rs.getString("AlbumID")) 
-                                   .replace(SRC_REP, rs.getString("ImageName"))
-                                   .replace(ALT_REP, rs.getString("AlbumName"))
-                                   .replace(SIZE_REP, "");
+                        .replace(HREF_VAL, rs.getString("AlbumID"))
+                        .replace(SRC_REP, rs.getString("ImageName"))
+                        .replace(ALT_REP, rs.getString("AlbumName"))
+                        .replace(SIZE_REP, "");
             }
-        }
-        catch(SQLException e)
-        {
+        } catch (SQLException e) {
             htmlOutput = "<p>" + e + "</p>";
-        }
-        finally
-        {
+        } finally {
             DBUtil.closeSelectObjects();
         }
         return htmlOutput;
