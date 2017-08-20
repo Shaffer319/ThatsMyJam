@@ -67,30 +67,31 @@ public class CartBean implements Serializable {
     //adds album/song to cartlist unless its already in the cart
     public void addItem(Item item) {
 
-        for (int i = 0; i < getNumItems(); ++i) {
-            if (item.getItemTitle().equals(items.get(i).getItemTitle())) {
-                alreadyAddedMessage();
-                System.out.println("Already added");
-            } else {
-                this.items.add(item);
-            }
-
-        }
+        boolean addFlag = true;
         if (items.isEmpty()) {
             this.items.add(item);
+        } else {
+            for (int i = 0; i < getNumItems(); ++i) {
+                if (item.getItemTitle().equals(items.get(i).getItemTitle())) {
+                    addFlag = false;
+                    break;
+                }
+            }
+            if (addFlag) {
+                this.items.add(item);
+            }
         }
     }
 
     //removes item from cart
     public void removeItem(String item) {
-     
+
         items.removeIf(itm -> itm.getItemTitle().equals(item));
- 
-    
+
     }
 
     public void removeAll() {
-     items.removeAll(items);
+        items.removeAll(items);
     }
 
     public String alreadyAddedMessage() {
