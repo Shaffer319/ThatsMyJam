@@ -1,9 +1,9 @@
 package com.thatsmyjam.data;
 
+import com.thatsmyjam.beans.InfoBean;
 import java.sql.*;
 import java.util.ArrayList;
 
-import com.thatsmyjam.User;
 
 public class UserDB {
 
@@ -114,9 +114,11 @@ public class UserDB {
             User user = null;
             if (rs.next()) {
                 user = new User();
+                user.setUserID(rs.getInt("UserID"));
                 user.setFirstName(rs.getString("FirstName"));
                 user.setLastName(rs.getString("LastName"));
                 user.setEmail(rs.getString("Email"));
+                InfoBean.setCurrentUser(user);
             }
             return user;
         } catch (SQLException e) {
@@ -143,6 +145,7 @@ public class UserDB {
             while (rs.next())
             {
                 User user = new User();
+                user.setUserID(rs.getInt("UserID"));
                 user.setFirstName(rs.getString("FirstName"));
                 user.setLastName(rs.getString("LastName"));
                 user.setEmail(rs.getString("Email"));

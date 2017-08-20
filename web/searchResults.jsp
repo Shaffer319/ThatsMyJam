@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
         <link href="css/homepage.css" rel="stylesheet">
-        <jsp:useBean id="infoBean" class="com.thatsmyjam" scope="request" />
+        <jsp:useBean id="searchBean" class="com.thatsmyjam.beans.InfoBean" scope="session" />
     </head>
     <body data-spy="scroll">
         <nav class="navbar navbar-inverse">
@@ -23,13 +23,13 @@
                     <a class="navbar-brand" href="#">That's My Jam</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Home</a></li>
+                    <li class="active"><a href="/ThatsMyJam/homepage.jsp">Home</a></li>
                     <li><a href="#">My Playlists</a></li>
                     <li><a href="#">Top Albums</a></li>
                 </ul>
-                <form class="navbar-form navbar-left">
+                <form class="navbar-form navbar-left" action="/ThatsMyJam/Search" method=GET>>
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" name="search" class="form-control" placeholder="Search">
                         <div class="input-group-btn">
                             <button class="btn btn-default" type="submit">
                                 <i class="glyphicon glyphicon-search"></i>
@@ -38,24 +38,19 @@
                     </div>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span>Account</a></li>
+                     <li><a href="/ThatsMyJam/cart.jsp"><span class= "glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                    <li><a href="/ThatsMyJam/account.jsp"><span class="glyphicon glyphicon-user"></span>Account</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
                 </ul>
             </div>
         </nav>
         <div class="container">
-            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                <a class="thumbnail">
-                    <img class="img-responsive" src="<jsp" alt="" width="500" height="500">
-                </a>
-            </div>
-            
-            
+            <%=searchBean.getSearchResults()%>
         </div>
-            <!-- Bootstrap core Javascript and jQuery  -->
-            <!-- Placed at the end for faster loading of pages -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-            <script src="js/bootstrap.min.js"></script>
+        <!-- Bootstrap core Javascript and jQuery  -->
+        <!-- Placed at the end for faster loading of pages -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
     </body>
 </html>
 
