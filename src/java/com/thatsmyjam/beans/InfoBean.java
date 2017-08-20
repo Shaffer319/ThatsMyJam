@@ -31,6 +31,7 @@ public class InfoBean implements Serializable {
     private ArrayList<String> songList;
     private static User currentUser;
     private String searchResults;
+    private String playlistResults;
     
     /**
      * Constructor
@@ -424,6 +425,20 @@ public class InfoBean implements Serializable {
      */
     public void setSearchResults(String searchResults) {
         this.searchResults = searchResults;
+    }
+
+    /**
+     * @return the playlistResults
+     */
+    public String getPlaylistResults() {
+        return playlistResults;
+    }
+
+    /**
+     * @param playlistResults the playlistResults to set
+     */
+    public void setPlaylistResults(String playlistResults) {
+        this.playlistResults = playlistResults;
     }
     
 }
