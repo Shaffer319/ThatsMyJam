@@ -139,6 +139,10 @@ public class InfoBean implements Serializable {
             {
                 boolean first = true;
                 
+                int counter = 0;
+                String[] albumNames = new String[3];
+                String rowDiv = "<div class=\"col-lg-9 col-md-12 col-xs-18\">";
+                String cellDiv = "<div style=\"text-align:center\" class=\"col-lg-3 col-md-4 col-xs-6\">REPLACE</div>";
                 while(results.next())
                 {
                     if(first)
@@ -151,14 +155,45 @@ public class InfoBean implements Serializable {
                         first = false;
                         html += newImage + "<h1>" + getArtistName() + "</h1>";
                     }
+                    
+                    if(counter == 0)
+                    {
+                        html += rowDiv;
+                    }
+                    
                     String albumImage = IMAGE.replace(SRC_REP, results.getString("AlbumImage"))
                                              .replace(ALT_REP, results.getString("AlbumName"))
                                              .replace(TYPE_REP, "album")
                                              .replace(HREF_VAL, results.getString("AlbumID"))
                                              .replaceAll(PIXEL_REP, "350");
                     // TODO Formatting html output
-                    html += albumImage + results.getString("AlbumName") + " " + results.getString("ReleaseYear");
+                    html += albumImage;
+                    albumNames[counter++] =  results.getString("AlbumName") + " " + results.getString("ReleaseYear");
+                    
+                    if(counter == 3)
+                    {
+                        html += "</div>";
+                        html += rowDiv;
+                        for(int i = 0; i < 3; i++)
+                        {
+                            html += cellDiv.replace("REPLACE", albumNames[i]);
+                            albumNames[i] = null;
+                        }
+                        html += "</div>";
+                        counter = 0;
+                    }
                 }
+                
+                if(counter != 0)
+                {
+                    html += "</div>" + rowDiv;
+                    for(int i = 0; i < counter; i++)
+                    {
+                        html += cellDiv.replace("REPLACE", albumNames[i]);
+                    }
+                    html += "</div>";
+                }
+                
                 DBUtil.closeSelectObjects();
             }
             else
