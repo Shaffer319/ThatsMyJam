@@ -25,18 +25,31 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
+    -->
     
     <security-constraint>
         <web-resource-collection>
-              <web-resource-name>Protected Area</web-resource-name>
-              <url-pattern>/admin/*</url-pattern>
-          </web-resource-collection>
-          <auth-constraint>
-              <role-name>service</role-name>
-              <role-name>admin</role-name>
-          </auth-constraint>
+            <web-resource-name>Protected Area</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>service</role-name>
+            <role-name>admin</role-name>
+        </auth-constraint>
     </security-constraint>
-    -->
+    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Protected Area</web-resource-name>
+            <url-pattern>/profile/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>user</role-name>
+            <role-name>service</role-name>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+    
     <login-config>
         <!--<auth-method>BASIC</auth-method>-->
         <!--<realm-name>Basic Authentication</realm-name>-->
