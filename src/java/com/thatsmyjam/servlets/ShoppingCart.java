@@ -92,13 +92,21 @@ public class ShoppingCart extends HttpServlet {
             cart.addItem(itm);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart.jsp");
             dispatcher.forward(request, response);
+        } else if ((request.getParameter("song") != null)) {
+            String[] songs = request.getParameterValues("song");
+            String song = songs[0];
+            String delim = "_";
+            String[] songNameID = song.split(delim);
+            Item itm = new Item(songNameID[0], "song_icon.png", info.getArtistName(), info.getArtistID(), info.getAlbumName(), info.getAlbumID(), songNameID[0], Integer.parseInt(songNameID[1]), .6f);
+            cart.addItem(itm);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart.jsp");
+            dispatcher.forward(request, response);
         } else if ((request.getParameter("remove") != null)) {
-            String []removeItm = request.getParameterValues("remove");
+            String[] removeItm = request.getParameterValues("remove");
             out.println(removeItm[0]);
             cart.removeItem(removeItm[0]);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart.jsp");
             dispatcher.forward(request, response);
-
         } else if ((request.getParameter("continue_shop") != null)) {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/homepage.jsp");
             dispatcher.forward(request, response);
