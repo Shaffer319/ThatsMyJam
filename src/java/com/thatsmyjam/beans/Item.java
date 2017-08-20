@@ -21,89 +21,141 @@ public class Item {
     private int songID;
     private float price;
 
-  
-    
     public  Item(String itemTitle, String image, String artistName,int artistID,String albumName,int albumID, String songName, int songID, float price){
-        setItemTitle(itemTitle);
-        setImage(image);
-        setArtistName(artistName);
-        setArtistID(artistID);
-        setAlbumName(albumName);
-        setAlbumID(albumID);
-        setSongName(songName);
-        setSongID(songID);
-        setPrice(price);
+        this.itemTitle = itemTitle;
+        this.image = image;
+        this.artistName = artistName;
+        this.artistID = artistID;
+        this.albumName = albumName;
+        this.albumID = albumID;
+        this.songName = songName;
+        this.songID = songID;
+        this.price = price;
     }
 
+    /**
+     * @return the itemTitle
+     */
+    public String getItemTitle() {
+        return itemTitle;
+    }
+
+    /**
+     * @param itemTitle the itemTitle to set
+     */
     public void setItemTitle(String itemTitle) {
         this.itemTitle = itemTitle;
     }
 
+    /**
+     * @return the image
+     */
+    public String getImage() {
+        return image;
+    }
+
+    /**
+     * @param image the image to set
+     */
     public void setImage(String image) {
         this.image = image;
     }
 
+    /**
+     * @return the artistName
+     */
+    public String getArtistName() {
+        return artistName;
+    }
+
+    /**
+     * @param artistName the artistName to set
+     */
     public void setArtistName(String artistName) {
         this.artistName = artistName;
     }
 
-    public void setArtistID(int artistID) {
-        this.artistID = artistID;
-    }
-
-    public void setAlbumName(String albumName) {
-        this.albumName = albumName;
-    }
-
-    public void setAlbumID(int albumID) {
-        this.albumID = albumID;
-    }
-
-    public void setSongName(String songName) {
-        this.songName = songName;
-    }
-
-    public void setSongID(int songID) {
-        this.songID = songID;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-      
-    
-    public String getItemTitle(){
-        return itemTitle;
-    }
-     public String getImage(){
-        return image;
-    }
-      public String getArtistName(){
-        return artistName;
-    }
- 
+    /**
+     * @return the artistID
+     */
     public int getArtistID() {
         return artistID;
     }
 
+    /**
+     * @param artistID the artistID to set
+     */
+    public void setArtistID(int artistID) {
+        this.artistID = artistID;
+    }
+
+    /**
+     * @return the albumName
+     */
     public String getAlbumName() {
         return albumName;
     }
 
+    /**
+     * @param albumName the albumName to set
+     */
+    public void setAlbumName(String albumName) {
+        this.albumName = albumName;
+    }
+
+    /**
+     * @return the albumID
+     */
     public int getAlbumID() {
         return albumID;
     }
 
+    /**
+     * @param albumID the albumID to set
+     */
+    public void setAlbumID(int albumID) {
+        this.albumID = albumID;
+    }
+
+    /**
+     * @return the songName
+     */
     public String getSongName() {
         return songName;
     }
 
+    /**
+     * @param songName the songName to set
+     */
+    public void setSongName(String songName) {
+        this.songName = songName;
+    }
+
+    /**
+     * @return the songID
+     */
     public int getSongID() {
         return songID;
     }
 
+    /**
+     * @param songID the songID to set
+     */
+    public void setSongID(int songID) {
+        this.songID = songID;
+    }
+
+    /**
+     * @return the price
+     */
     public float getPrice() {
         return price;
     }
-           
+
+    /**
+     * @param price the price to set
+     */
+    public void setPrice(float price) {
+        this.price = price;
+    }          
 }

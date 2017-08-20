@@ -119,7 +119,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="cardnumber">Card Number</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="cardnumber" id="cardnumber" placeholder="Credit Card Number">
+                                <input type="text" maxlength="16" class="form-control" name="cardnumber" id="cardnumber" placeholder="Credit Card Number">
                             </div>
                         </div>
                         <div class="form-group">
