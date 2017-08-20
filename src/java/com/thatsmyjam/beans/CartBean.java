@@ -18,6 +18,13 @@ import java.util.ListIterator;
 public class CartBean implements Serializable {
 
     private List<Item> items;
+    private String songAlbumName = "";
+    private String albumSongName = "";
+    private String message;
+    boolean addFlag;
+    private boolean addedAlbumSong;
+    private boolean songSameAlbum;
+    private boolean albumSameSong;
 
     //creating a list of items in cart
     public CartBean() {
@@ -66,13 +73,32 @@ public class CartBean implements Serializable {
 
     //adds album/song to cartlist unless its already in the cart
     public void addItem(Item item) {
+        message = null;
+        addFlag = true;
+        addedAlbumSong = false;
+        songSameAlbum = false;
+        albumSameSong = false;
 
-        boolean addFlag = true;
         if (items.isEmpty()) {
             this.items.add(item);
         } else {
             for (int i = 0; i < getNumItems(); ++i) {
                 if (item.getItemTitle().equals(items.get(i).getItemTitle())) {
+                    addedAlbumSong = true;
+                    setMessage();
+                    addFlag = false;
+                    break;
+                }
+                if (item.getAlbumName().equals(items.get(i).getAlbumName())) {
+                    if (item.getSongID() == 0) {
+                        setAlbumIncludedSong(items.get(i).getSongName());
+                        albumSameSong = true;
+                        setMessage();
+                    } else {
+                        setSongIncludedAlbum(items.get(i).getAlbumName());
+                        songSameAlbum = true;
+                        setMessage();
+                    }
                     addFlag = false;
                     break;
                 }
@@ -94,8 +120,34 @@ public class CartBean implements Serializable {
         items.removeAll(items);
     }
 
-    public String alreadyAddedMessage() {
-        return "<p> You've already added this item to your cart! </p>";
+    public void setSongIncludedAlbum(String songAlbumName) {
+        this.songAlbumName = songAlbumName;
     }
 
+    public String getSongIncludedAlbum() {
+        return songAlbumName;
+    }
+
+    public void setAlbumIncludedSong(String albumSongName) {
+        this.albumSongName = albumSongName;
+    }
+
+    public String getAlbumIncludedSong() {
+        return albumSongName;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage() {
+        if (addedAlbumSong) {
+            this.message = "You've already added this item to your cart!";
+        } else if (songSameAlbum) {
+            this.message = "The song you are trying to add is already included in <b>"+getSongIncludedAlbum()+"</b>";
+        } else if (albumSameSong) {
+            this.message = "The album you are trying to add contains the song <b>"+getAlbumIncludedSong()+"</b>."
+            + " Remove this song if you would like to purchase the album";
+        }
+    }
 }
