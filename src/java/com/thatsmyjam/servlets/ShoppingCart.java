@@ -95,11 +95,18 @@ public class ShoppingCart extends HttpServlet {
         } 
         else if ((request.getParameter("checkout") != null)) 
         {
+            if(user == null)
+            {
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("profileController/cart");
+                dispatcher.forward(request, response);
+                return;
+            }
+            
             cart.setPurchasedDate(); //maybe store the date purchased?
             ResultSet results;
             String sql_albumsong;
-            //*****************************TODO Use Actual UserID when login is working
-            String sql_song = "INSERT INTO OwnedSongs(UserID, SongID) VALUES (1,?)";
+            
+            String sql_song = "INSERT INTO OwnedSongs(UserID, SongID) VALUES (?,?)";
 
             for (int i = 0; i < cart.getNumItems(); i++) 
             {
@@ -108,7 +115,7 @@ public class ShoppingCart extends HttpServlet {
                 {
                     try 
                     {
-                        executeSongInsert(sql_song, cart.getItems().get(i).getSongID());
+                        executeSongInsert(sql_song, user.getUserID(), cart.getItems().get(i).getSongID());
 
                     } catch (SQLException ex) {
                         Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
@@ -150,7 +157,7 @@ public class ShoppingCart extends HttpServlet {
                     {
                         for(int id : songIDs)
                         {
-                            executeSongInsert(sql_song, id);
+                            executeSongInsert(sql_song, user.getUserID(), id);
                             DBUtil.closeInsertObjects();
                         }
                     }

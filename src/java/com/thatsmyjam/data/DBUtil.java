@@ -82,11 +82,12 @@ public class DBUtil {
      * @return - Number of rows modified
      * @throws SQLException 
      */
-    public static int executeSongInsert(String query, int song) throws SQLException{
+    public static int executeSongInsert(String query, int userID, int song) throws SQLException{
         pool = ConnectionPool.getInstance();
         connection = pool.getConnection();
         ps = connection.prepareStatement(query);
-        ps.setInt(1, song);
+        ps.setInt(1, userID);
+        ps.setInt(2, song);
            
         return ps.executeUpdate();
     }
