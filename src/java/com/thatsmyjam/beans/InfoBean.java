@@ -307,7 +307,8 @@ public class InfoBean implements Serializable {
                      + "INNER JOIN Song ON Song.SongID = OwnedSongs.SongID "
                      + "INNER JOIN Artist ON Artist.ArtistID = Song.ArtistID "
                      + "INNER JOIN Album ON Album.AlbumID = Song.AlbumID "
-                     + "WHERE UserID = 1"; // InfoBean.getCurrentUser().getUserID();
+                     + "WHERE UserID = 1 " // InfoBean.getCurrentUser().getUserID();
+                     + "ORDER BY SongName ASC";
         String htmlOutput = "";
         try
         {
