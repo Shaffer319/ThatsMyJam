@@ -12,14 +12,15 @@
         </div>
         <ul class="nav navbar-nav">
             <li class="active">
-                <a href="<c:url value="/homepage.jsp"/>">Home</a>
+                <a href="<c:url value="/homepage.jsp" />">Home</a>
             </li>
             <li>
-                <a href="<c:url value="/profileController/playlists" />">My Playlists</a>
+                <a href="<c:url value="/Playlists" />">My Playlists</a>
             </li>
             <li>
-                <a href="#">Top Albums</a>
+                <a href="<c:url value="/mySongs.jsp" />">My Songs</a>
             </li>
+
         </ul>
         <form class="navbar-form navbar-left" action=<%= response.encodeURL("Search")%> method=GET>>
             <div class="input-group">
