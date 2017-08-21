@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author mshaffer
  */
-@WebServlet(name = "ProfileServlet", urlPatterns = {"/profile/*"})
-public class ProfileServlet extends HttpServlet {
+@WebServlet(name = "AdminController", urlPatterns = {"/adminController/*"})
+public class AdminController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,22 +32,18 @@ public class ProfileServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String requestURI = request.getRequestURI();
-        String userName = request.getUserPrincipal().getName();
-        
-        User user = (User)request.getAttribute("user");
-        
-        String url = "/profile";
-        if (requestURI.endsWith("profile")) {
-            url
-        } else if (requestURI.endsWith("view")) {
-
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AdminController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AdminController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-        getServletContext()
-                .getRequestDispatcher(url)
-                .forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

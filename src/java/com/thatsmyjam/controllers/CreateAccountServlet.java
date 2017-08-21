@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author mshaffer
  */
-@WebServlet(name = "createaccount", urlPatterns = {"/createaccount"})
+@WebServlet(name = "createaccount", urlPatterns = {"/createAccount"})
 public class CreateAccountServlet extends HttpServlet {
 
     /**
