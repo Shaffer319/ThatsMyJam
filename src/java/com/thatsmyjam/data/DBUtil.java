@@ -6,6 +6,7 @@ public class DBUtil {
 
     private static ConnectionPool pool;
     private static Connection connection;
+    private static PreparedStatement ps;
     private static Statement s;
     private static ResultSet rs;
     private static String error = "";
@@ -71,6 +72,16 @@ public class DBUtil {
         rs = s.executeQuery(query);
 
         return rs;
+    }
+        
+    public static int executeSongInsertUpdate(String query, int[]songs) throws SQLException{
+         pool = ConnectionPool.getInstance();
+        connection = pool.getConnection();
+            ps = connection.prepareStatement(query);
+        for(int i=0;i<songs.length;i++){
+            ps.setInt(1, songs[i]);
+        }   
+        return ps.executeUpdate();
     }
     
     /**
