@@ -31,6 +31,7 @@ public class InfoBean implements Serializable {
     private ArrayList<String> songList;
     private static User currentUser;
     private String searchResults;
+    private String playlistResults;
     
     /**
      * Constructor
@@ -243,7 +244,7 @@ public class InfoBean implements Serializable {
                                 + "+on+album+" + albumName.replaceAll(" ", "+") + "&m=0>"
                                 + "<div style=\"float:left\">" + songName + "</div></a>"
                                 + "<div style=\"float:right\">"
-                                + "<button title=\"Add to Cart\" style=\"height:20px\" type=\"button\">"
+                                + "<button name=\"song\" value=\"" +songName+"_"+songID + "\" title=\"Add to Cart\" style=\"height:20px\" type=\"submit\">"
                                 + "<span class=\"glyphicon glyphicon-shopping-cart\"/>"
                                 + "</button></div></div></li>";
                 //    }
@@ -424,6 +425,20 @@ public class InfoBean implements Serializable {
      */
     public void setSearchResults(String searchResults) {
         this.searchResults = searchResults;
+    }
+
+    /**
+     * @return the playlistResults
+     */
+    public String getPlaylistResults() {
+        return playlistResults;
+    }
+
+    /**
+     * @param playlistResults the playlistResults to set
+     */
+    public void setPlaylistResults(String playlistResults) {
+        this.playlistResults = playlistResults;
     }
     
 }

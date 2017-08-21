@@ -58,7 +58,7 @@ public class Search extends HttpServlet {
                 // This checks if there is a first record otherwise the Artist section will be skipped
                 if(artistsFound.isBeforeFirst())
                 {
-                    htmlOutput += "<h1> Artists </h1><ul>";
+                    htmlOutput += "<h1> Artists </h1><ul style=\"list-style: none;\">";
                     while(artistsFound.next())
                     {
                         htmlOutput += "<a href=/ThatsMyJam/info.jsp?artist=" + artistsFound.getString("ArtistID") + ">";
@@ -74,7 +74,7 @@ public class Search extends HttpServlet {
 
                 if(albumsFound.isBeforeFirst())
                 {
-                    htmlOutput += "<h1> Albums </h1><ul>";
+                    htmlOutput += "<h1> Albums </h1><ul style=\"list-style: none;\">";
                     while(albumsFound.next())
                     {
                         htmlOutput += "<a href=/ThatsMyJam/info.jsp?album=" + albumsFound.getString("AlbumID") + ">";
@@ -91,7 +91,7 @@ public class Search extends HttpServlet {
 
                 if(songsFound.isBeforeFirst())
                 {
-                    htmlOutput += "<h1> Songs </h1><ul>";
+                    htmlOutput += "<h1> Songs </h1><ul style=\"list-style: none;\">";
                     while(songsFound.next())
                     {
                         htmlOutput += "<li>" + songsFound.getString("SongName") + " by " + songsFound.getString("ArtistName") + "</li>";

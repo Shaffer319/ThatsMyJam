@@ -72,6 +72,12 @@ create table Playlist (
   FOREIGN KEY(UserID) REFERENCES User(UserID)
 );
 
+create table SongsInPlaylist (
+  PlaylistID INT NOT NULL,
+  SongID INT NOT NULL,
+  FOREIGN KEY(PlaylistID) REFERENCES Playlist(PlaylistID),
+  FOREIGN KEY(SongID) REFERENCES Song(SongID)
+);
 
 # Artists
 insert into Artist(ArtistName, ImageName)

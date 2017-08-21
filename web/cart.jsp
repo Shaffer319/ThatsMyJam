@@ -18,7 +18,8 @@
         <link href="css/homepage.css" rel="stylesheet">
     </head>
     <body data-spy="scroll">
-        <% CartBean cart = (CartBean) session.getAttribute("cartBean");%>
+        <% CartBean cart = (CartBean) session.getAttribute("cartBean");
+            String message = cart.getMessage();%>
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -26,10 +27,10 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="/ThatsMyJam/homepage.jsp">Home</a></li>
-                    <li><a href="#">My Playlists</a></li>
+                    <li><a href="/ThatsMyJam/Playlists">My Playlists</a></li>
                     <li><a href="#">Top Albums</a></li>
                 </ul>
-                <form class="navbar-form navbar-left" action="/ThatsMyJam/Search" method=GET>>
+                <form class="navbar-form navbar-left" action=<%= response.encodeURL("Search")%> method=GET>>
                     <div class="input-group">
                         <input type="text" name="search" class="form-control" placeholder="Search">
                         <div class="input-group-btn">
@@ -47,8 +48,12 @@
             </div>
         </nav>
         <div class="container">
-             <legend>Shopping Cart</legend>
+            <legend>Shopping Cart</legend>
+            <% if (message != null) {%>
+            <p><i><font color= #B1351A><%= message%></font></i></p>
+                    <% }%>
             <form method="post" action=<%= response.encodeURL("ShoppingCart")%>  class="form-horizontal" role="form" align="center">
+                <% if (cart != null && cart.getNumItems() > 0) {%>
                 <div class="row">
                     <div class="col-sm-12 col-md-10 col-md-offset-1">
                         <table class="table table-hover">
@@ -60,8 +65,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <% if (cart != null && cart.getNumItems() > 0) {
-                                    for (int i = 0; i < cart.getNumItems(); ++i) {%>
+
+                                <%  for (int i = 0; i < cart.getNumItems(); ++i) {%>
                                 <tr>
                                     <td class="col-sm-8 col-md-6">
                                         <div class="media">
@@ -99,12 +104,17 @@
                                         </button></td>
                                 </tr>
                             </tfoot>
-                            <%   } else {%>
-                            <h3>No items in cart</h3>
-                            <%}%>
+
                         </table>
                     </div>
                 </div>
+                <%   } else {%>
+                <h3>No items in cart</h3>
+                <br></br>
+                <button type="submit" name="continue_shop" class="btn btn-default">
+                    <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
+                </button>
+                <%}%>
             </form>
             <div id="payment" class="collapse">
                 <form class="form-horizontal" role="form">
@@ -119,7 +129,7 @@
                         <div class="form-group">
                             <label class="col-sm-3 control-label" for="cardnumber">Card Number</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="cardnumber" id="cardnumber" placeholder="Credit Card Number">
+                                <input type="text" maxlength="16" class="form-control" name="cardnumber" id="cardnumber" placeholder="Credit Card Number">
                             </div>
                         </div>
                         <div class="form-group">
