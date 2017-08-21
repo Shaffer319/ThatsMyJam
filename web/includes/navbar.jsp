@@ -15,14 +15,14 @@
                 <a href="<c:url value="/homepage.jsp" />">Home</a>
             </li>
             <li>
-                <a href="<c:url value="/Playlists" />">My Playlists</a>
+                <a href="<c:url value="/profileController/playlists" />">My Playlists</a>
             </li>
             <li>
-                <a href="<c:url value="/mySongs.jsp" />">My Songs</a>
+                <a href="<c:url value="/profileController/mySongs" />">My Songs</a>
             </li>
 
         </ul>
-        <form class="navbar-form navbar-left" action=<%= response.encodeURL("Search")%> method=GET>>
+        <form class="navbar-form navbar-left" action=<c:url value="/Search" /> method=GET>>
             <div class="input-group">
                 <input type="text" name="search" class="form-control" placeholder="Search">
                 <div class="input-group-btn">
