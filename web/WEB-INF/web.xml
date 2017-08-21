@@ -12,15 +12,30 @@
     
     <!-- 
         Enable HTTPS on whole the site 
+    -->
+    
+<!--    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Thats My Jam</web-resource-name>
+            <url-pattern></url-pattern>
+            <http-method>GET</http-method>
+            <http-method>POST</http-method>
+        </web-resource-collection>        
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>-->
     
     
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>Thats My Jam</web-resource-name>
-            <url-pattern>/</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>
-        </web-resource-collection>        
+            <web-resource-name>Protected Area</web-resource-name>
+            <url-pattern>/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>service</role-name>
+            <role-name>admin</role-name>
+        </auth-constraint>
         <user-data-constraint>
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
@@ -28,15 +43,21 @@
     
     <security-constraint>
         <web-resource-collection>
-              <web-resource-name>Protected Area</web-resource-name>
-              <url-pattern>/admin/*</url-pattern>
-          </web-resource-collection>
-          <auth-constraint>
-              <role-name>service</role-name>
-              <role-name>admin</role-name>
-          </auth-constraint>
+            <web-resource-name>Secure Profile</web-resource-name>
+            <url-pattern>/profile/*</url-pattern>   
+            <url-pattern>/profileController/*</url-pattern>
+
+        </web-resource-collection>
+        <auth-constraint>            
+            <role-name>user</role-name>
+            <role-name>service</role-name>
+            <role-name>admin</role-name>
+        </auth-constraint>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
     </security-constraint>
-    -->
+    
     <login-config>
         <!--<auth-method>BASIC</auth-method>-->
         <!--<realm-name>Basic Authentication</realm-name>-->
@@ -49,7 +70,7 @@
     </login-config>    
     
     <welcome-file-list>
-        <welcome-file>ThatsMyJam</welcome-file>
+        <welcome-file>homepage.jsp</welcome-file>
         <welcome-file>index.jsp</welcome-file>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
