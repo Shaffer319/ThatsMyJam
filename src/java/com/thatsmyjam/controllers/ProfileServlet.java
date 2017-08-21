@@ -8,7 +8,6 @@ package com.thatsmyjam.controllers;
 import com.thatsmyjam.data.User;
 import com.thatsmyjam.data.UserDB;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.security.Principal;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,18 +43,18 @@ public class ProfileServlet extends HttpServlet {
         User user = getUser(request);
         if (user == null) {
             // Error loading user form db
-        }
-        if (requestURI.endsWith("view")) {
+            url = "/profile";
+        } else if (requestURI.endsWith("view")) {
             url = "/profile/index.jsp";
         } else if (requestURI.endsWith("changeName")) {
             url = handleChangeProfileName(user, request, response);
         } else if (requestURI.endsWith("changePassword")) {
             url = handleUpdateUserPassword(user, request, response);
-        } else if (requestURI.endsWith("playlists")){
+        } else if (requestURI.endsWith("playlists")) {
             url = "/Playlists";
-        }else if (requestURI.endsWith("mySongs")){
+        } else if (requestURI.endsWith("mySongs")) {
             url = "/mySongs.jsp";
-        }else if (requestURI.endsWith("cart")){
+        } else if (requestURI.endsWith("cart")) {
             url = "/ShoppingCart";
         }
 
@@ -156,7 +155,7 @@ public class ProfileServlet extends HttpServlet {
             request.setAttribute("message", "Current password invalid.");
         } else {
             int count = UserDB.updateUserPass(user.getEmail(), pass);
-           
+
             if (count == 0) {
                 request.setAttribute("message", "Error could not update pass at this time");
             }
