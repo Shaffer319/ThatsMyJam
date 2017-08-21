@@ -133,7 +133,7 @@
                                             <select class="form-control col-sm-2" name="expmon" id="expmon">
                                                 <option>Month</option>
                                                 <option value="01">01</option>
-                                                <option value="02">02)</option>
+                                                <option value="02">02</option>
                                                 <option value="03">03</option>
                                                 <option value="04">04</option>
                                                 <option value="05">05</option>
