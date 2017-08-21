@@ -8,13 +8,14 @@
 <jsp:include page="/includes/header.jsp" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="banner-text">
+<!--<div class="banner-text">
     <h2>That's My Jam!</h2>
     <p>Welcome to our music store</p>
     <a href="<c:url value="/admin" />">Admin Site</a>
 
     <a href="<c:url value="/profile" />">View Profile</a>
-</div>
+</div>-->
+<jsp:include page="includes/navbar.jsp" />
 
 
 <section class="login-block">

@@ -36,11 +36,11 @@ public class ProfileServlet extends HttpServlet {
         String requestURI = request.getRequestURI();
         String userName = request.getUserPrincipal().getName();
         
-        User user = (User)request.getAttribute("user");
+//        User user = (User)request.getAttribute("user");
         
         String url = "/profile";
         if (requestURI.endsWith("profile")) {
-            url
+//            url
         } else if (requestURI.endsWith("view")) {
 
         }

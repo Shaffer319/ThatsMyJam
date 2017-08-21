@@ -11,9 +11,15 @@
             <a class="navbar-brand" href="#">That's My Jam</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="/ThatsMyJam/homepage.jsp">Home</a></li>
-            <li><a href="/ThatsMyJam/Playlists">My Playlists</a></li>
-            <li><a href="#">Top Albums</a></li>
+            <li class="active">
+                <a href="<c:url value="/homepage.jsp"/>">Home</a>
+            </li>
+            <li>
+                <a href="<c:url value="/Playlists" />">My Playlists</a>
+            </li>
+            <li>
+                <a href="#">Top Albums</a>
+            </li>
         </ul>
         <form class="navbar-form navbar-left" action=<%= response.encodeURL("Search")%> method=GET>>
             <div class="input-group">
@@ -26,9 +32,9 @@
             </div>
         </form>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="<c:url value="cart.jsp" />" ><span class= "glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-            <li><a href="<c:url value="profile/account.jsp"/>" ><span class="glyphicon glyphicon-user"></span>Account</a></li>
-            <li><a href="<c:url value="logout"/>"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+            <li><a href="<c:url value="/cart.jsp" />" ><span class= "glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+            <li><a href="<c:url value="/profile"/>" ><span class="glyphicon glyphicon-user"></span>Account</a></li>
+            <li><a href="<c:url value="/logout"/>"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
         </ul>
     </div>
 </nav>
