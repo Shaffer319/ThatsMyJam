@@ -181,6 +181,7 @@ public class UserDB {
                 user.setLastName(rs.getString("LastName"));
                 user.setEmail(rs.getString("Email"));
                 user.setPassword(rs.getString("Password"));
+                user.setUserID(Integer.parseInt(rs.getString("UserID")));
                 InfoBean.setCurrentUser(user);
             }
             return user;
