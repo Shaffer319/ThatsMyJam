@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -88,7 +89,7 @@ public class InfoBean implements Serializable {
      * @param id - ID of the Artist/Album to get the page information for
      * @return - HTML to display to the user
      */
-    public String getPage(boolean isArtist, String id) {
+    public String getPage(HttpServletResponse response,boolean isArtist, String id) {
         try {
             Integer.parseInt(id);
         } catch (NumberFormatException e) {
@@ -181,6 +182,7 @@ public class InfoBean implements Serializable {
                 results.next();
                 html += "<table class=\"col-xs-12 col-md-8\"><tr></td>";
                 html += IMAGE.replace(SRC_REP, results.getString("ImageName"))
+                        .replace(URL_ENCODED, response.encodeURL(URL_LINK))
                         .replace(ALT_REP, results.getString("AlbumName"))
                         .replace(HREF_REP, "")
                         .replace(PIXEL_REP, "500");
@@ -265,7 +267,7 @@ public class InfoBean implements Serializable {
      *
      * @return - Formatted HTML to display the first 10 Albums for the database
      */
-    public String getAlbumGallery() {
+    public String getAlbumGallery(HttpServletResponse response) {
         String query = "SELECT AlbumID, AlbumName, ImageName FROM ALBUM ORDER BY RAND() LIMIT 8;";
         ResultSet rs = null;
         String htmlOutput = "";
@@ -279,6 +281,7 @@ public class InfoBean implements Serializable {
         try {
             while (rs.next()) {
                 htmlOutput += IMAGE.replace(TYPE_REP, "album")
+                        .replace(URL_ENCODED, response.encodeURL(URL_LINK))
                         .replace(HREF_VAL, rs.getString("AlbumID"))
                         .replace(SRC_REP, rs.getString("ImageName"))
                         .replace(ALT_REP, rs.getString("AlbumName"))

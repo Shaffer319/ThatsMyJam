@@ -23,39 +23,14 @@
         <link href="css/homepage.css" rel="stylesheet">
     </head>
     <body data-spy="scroll">
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">That's My Jam</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/ThatsMyJam/homepage.jsp">Home</a></li>
-                    <li><a href="/ThatsMyJam/Playlists">My Playlists</a></li>
-                    <li><a href="#">Top Albums</a></li>
-                </ul>
-                <form class="navbar-form navbar-left" action=<%= response.encodeURL("Search")%> method=GET>
-                    <div class="input-group">
-                        <input type="text" name="search" class="form-control" placeholder="Search">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/ThatsMyJam/cart.jsp"><span class= "glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-                    <li><a href="/ThatsMyJam/account.jsp"><span class="glyphicon glyphicon-user"></span>Account</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-                </ul>
-            </div>
-        </nav>
+        <jsp:include page="includes/navbar.jsp" />
+
         <div class="container">
             <form method="post" action=<%= response.encodeURL("ShoppingCart")%> class="form-horizontal" role="form" align="center">
                 <% if (request.getParameter("artist") != null) {%>
-                <%=infoBean.getPage(true, request.getParameter("artist"))%>
+                <%=infoBean.getPage(response, true, request.getParameter("artist"))%>
                 <%} else {%>
-                <%=infoBean.getPage(false, request.getParameter("album"))%>
+                <%=infoBean.getPage(response, false, request.getParameter("album"))%>
                 <br></br>                     
                 <button type="submit" name="addAlbumCart" class="btn btn-default">
                     Add Album to Cart <span class="glyphicon glyphicon-shopping-cart"></span>
