@@ -85,11 +85,12 @@ public class InfoBean implements Serializable {
     /**
      * Gets an HTML formatted section for the album/artist id stored in the bean
      *
+     * @param response - HttpServletResponse to link to another url from page results
      * @param isArtist - True if looking for an Artist, false for an Album
      * @param id - ID of the Artist/Album to get the page information for
      * @return - HTML to display to the user
      */
-    public String getPage(HttpServletResponse response,boolean isArtist, String id) {
+    public String getPage(HttpServletResponse response, boolean isArtist, String id) {
         try {
             Integer.parseInt(id);
         } catch (NumberFormatException e) {
@@ -199,8 +200,7 @@ public class InfoBean implements Serializable {
                 DBUtil.closeSelectObjects();
               
                 //TODO UNCOMMENT WHEN LOGIN IS WORKING SO A USER CAN BE TRACKED
-                /*  
-                query = "SELECT SongID FROM OwnedSongs WHERE UserID = " + getCurrentUser().getUserID();
+                query = "SELECT SongID FROM OwnedSongs WHERE UserID = 1";// + getCurrentUser().getUserID();
                 
                 results = DBUtil.executeSelect(query);
                 ArrayList<Integer> ownedSongs = new ArrayList<Integer>();
@@ -209,47 +209,48 @@ public class InfoBean implements Serializable {
                 {
                     ownedSongs.add(results.getInt("SongID"));
                 }
-                */
+                
                 query = "SELECT SongID, SongName, AlbumName FROM Song INNER JOIN Album ON Album.AlbumID = Song.AlbumID WHERE Album.AlbumID = " + id;
                 
                 results = DBUtil.executeSelect(query);
 
                 // TODO Formatting HTML output
                 boolean first = true;
-                String albumName = "";
+                String album = "";
                 while(results.next())
                 {
                     if(first)
                     {
-                        albumName = results.getString("AlbumName");
-                        html += "<h2>Songs on " + albumName + "<br/>by <a href=/ThatsMyJam/info.jsp?artist=" + getArtistID()
+                        album = results.getString("AlbumName");
+                        html += "<h2>Songs on " + album + "<br/>by <a href=/ThatsMyJam/info.jsp?artist=" + getArtistID()
                                 + ">" + getArtistName() + "</a> released in " + getReleaseYear() + "</h2><ul style=\"list-style:none;\">";
                         first = false;
                         html += "<strong><em>$" + getAlbumPrice() + "</em></strong><br><br/>";
                     }
                     
                     int songID = results.getInt("SongID");
-                //TODO UNCOMMENT WHEN LOGIN IS WORKING    
-                //    if(ownedSongs.contains(songID))
-                //    {
-                //        html += "<li><div style=\"float:left\">" + results.getString("SongName") + "</div>"
-                //                + "<div style=\"flot:right\">Already Owned</li>";
-                //    }
-                //    else
-                //    {
-                        // TODO ADD FUNC TO ADD THE SONG TO THE CART
-                        String songName = results.getString("SongName");
-                        
+                    String songName = results.getString("SongName");
+                    String targetLink = "<a target=\"_blank\" href=http://www.google.com/search?q=youtube+" 
+                                      + songName.replaceAll(" ", "+") 
+                                      + "+on+album+" + album.replaceAll(" ", "+") + "&m=0>";
+   
+                    if(ownedSongs.contains(songID))
+                    {
                         html += "<li><div class=\"col-xs-12 col-md-8\">"
-                                + "<a target=\"_blank\" href=http://www.google.com/search?q=youtube+" 
-                                + songName.replaceAll(" ", "+") 
-                                + "+on+album+" + albumName.replaceAll(" ", "+") + "&m=0>"
+                                + targetLink
+                                + "<div style=\"float:left\">" + results.getString("SongName") + "</div></a>"
+                             + "<div style=\"flot:right\">Already Owned</li>";
+                    }
+                    else
+                    {
+                        html += "<li><div class=\"col-xs-12 col-md-8\">"
+                                + targetLink
                                 + "<div style=\"float:left\">" + songName + "</div></a>"
                                 + "<div style=\"float:right\">"
                                 + "<button name=\"song\" value=\"" +songName+"_"+songID + "\" title=\"Add to Cart\" style=\"height:20px\" type=\"submit\">"
                                 + "<span class=\"glyphicon glyphicon-shopping-cart\"/>"
                                 + "</button></div></div></li>";
-                //    }
+                    }
                 }
                 html += "</ul></td></tr></table>";
             }
