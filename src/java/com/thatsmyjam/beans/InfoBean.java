@@ -300,14 +300,14 @@ public class InfoBean implements Serializable {
      * Returns html formatted list of the users owned songs
      * @return 
      */
-    public String getMySongs()
+    public String getMySongs(int userID)
     {
         // TODO Fix user id value when login is implemented
         String query = "SELECT OwnedSongs.SongID, SongName, ArtistName, AlbumName FROM OwnedSongs "
                      + "INNER JOIN Song ON Song.SongID = OwnedSongs.SongID "
                      + "INNER JOIN Artist ON Artist.ArtistID = Song.ArtistID "
                      + "INNER JOIN Album ON Album.AlbumID = Song.AlbumID "
-                     + "WHERE UserID = 1 " // InfoBean.getCurrentUser().getUserID();
+                     + "WHERE UserID = "+userID+" " // InfoBean.getCurrentUser().getUserID();
                      + "ORDER BY SongName ASC";
         String htmlOutput = "";
         try
