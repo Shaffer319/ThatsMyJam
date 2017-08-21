@@ -6,14 +6,13 @@
 package com.thatsmyjam.beans;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.ListIterator;
 
 /**
  *
@@ -67,7 +66,7 @@ public class CartBean implements Serializable {
     }
 
     //get total
-    public float getTotal() throws SQLException {
+    public float getTotal() {
         float total = 0;
         for (int i = 0; i < getNumItems(); ++i) {
             total += items.get(i).getPrice();
@@ -77,6 +76,15 @@ public class CartBean implements Serializable {
         return total;
     }
 
+    /**
+     * Gets the total price formatted to $X.XX
+     * @return 
+     */
+    public String getFormattedTotal() {
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        return formatter.format(getTotal());
+    }
+    
     //adds album/song to cartlist unless its already in the cart
     public void addItem(Item item) {
         message = null;
