@@ -170,7 +170,7 @@
                             <div class="form-group">
                                 <div class="col-sm-offset-3 col-sm-9">
                                     <form method="post" class="form-horizontal" role="form" align="center" action=<%= response.encodeURL("ShoppingCart")%>>
-                                        <button type="button" name="checkout" class="btn btn-success" data-toggle="modal" data-target="#confirmDialog">Confirm Payment</button>
+                                        <button type="submit" name="checkout" class="btn btn-success" data-toggle="modal" data-target="#confirmDialog">Confirm Payment</button>
                                     </form>
                                 </div>
                             </div>
@@ -179,26 +179,26 @@
                 </div>
 
                 <!-- Modal -->
-                <div class="modal fade" id="confirmDialog" role="dialog">
-                    <div class="modal-dialog">
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title"><font color= #1E8D1E>Payment Processed</font></h4>
-                            </div>
-                            <div class="modal-body">
-                                <p>Thank you for your purchase!</p>
-                                <p>You can now add these songs to your playlists.</p>
-                            </div>
-                            <div class="form-group">
-                                <div align="center">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <div class="modal fade" id="confirmDialog" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title"><font color= #1E8D1E>Payment Processed</font></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Thank you for your purchase!</p>
+                                    <p>You can now add these songs to your playlists.</p>
+                                </div>
+                                <div class="form-group">
+                                    <div align="center">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
         </div>
         <!-- Bootstrap core Javascript and jQuery  -->
         <!-- Placed at the end for faster loading of pages -->
