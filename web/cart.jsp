@@ -18,35 +18,12 @@
         <link href="css/homepage.css" rel="stylesheet">
     </head>
     <body data-spy="scroll">
-        <% CartBean cart = (CartBean) session.getAttribute("cartBean");
-            String message = cart.getMessage();%>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">That's My Jam</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="/ThatsMyJam/homepage.jsp">Home</a></li>
-                    <li><a href="/ThatsMyJam/Playlists">My Playlists</a></li>
-                    <li><a href="#">Top Albums</a></li>
-                </ul>
-                <form class="navbar-form navbar-left" action=<%= response.encodeURL("Search")%> method=GET>>
-                    <div class="input-group">
-                        <input type="text" name="search" class="form-control" placeholder="Search">
-                        <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/ThatsMyJam/cart.jsp"><span class= "glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-                    <li><a href="/ThatsMyJam/account.jsp"><span class="glyphicon glyphicon-user"></span>Account</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-                </ul>
-            </div>
-        </nav>
+        <%
+            CartBean cart = (CartBean) session.getAttribute("cartBean");
+            String message = cart.getMessage();
+        %>
+        <jsp:include page="includes/navbar.jsp" />
+
         <div class="container">
             <form method="post" action=<%= response.encodeURL("ShoppingCart")%>  class="form-horizontal" role="form" align="center">
                 <legend>Shopping Cart</legend>
@@ -73,8 +50,23 @@
                                         <div class="media">
                                             <a class="thumbnail pull-left" href="#"> <img class="media-object" src="images/<%=cart.getItems().get(i).getImage()%>" style="width: 50%; height: 50%;"> </a>
                                             <div class="media-body">
-                                                <h4 class="media-heading"><a href="/ThatsMyJam/info.jsp?album=<%=cart.getItems().get(i).getAlbumID()%>"><%=cart.getItems().get(i).getItemTitle()%></a></h4>
-                                                <h5 class="media-heading"> by  <a href="/ThatsMyJam/info.jsp?artist=<%=cart.getItems().get(i).getArtistID()%>"> <%=cart.getItems().get(i).getArtistName()%> </a></h5>
+                                                <c:url value="/info.jsp" var="albumUrl">
+                                                    <c:param name="album" value="<%=String.valueOf(cart.getItems().get(i).getAlbumID())%>" />
+                                                </c:url>		
+                                                <c:url value="/info.jsp" var="artistUrl">		
+                                                    <c:param name="artist" value="<%=String.valueOf(cart.getItems().get(i).getArtistID())%>" />		
+                                                </c:url>		
+                                                </p>		
+                                                <h4 class="media-heading">		
+                                                    <a href="${albumUrl}">		
+                                                        <%=cart.getItems().get(i).getItemTitle()%>		
+                                                    </a>		
+                                                </h4>		
+                                                <h5 class="media-heading"> by 		
+                                                    <a href="${artistUrl}">		
+                                                        <%=cart.getItems().get(i).getArtistName()%>		
+                                                    </a>		
+                                                </h5>
                                             </div>
                                         </div></td>                          
                                     <td class="col-sm-1 col-md-1 text-center"><strong><%=cart.getItems().get(i).getFormattedPrice()%></strong></td>
@@ -187,26 +179,26 @@
                 </div>
 
                 <!-- Modal -->
-                    <div class="modal fade" id="confirmDialog" role="dialog">
-                        <div class="modal-dialog">
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title"><font color= #1E8D1E>Payment Processed</font></h4>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Thank you for your purchase!</p>
-                                    <p>You can now add these songs to your playlists.</p>
-                                </div>
-                                <div class="form-group">
-                                    <div align="center">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
+                <div class="modal fade" id="confirmDialog" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title"><font color= #1E8D1E>Payment Processed</font></h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Thank you for your purchase!</p>
+                                <p>You can now add these songs to your playlists.</p>
+                            </div>
+                            <div class="form-group">
+                                <div align="center">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
         </div>
         <!-- Bootstrap core Javascript and jQuery  -->
         <!-- Placed at the end for faster loading of pages -->
