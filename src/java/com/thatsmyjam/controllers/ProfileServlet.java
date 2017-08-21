@@ -5,7 +5,6 @@
  */
 package com.thatsmyjam.controllers;
 
-import com.thatsmyjam.data.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -36,12 +35,12 @@ public class ProfileServlet extends HttpServlet {
 
         String requestURI = request.getRequestURI();
         String userName = request.getUserPrincipal().getName();
-
-        User user = (User) request.getAttribute("user");
-
+        
+        User user = (User)request.getAttribute("user");
+        
         String url = "/profile";
         if (requestURI.endsWith("profile")) {
-            url = url + "/index.jsp";
+            url
         } else if (requestURI.endsWith("view")) {
 
         }

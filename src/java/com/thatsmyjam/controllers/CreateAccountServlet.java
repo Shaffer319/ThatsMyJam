@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author mshaffer
  */
-@WebServlet(name = "createaccount", urlPatterns = {"/createAccountController"})
+@WebServlet(name = "createaccount", urlPatterns = {"/createAccount"})
 public class CreateAccountServlet extends HttpServlet {
 
     /**
@@ -70,7 +70,7 @@ public class CreateAccountServlet extends HttpServlet {
             
             // Make sure the user info is valid
             if(!request.getMethod().equalsIgnoreCase("POST")){
-                request.setAttribute("message", "Invalid request mode please use post.");
+                request.setAttribute("message", "Invalid request mode.");
             }else if(fname == null || fname.isEmpty()){
                 request.setAttribute("message", "Invalid First Name.");
             }else if(lname == null || lname.isEmpty()){

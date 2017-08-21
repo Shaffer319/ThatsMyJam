@@ -19,5 +19,4 @@
         <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>"/>
         <link rel="stylesheet" href="<c:url value="/css/main.css"/>">
     </head>
-<!--<body data-spy="scroll">-->
-<body>
+    <body>

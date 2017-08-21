@@ -8,8 +8,6 @@
 <jsp:include page="/includes/header.jsp" />
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<jsp:include page="includes/navbar.jsp" />
-
 <div class="banner-text">
     <h2>That's My Jam!</h2>
     <p>Welcome to our music store</p>

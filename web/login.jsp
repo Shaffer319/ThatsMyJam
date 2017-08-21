@@ -7,12 +7,12 @@
 <%@page import="com.thatsmyjam.constants.Action, com.thatsmyjam.constants.URL" %>
 <jsp:include page="/includes/header.jsp" />
 
-    <jsp:include page="includes/navbar.jsp" />
     <div class="banner-text">
         <h2>That's My Jam!</h2>
         <p>Please Login</p>
     </div>
     <section class="login-block">
+        <jsp:include page="includes/navbar.jsp" />
         <div class="container">
             <div class="row">
                 <div class="col-md-4 login-sec">
@@ -32,7 +32,7 @@
                         </div>
                     </form>
                     
-                    <form method="post" action="createAccount"  class="form-horizontal" role="form" align="center">
+                    <form method="post" action="ThatsMyJam"  class="form-horizontal" role="form" align="center">
                         <input type="hidden" name="action" value="<%= Action.ACTION_SIGNUP %>" />
                         <div class="form-group">
                             <button type="submit" name="newAcct" class="btn btn-newAcct float-bottom">Create an Account</button>
