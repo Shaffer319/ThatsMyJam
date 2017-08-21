@@ -296,6 +296,61 @@ public class InfoBean implements Serializable {
         return htmlOutput;
     }
     
+    /**
+     * Checks to see if the user already owns an album
+     * @param album - Album to check
+    s * 
+     * @return - True if the user owns the album, false otherwise 
+     */
+    public boolean albumOwned(String album)
+    {
+        int albumID = -1;
+        try
+        {
+            albumID = Integer.parseInt(album);
+        }
+        catch(NumberFormatException e)
+        {
+            return false;
+        }
+        
+        // TODO Fix when login is working
+        String query = "SELECT SongID FROM OwnedSongs WHERE UserID = 1"; // + InfoBean.getCurrentUser().getUserID();
+        
+        try
+        {
+            ResultSet results = DBUtil.executeSelect(query);
+            ArrayList<Integer> ownedSongs = new ArrayList<Integer>();
+            while(results.next())
+            {
+                ownedSongs.add(results.getInt("SongID"));
+            }
+            DBUtil.closeSelectObjects();
+            
+            query = "SELECT SongID FROM Song WHERE AlbumID = " + albumID;
+            
+            results = DBUtil.executeSelect(query);
+            boolean albumOwned = true;
+            while(results.next())
+            {
+                if(!ownedSongs.contains(results.getInt("SongID")))
+                {
+                    albumOwned = false;
+                    break;
+                }
+            }
+            DBUtil.closeSelectObjects();
+            return albumOwned;
+        }
+        catch(SQLException e)
+        {
+            return false;
+        }
+        finally
+        {
+            DBUtil.closeSelectObjects();
+        }
+    }
     
   /**
      * @return the albumID

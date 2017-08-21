@@ -31,11 +31,13 @@
                 <%=infoBean.getPage(response, true, request.getParameter("artist"))%>
                 <%} else {%>
                 <%=infoBean.getPage(response, false, request.getParameter("album"))%>
-                <br></br>                     
-                <button type="submit" name="addAlbumCart" class="btn btn-default">
-                    Add Album to Cart <span class="glyphicon glyphicon-shopping-cart"></span>
-                </button> 
-                <%}%>
+                <br></br>
+                    <% if (!infoBean.albumOwned(request.getParameter("album"))) {%>
+                        <button type="submit" name="addAlbumCart" class="btn btn-default">
+                            Add Album to Cart <span class="glyphicon glyphicon-shopping-cart"></span>
+                        </button> 
+                    <%} 
+                }%>
             </form>
         </div>
         <!-- Bootstrap core Javascript and jQuery  -->
