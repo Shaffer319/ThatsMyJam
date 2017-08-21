@@ -6,11 +6,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.thatsmyjam.constants.Action, com.thatsmyjam.constants.URL" %>
 <jsp:include page="/includes/header.jsp" />
-
+<!--
     <div class="banner-text">
         <h2>That's My Jam!</h2>
         <p>Please Login</p>
     </div>
+-->
     <section class="login-block">
         <jsp:include page="includes/navbar.jsp" />
         <div class="container">

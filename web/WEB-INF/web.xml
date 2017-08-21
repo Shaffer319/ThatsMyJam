@@ -44,7 +44,9 @@
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Secure Profile</web-resource-name>
-            <url-pattern>/profile/*</url-pattern>
+            <url-pattern>/profile/*</url-pattern>   
+            <url-pattern>/profileController/*</url-pattern>
+
         </web-resource-collection>
         <auth-constraint>            
             <role-name>user</role-name>
@@ -68,6 +70,7 @@
     </login-config>    
     
     <welcome-file-list>
+        <welcome-file>homepage.jsp</welcome-file>
         <welcome-file>index.jsp</welcome-file>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>

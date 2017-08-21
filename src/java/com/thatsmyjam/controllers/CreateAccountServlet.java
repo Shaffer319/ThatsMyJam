@@ -7,6 +7,7 @@ package com.thatsmyjam.controllers;
 
 import com.thatsmyjam.constants.URL;
 import com.thatsmyjam.data.User;
+import com.thatsmyjam.data.UserDB;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,7 +37,6 @@ public class CreateAccountServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         HttpSession session = request.getSession();
-        User user = (User)session.getAttribute("user");
         String url;
         
         url = handleCreateUser(request, response);
@@ -84,9 +84,20 @@ public class CreateAccountServlet extends HttpServlet {
             }else{            
                 // Try to create account
                 // Valid
+                User user = new User();
+                user.setFirstName(fname);
+                user.setLastName(lname);
+                user.setEmail(email);
+                user.setPassword(pass);
                 
+                if(UserDB.emailExists(email))
+                {   
+                    request.setAttribute("message", "Email already exists!");
+                    return URL.URL_SIGNUP;
+                }
+                
+                UserDB.insert(user);
                 // On success
-                url = URL.URL_SIGNUP;
             }
             return url;
     }

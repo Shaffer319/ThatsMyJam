@@ -16,7 +16,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
          <!--Bootstrap core CSS-->
-        <link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>"/>
-        <link rel="stylesheet" href="<c:url value="/css/main.css"/>">
+        <!--<link rel="stylesheet" href="<c:url value="/css/bootstrap.min.css"/>"/>-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!--<link rel="stylesheet" href="<c:url value="/css/main.css"/>">-->
     </head>
     <body data-spy="scroll">

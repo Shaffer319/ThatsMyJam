@@ -62,18 +62,6 @@ public class Login extends HttpServlet {
         if(action.equals(Action.ACTION_INDEX)){
             // 
             url = URL.URL_INDEX;
-        }else if(action.equals(Action.ACTION_LOGIN)){
-            String pass = request.getParameter("pass");
-            if(true){
-                InfoBean.setCurrentUser(user);
-                user.setLoggedIn(true);
-            }
-            // Login to user account
-            if(user.isLoggedIn())
-                url = URL.URL_HOME;
-            else
-                url= URL.URL_INDEX;
-            // On fail got to index / login
         }
         else if(action.equals(Action.ACTION_SIGNUP))
         {

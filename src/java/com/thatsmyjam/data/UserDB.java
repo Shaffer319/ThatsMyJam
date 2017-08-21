@@ -13,13 +13,15 @@ public class UserDB {
         PreparedStatement ps = null;
 
         String query
-                = "INSERT INTO User (Email, FirstName, LastName) "
+                = "INSERT INTO User (Email, FirstName, LastName, Password) "
                 + "VALUES (?, ?, ?)";
         try {
             ps = connection.prepareStatement(query);
             ps.setString(1, user.getEmail());
             ps.setString(2, user.getFirstName());
-            ps.setString(3, user.getLastName());
+            ps.setString(3, user.getLastName());  
+            ps.setString(4, user.getPassword());
+
             return ps.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e);

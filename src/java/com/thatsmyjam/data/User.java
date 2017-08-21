@@ -10,15 +10,15 @@ package com.thatsmyjam.data;
  * @author mshaffer
  */
 public class User {
-    
+
     private int userID;
-    private boolean loggedIn = false;
     private String firstName;
     private String lastName;
     private String email;
-    
-    public User(){
-        
+    private String password = null;
+
+    public User() {
+
     }
 
     /**
@@ -33,20 +33,6 @@ public class User {
      */
     public void setUserID(int userID) {
         this.userID = userID;
-    }
-
-    /**
-     * @return the loggedIn
-     */
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
-
-    /**
-     * @param loggedIn the loggedIn to set
-     */
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
     }
 
     /**
@@ -90,4 +76,13 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
 }
