@@ -239,7 +239,7 @@ public class InfoBean implements Serializable {
                         html += "<li><div class=\"col-xs-12 col-md-8\">"
                                 + targetLink
                                 + "<div style=\"float:left\">" + results.getString("SongName") + "</div></a>"
-                             + "<div style=\"flot:right\">Already Owned</li>";
+                             + "<div style=\"float:right\">Already Owned</li>";
                     }
                     else
                     {
