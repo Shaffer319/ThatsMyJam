@@ -10,6 +10,7 @@ import com.thatsmyjam.beans.InfoBean;
 import com.thatsmyjam.beans.Item;
 import com.thatsmyjam.data.DBUtil;
 import static com.thatsmyjam.data.DBUtil.executeSongInsert;
+import com.thatsmyjam.data.User;
 import java.io.IOException;
 import static java.lang.System.out;
 import java.sql.ResultSet;
@@ -43,9 +44,17 @@ public class ShoppingCart extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+//        HttpSession session = request.getSession(false);
+//        if(session == null)
+//        {
+//            throw new NullPointerException("getSession(false) will return null and the getAttribute throw nullptr");
+//        }
+        
+        InfoBean info = (InfoBean) request.getSession().getAttribute("infoBean");
+        CartBean cart = (CartBean) request.getSession().getAttribute("cartBean");
+        User user = (User) request.getSession().getAttribute("user");
 
-        InfoBean info = (InfoBean) request.getSession(false).getAttribute("infoBean");
-        CartBean cart = (CartBean) request.getSession(false).getAttribute("cartBean");
         if (cart == null) 
         {
             cart = new CartBean();
