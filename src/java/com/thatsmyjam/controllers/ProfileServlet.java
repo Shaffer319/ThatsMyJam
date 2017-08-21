@@ -42,13 +42,15 @@ public class ProfileServlet extends HttpServlet {
         String url = "/profile";
 
         User user = getUser(request);
-        if (user == null){
+        if (user == null) {
             // Error loading user form db
         }
         if (requestURI.endsWith("view")) {
             url = "/profile/index.jsp";
-        }else if (requestURI.endsWith("ChangeProfile")){
-            url = "/profile/index.jsp";
+        } else if (requestURI.endsWith("changeName")) {
+            url = handleChangeProfileName(user, request, response);
+        } else if (requestURI.endsWith("changePassword")) {
+            url = handleUpdateUserPassword(user, request, response);
         }
 
         getServletContext()
@@ -56,21 +58,23 @@ public class ProfileServlet extends HttpServlet {
                 .forward(request, response);
 
     }
-    
-    public User getUser(HttpServletRequest request){
+
+    public User getUser(HttpServletRequest request) {
         Principal p = request.getUserPrincipal(); // if null user is not logged in
-        if(p == null)// user is not logged in
+        if (p == null)// user is not logged in
+        {
             return null;
-        
+        }
+
         String userName = request.getUserPrincipal().getName();
-        HttpSession session =  request.getSession();
-        User user = (User)session.getAttribute("user");
-        
-        if ( user == null){
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        if (user == null) {
             user = UserDB.selectUser(userName);
             session.setAttribute("user", user);
         }
-        
+
         return user;
     }
 
@@ -113,4 +117,48 @@ public class ProfileServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private String handleChangeProfileName(User user, HttpServletRequest request, HttpServletResponse response) {
+        String fname = request.getParameter("fname");
+        String lname = request.getParameter("lname");
+
+        if (fname == null || fname.isEmpty()) {
+            request.setAttribute("message", "Invalid First Name.");
+        } else if (lname == null || lname.isEmpty()) {
+            request.setAttribute("message", "Invalid Last Name.");
+        } else {
+            int count = UserDB.updateUserName(user.getEmail(), fname, lname);
+            if (count == 0) {
+                request.setAttribute("message", "Error could not update name at this time");
+            }
+            user = UserDB.selectUser(user.getEmail());
+            request.getSession().setAttribute("user", user);
+        }
+        return "/profile/index.jsp";
+    }
+
+    private String handleUpdateUserPassword(User user, HttpServletRequest request, HttpServletResponse response) {
+
+        String pass = request.getParameter("pass");
+        String cpass = request.getParameter("cpass");
+        String current = request.getParameter("current");
+
+        if (pass == null || pass.isEmpty()) {
+            request.setAttribute("message", "Password is empty.");
+        } else if (!pass.equals(cpass)) {
+            request.setAttribute("message", "Passwords did not match.");
+        } else if (!user.getPassword().equals(current)) {
+            request.setAttribute("message", "Current password invalid.");
+        } else {
+            int count = UserDB.updateUserPass(user.getEmail(), pass);
+           
+            if (count == 0) {
+                request.setAttribute("message", "Error could not update pass at this time");
+            }
+
+            user = UserDB.selectUser(user.getEmail());
+            request.getSession().setAttribute("user", user);
+        }
+
+        return "/profile/index.jsp";
+    }
 }

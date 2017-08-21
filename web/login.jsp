@@ -32,15 +32,16 @@
                             <input type="submit" value="Login"  class="btn btn-login float-right">
                         </div>
                     </form>
-                    
-                    <form method="post" action="ThatsMyJam"  class="form-horizontal" role="form" align="center">
+
+                </div>
+                <div>
+                    <form method="post" action="/ThatsMyJam/createAccount"  class="form-horizontal" role="form" align="center">
                         <input type="hidden" name="action" value="<%= Action.ACTION_SIGNUP %>" />
                         <div class="form-group">
                             <button type="submit" name="newAcct" class="btn btn-newAcct float-bottom">Create an Account</button>
                         </div>
                     </form>
-                </div>
-               
+                </div>      
                 <div class="col-md-8 banner-sec">
                 </div>
             </div>

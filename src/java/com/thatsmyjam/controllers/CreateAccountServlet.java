@@ -35,73 +35,79 @@ public class CreateAccountServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         HttpSession session = request.getSession();
         String url;
-        
+
         url = handleCreateUser(request, response);
-        
+
         getServletContext()
-            .getRequestDispatcher(url)
-            .forward(request, response);
-        
+                .getRequestDispatcher(url)
+                .forward(request, response);
+
     }
-    
+
     /**
      * Handle the @see Action.ACTION_CREATE_ACCOUNT
+     *
      * @param request
      * @param response
-     * @return 
+     * @return
      */
-    public String handleCreateUser(HttpServletRequest request, HttpServletResponse response){
-    
-            // Pull in user info from form
-            String fname = request.getParameter("fname");
-            String lname = request.getParameter("lname");
-            String email = request.getParameter("email");
-            String pass = request.getParameter("pass");
-            String cpass = request.getParameter("cpass");   
-            
-            request.setAttribute("fname", fname);
-            request.setAttribute("lname", lname);
-            request.setAttribute("email", email);
-            
-            String url = URL.URL_SIGNUP;
-            
-            // Make sure the user info is valid
-            if(!request.getMethod().equalsIgnoreCase("POST")){
-                request.setAttribute("message", "Invalid request mode.");
-            }else if(fname == null || fname.isEmpty()){
-                request.setAttribute("message", "Invalid First Name.");
-            }else if(lname == null || lname.isEmpty()){
-                request.setAttribute("message", "Invalid Last Name.");
-            }else if(email == null || email.isEmpty()){
-                request.setAttribute("message", "Invalid Email.");
-            }else if(pass == null || pass.isEmpty()){
-                request.setAttribute("message", "Password is invalid.");                
-            }else if(!pass.equals(cpass)){
-                request.setAttribute("message", "Passwords did not match.");
-            }else{            
-                // Try to create account
-                // Valid
-                User user = new User();
-                user.setFirstName(fname);
-                user.setLastName(lname);
-                user.setEmail(email);
-                user.setPassword(pass);
-                
-                if(UserDB.emailExists(email))
-                {   
-                    request.setAttribute("message", "Email already exists!");
-                    return URL.URL_SIGNUP;
-                }
-                
-                UserDB.insert(user);
-                // On success
+    public String handleCreateUser(HttpServletRequest request, HttpServletResponse response) {
+
+        // Pull in user info from form
+        String fname = request.getParameter("fname");
+        String lname = request.getParameter("lname");
+        String email = request.getParameter("email");
+        String pass = request.getParameter("pass");
+        String cpass = request.getParameter("cpass");
+
+        request.setAttribute("fname", fname);
+        request.setAttribute("lname", lname);
+        request.setAttribute("email", email);
+
+        String url = URL.URL_SIGNUP;
+
+        // Make sure the user info is valid
+        if (!request.getMethod().equalsIgnoreCase("POST")) {
+            request.setAttribute("message", "Invalid request mode.");
+        } else if (fname == null || fname.isEmpty()) {
+            request.setAttribute("message", "Invalid First Name.");
+        } else if (lname == null || lname.isEmpty()) {
+            request.setAttribute("message", "Invalid Last Name.");
+        } else if (email == null || email.isEmpty()) {
+            request.setAttribute("message", "Invalid Email.");
+        } else if (pass == null || pass.isEmpty()) {
+            request.setAttribute("message", "Password is invalid.");
+        } else if (!pass.equals(cpass)) {
+            request.setAttribute("message", "Passwords did not match.");
+        } else {
+            // Try to create account
+            // Valid
+            User user = new User();
+            user.setFirstName(fname);
+            user.setLastName(lname);
+            user.setEmail(email);
+            user.setPassword(pass);
+
+            if (UserDB.emailExists(email)) {
+                request.setAttribute("message", "Email already exists!");
+                return URL.URL_SIGNUP;
             }
-            return url;
+
+            int count = UserDB.insert(user);
+            if (count == 0) {
+                request.setAttribute("message", "Error try again later.");
+            } else {
+                url = "/homepage.jsp";
+            }
+
+            // On success
+        }
+        return url;
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
