@@ -7,7 +7,11 @@ package com.thatsmyjam.beans;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -25,6 +29,9 @@ public class CartBean implements Serializable {
     private boolean addedAlbumSong;
     private boolean songSameAlbum;
     private boolean albumSameSong;
+    private String purchasedDate = null;
+    private DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+    Date today;
 
     //creating a list of items in cart
     public CartBean() {
@@ -47,7 +54,6 @@ public class CartBean implements Serializable {
     }
 
     public String printCart() {
-        ListIterator<Item> itr = this.items.listIterator();
         String output = "";
         for (int i = 0; i < getNumItems(); ++i) {
             output += "<p>In Cart -- Item Name: "
@@ -144,10 +150,19 @@ public class CartBean implements Serializable {
         if (addedAlbumSong) {
             this.message = "You've already added this item to your cart!";
         } else if (songSameAlbum) {
-            this.message = "The song you are trying to add is already included in <b>"+getSongIncludedAlbum()+"</b>";
+            this.message = "The song you are trying to add is already included in <b>" + getSongIncludedAlbum() + "</b>";
         } else if (albumSameSong) {
-            this.message = "The album you are trying to add contains the song <b>"+getAlbumIncludedSong()+"</b>."
-            + " Remove this song if you would like to purchase the album";
+            this.message = "The album you are trying to add contains the song <b>" + getAlbumIncludedSong() + "</b>."
+                    + " Remove this song if you would like to purchase the album";
         }
+    }
+    
+    public String getPurchasedDate(){
+        return purchasedDate;
+    }
+
+    public void setPurchasedDate() {
+        today = Calendar.getInstance().getTime();
+        this.purchasedDate = df.format(today);        
     }
 }
