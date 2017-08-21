@@ -48,11 +48,12 @@
             </div>
         </nav>
         <div class="container">
-            <legend>Shopping Cart</legend>
-            <% if (message != null) {%>
-            <p><i><font color= #B1351A><%= message%></font></i></p>
-                    <% }%>
             <form method="post" action=<%= response.encodeURL("ShoppingCart")%>  class="form-horizontal" role="form" align="center">
+                <legend>Shopping Cart</legend>
+                <% if (message != null) {%>
+                <p><i><font color= #B1351A><%= message%></font></i></p>
+                        <% }%>
+
                 <% if (cart != null && cart.getNumItems() > 0) {%>
                 <div class="row">
                     <div class="col-sm-12 col-md-10 col-md-offset-1">
@@ -115,73 +116,100 @@
                     <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
                 </button>
                 <%}%>
-            </form>
-            <div id="payment" class="collapse">
-                <form class="form-horizontal" role="form">
-                    <fieldset>
-                        <legend>Payment</legend>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label" for="cardholder">Name on Card</label>
-                            <div class="col-sm-9">
-                                <input type="text" class="form-control" name="cardholder" id="cardholder" placeholder="Card Holder Name">
+
+                <div id="payment" class="collapse">
+                    <form class="form-horizontal" role="form">
+                        <fieldset>
+                            <legend>Payment</legend>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="cardholder">Name on Card</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="cardholder" id="cardholder" placeholder="Card Holder Name">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label" for="cardnumber">Card Number</label>
-                            <div class="col-sm-9">
-                                <input type="text" maxlength="16" class="form-control" name="cardnumber" id="cardnumber" placeholder="Credit Card Number">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="cardnumber">Card Number</label>
+                                <div class="col-sm-9">
+                                    <input type="text" maxlength="16" class="form-control" name="cardnumber" id="cardnumber" placeholder="Credit Card Number">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label" for="expdate">Expiration Date</label>
-                            <div class="col-sm-9">
-                                <div class="row">
-                                    <div class="col-xs-3">
-                                        <select class="form-control col-sm-2" name="expmon" id="expmon">
-                                            <option>Month</option>
-                                            <option value="01">01</option>
-                                            <option value="02">02)</option>
-                                            <option value="03">03</option>
-                                            <option value="04">04</option>
-                                            <option value="05">05</option>
-                                            <option value="06">06</option>
-                                            <option value="07">07</option>
-                                            <option value="08">08</option>
-                                            <option value="09">09</option>
-                                            <option value="10">10</option>
-                                            <option value="11">11</option>
-                                            <option value="12">12</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-xs-3">
-                                        <select class="form-control" name="expyr">
-                                            <option value="13">2016</option>
-                                            <option value="14">2017</option>
-                                            <option value="15">2018</option>
-                                            <option value="16">2019</option>
-                                            <option value="27">2020</option>
-                                            <option value="18">2021</option>
-                                            <option value="19">2022</option>
-                                            <option value="20">2023</option>
-                                        </select>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label" for="expdate">Expiration Date</label>
+                                <div class="col-sm-9">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <select class="form-control col-sm-2" name="expmon" id="expmon">
+                                                <option>Month</option>
+                                                <option value="01">01</option>
+                                                <option value="02">02)</option>
+                                                <option value="03">03</option>
+                                                <option value="04">04</option>
+                                                <option value="05">05</option>
+                                                <option value="06">06</option>
+                                                <option value="07">07</option>
+                                                <option value="08">08</option>
+                                                <option value="09">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-xs-3">
+                                            <select class="form-control" name="expyr">
+                                                <option value="13">2016</option>
+                                                <option value="14">2017</option>
+                                                <option value="15">2018</option>
+                                                <option value="16">2019</option>
+                                                <option value="27">2020</option>
+                                                <option value="18">2021</option>
+                                                <option value="19">2022</option>
+                                                <option value="20">2023</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-xs-3 control-label" for="cvv">CVV</label>
-                            <div class="col-xs-3">
-                                <input type="text" class="form-control" minlength="3"  maxlength="3" name="cvv" id="cvv" placeholder="Security Code">
+                            <div class="form-group">
+                                <label class="col-xs-3 control-label" for="cvv">CVV</label>
+                                <div class="col-xs-3">
+                                    <input type="text" class="form-control" minlength="3"  maxlength="3" name="cvv" id="cvv" placeholder="Security Code">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button type="button" name="checkout" class="btn btn-success" data-toggle="modal" data-target="#confirmDialog">Confim Payment</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <!-- Modal -->
+                <form method="post" action=<%= response.encodeURL("ShoppingCart")%>  class="form-horizontal" role="form" align="center">
+                    <div class="modal fade" id="confirmDialog" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <form method="post" action=<%= response.encodeURL("ShoppingCart")%>  class="form-horizontal" role="form" align="center">
+                                        <button type="submit" class="close" name="final" data-dismiss="modal">&times;</button>
+                                    </form>
+                                    <h4 class="modal-title"><font color= #1E8D1E>Payment Processed</font></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Thank you for your purchase!</p>
+                                    <p>You should the songs you purchased under your playlists now.</p>
+                                </div>
+                                <div class="form-group">
+                                    <form method="post" action=<%= response.encodeURL("ShoppingCart")%>  class="form-horizontal" role="form" align="center">
+                                        <button type="submit" class="btn btn-default" name="final" data-dismiss="modal">Close</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-9">
-                                <button type="submit" name="checkout" class="btn btn-success">Confim Payment</button>
-                            </div>
-                        </div>
-                    </fieldset>
+                    </div>
                 </form>
-            </div>
         </div>
         <!-- Bootstrap core Javascript and jQuery  -->
         <!-- Placed at the end for faster loading of pages -->
