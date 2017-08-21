@@ -53,6 +53,10 @@ public class ProfileServlet extends HttpServlet {
             url = handleUpdateUserPassword(user, request, response);
         } else if (requestURI.endsWith("playlists")){
             url = "/Playlists";
+        }else if (requestURI.endsWith("mySongs")){
+            url = "/mySongs.jsp";
+        }else if (requestURI.endsWith("cart")){
+            url = "/ShoppingCart";
         }
 
         getServletContext()

@@ -9,6 +9,8 @@
 <html lang="en">
     <head>
         <jsp:useBean id="infoBean" class="com.thatsmyjam.beans.InfoBean" scope="session" />
+        <jsp:useBean id="user" class="com.thatsmyjam.data.User" scope="session" />
+
         <title>My Songs</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +22,7 @@
         <jsp:include page="includes/navbar.jsp" />
 
         <div class="container">
-            <%=infoBean.getMySongs()%>
+            <%=infoBean.getMySongs(user.getUserID())%>
         </div>
         <!-- Bootstrap core Javascript and jQuery  -->
         <!-- Placed at the end for faster loading of pages -->
