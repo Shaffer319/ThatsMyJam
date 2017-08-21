@@ -13,7 +13,7 @@
         <ul class="nav navbar-nav">
             <li class="active"><a href="/ThatsMyJam/homepage.jsp">Home</a></li>
             <li><a href="/ThatsMyJam/Playlists">My Playlists</a></li>
-            <li><a href="#">Top Albums</a></li>
+            <li><a href="/ThatsMyJam/mySongs.jsp">My Songs</a></li>
         </ul>
         <form class="navbar-form navbar-left" action=<%= response.encodeURL("Search")%> method=GET>>
             <div class="input-group">

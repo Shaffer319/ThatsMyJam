@@ -297,6 +297,60 @@ public class InfoBean implements Serializable {
     }
     
     /**
+     * Returns html formatted list of the users owned songs
+     * @return 
+     */
+    public String getMySongs()
+    {
+        // TODO Fix user id value when login is implemented
+        String query = "SELECT OwnedSongs.SongID, SongName, ArtistName, AlbumName FROM OwnedSongs "
+                     + "INNER JOIN Song ON Song.SongID = OwnedSongs.SongID "
+                     + "INNER JOIN Artist ON Artist.ArtistID = Song.ArtistID "
+                     + "INNER JOIN Album ON Album.AlbumID = Song.AlbumID "
+                     + "WHERE UserID = 1"; // InfoBean.getCurrentUser().getUserID();
+        String htmlOutput = "";
+        try
+        {
+            ResultSet results = DBUtil.executeSelect(query);
+            
+            if(results.isBeforeFirst())
+            {
+                htmlOutput += "<h1> Songs </h1><ul style=\"list-style: none;\">";
+                while(results.next())
+                {
+                    int songID = results.getInt("SongID");
+                    String album = results.getString("AlbumName");
+                    String songName = results.getString("SongName");
+                    String targetLink = "<a target=\"_blank\" href=http://www.google.com/search?q=youtube+" 
+                                      + songName.replaceAll(" ", "+") 
+                                      + "+on+album+" + album.replaceAll(" ", "+") + "&m=0>";
+                    htmlOutput += "<li><div class=\"col-xs-12 col-md-8\">"
+                                + targetLink
+                                + "<div style=\"float:left\">" + songName + "</div></a>"
+                                + "<div style=\"float:right\">"
+                                + "<button name=\"song\" value=\"" +songName+"_"+songID + "\" title=\"Add to Playlist\" style=\"height:20px\" type=\"submit\">"
+                                + "<span class=\"glyphicon glyphicon-plus-sign\"/>"
+                                + "</button></div></div></li>";
+                }
+                htmlOutput += "</ul>";
+            }
+            else
+            {
+                htmlOutput += "<p> No owned songs. </p>";
+            }
+        }
+        catch(SQLException e)
+        {
+            return "<p> An error occurred while processing your request, try again.</br>" + e.getMessage() + "</p>";
+        }
+        finally
+        {
+            DBUtil.closeSelectObjects();
+        }
+        return htmlOutput;
+    }
+    
+    /**
      * Checks to see if the user already owns an album
      * @param album - Album to check
     s * 
