@@ -89,7 +89,6 @@ public class ShoppingCart extends HttpServlet {
             cart.setPurchasedDate(); //maybe store the date purchased?
             ResultSet results;
             String sql_albumsong;
-            boolean update = true;
             //*****************************TODO Use Actual UserID when login is working
             String sql_song = "INSERT INTO OwnedSongs(UserID, SongID) VALUES (1,?)";
 
@@ -157,6 +156,8 @@ public class ShoppingCart extends HttpServlet {
                 }
 
             }
+            // Empty the cart and forward the no response message
+            cart.setItems(new ArrayList());
             response.setStatus(HttpServletResponse.SC_NO_CONTENT);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/checkout.jsp");
             dispatcher.forward(request, response);
