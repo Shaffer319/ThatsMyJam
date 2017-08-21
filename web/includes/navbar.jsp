@@ -4,10 +4,7 @@
     Author     : mshaffer
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!--
-    <%= response.encodeURL("/Search")%>
-    <c:url value="/Search"/>
--->
+
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -29,9 +26,9 @@
             </div>
         </form>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/ThatsMyJam/cart.jsp"><span class= "glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-            <li><a href="/ThatsMyJam/account.jsp"><span class="glyphicon glyphicon-user"></span>Account</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+            <li><a href="<c:url value="cart.jsp" />" ><span class= "glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+            <li><a href="<c:url value="profile/account.jsp"/>" ><span class="glyphicon glyphicon-user"></span>Account</a></li>
+            <li><a href="<c:url value="logout"/>"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
         </ul>
     </div>
 </nav>

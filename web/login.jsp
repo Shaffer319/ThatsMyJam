@@ -12,6 +12,7 @@
         <p>Please Login</p>
     </div>
     <section class="login-block">
+        <jsp:include page="includes/navbar.jsp" />
         <div class="container">
             <div class="row">
                 <div class="col-md-4 login-sec">

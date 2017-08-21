@@ -52,7 +52,7 @@
                     <h1 class="page-header">Album Gallery</h1>
                 </div>
 
-                <%=infoBean.getAlbumGallery()%>
+                <%=infoBean.getAlbumGallery(response)%>
 
             </div>
             <!-- Bootstrap core Javascript and jQuery  -->
