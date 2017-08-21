@@ -51,6 +51,8 @@ public class ProfileServlet extends HttpServlet {
             url = handleChangeProfileName(user, request, response);
         } else if (requestURI.endsWith("changePassword")) {
             url = handleUpdateUserPassword(user, request, response);
+        } else if (requestURI.endsWith("playlists")){
+            url = "/Playlists";
         }
 
         getServletContext()
