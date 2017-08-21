@@ -8,9 +8,15 @@ package com.thatsmyjam.servlets;
 import com.thatsmyjam.beans.CartBean;
 import com.thatsmyjam.beans.InfoBean;
 import com.thatsmyjam.beans.Item;
+import com.thatsmyjam.data.DBUtil;
+import static com.thatsmyjam.data.DBUtil.executeSongInsertUpdate;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -110,10 +116,60 @@ public class ShoppingCart extends HttpServlet {
         } else if ((request.getParameter("continue_shop") != null)) {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/homepage.jsp");
             dispatcher.forward(request, response);
+        } else if ((request.getParameter("final") != null)) {
+            try {
+                cart.setPurchasedDate(); //maybe store the date purchased?
+                ResultSet results;
+                String sql_song;
+                String sql_albumsong;
+                boolean update = true;
+                //*********************************************************************Replace 1 with the actual user ID*************************************************
+                String getUser = "SELECT UserID FROM OwnedSongs WHERE OwnedSongs.UserID = 1";
+                results = DBUtil.executeSelect(getUser);
+                //*****************************update userID here *******************************************
+                if (results == null) {
+                    sql_song = "INSERT INTO OwnedSongs(UserID, SongID) VALUES (1,?)";
+                } else {
+                    sql_song = "UPDATE OwnedSongs SET SongID=? WHERE UserID=1";
+                }
+                for (int i = 0; i < cart.getNumItems(); ++i) {
+                    //if the item in the cart is a song
+                    if (cart.getItems().get(i).getSongID() != 0) {
+                        try {
+                            int[] songA = {cart.getItems().get(i).getSongID()};
+                            int rowsUpdated = executeSongInsertUpdate(sql_song, songA);
+                            if (rowsUpdated > 0) {
+                                System.out.println("A new user was inserted successfully!");
+                            }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        //if the item is an album get all the songs 
+                    } else {
+                        sql_albumsong = "SELECT SongID FROM Song INNER JOIN Album ON Album.AlbumID = Song.AlbumID WHERE Album.AlbumID = " + cart.getItems().get(i).getAlbumID();
+                        results = DBUtil.executeSelect(sql_albumsong);
+                        results.last();
+                        int totalRows = results.getRow();
+                        int[] songA2 = {};
+                        results.beforeFirst();
+                        for (int j = 0; j < totalRows; j++) {
+                            while (results.next()) {
+                                int songID = results.getInt("songID");
+                                songA2[j] = songID;
+                            }
+                        }
+                        int rowsUpdated2 = executeSongInsertUpdate(sql_albumsong, songA2);
+                        if (rowsUpdated2 > 0) {
+                            System.out.println("A new user was inserted successfully!");
+                        }
+                    }
 
-        } else if ((request.getParameter("checkout") != null)) {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/checkout.jsp");
-            dispatcher.forward(request, response);
+                }
+                //   RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/checkout.jsp");
+                //   dispatcher.forward(request, response);
+            } catch (SQLException ex) {
+                Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
