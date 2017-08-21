@@ -5,6 +5,8 @@
  */
 package com.thatsmyjam.beans;
 
+import java.text.NumberFormat;
+
 /**
  *
  * @author bean51591
@@ -152,6 +154,14 @@ public class Item {
         return price;
     }
 
+    /**
+     * @return the price formatted to $X.XX
+     */
+    public String getFormattedPrice() {
+         NumberFormat formatter = NumberFormat.getCurrencyInstance();
+         return formatter.format(price);
+    }
+    
     /**
      * @param price the price to set
      */

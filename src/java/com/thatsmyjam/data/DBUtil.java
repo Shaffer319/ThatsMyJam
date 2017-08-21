@@ -73,14 +73,21 @@ public class DBUtil {
 
         return rs;
     }
-        
-    public static int executeSongInsertUpdate(String query, int[]songs) throws SQLException{
-         pool = ConnectionPool.getInstance();
+    
+    /**
+     * Executes an Insert query passed in and returns the number of rows updated
+     * 
+     * @param query - Insert statement to execute
+     * @param song - SongID to insert
+     * @return - Number of rows modified
+     * @throws SQLException 
+     */
+    public static int executeSongInsert(String query, int song) throws SQLException{
+        pool = ConnectionPool.getInstance();
         connection = pool.getConnection();
-            ps = connection.prepareStatement(query);
-        for(int i=0;i<songs.length;i++){
-            ps.setInt(1, songs[i]);
-        }   
+        ps = connection.prepareStatement(query);
+        ps.setInt(1, song);
+           
         return ps.executeUpdate();
     }
     
@@ -100,6 +107,16 @@ public class DBUtil {
     public static void closeSelectObjects()
     {
         closeStatement(s);
+        closeResultSet(rs);
+        pool.freeConnection(connection);
+    }
+    
+    /**
+     * Closes all of the objects after calling executeSongInsert
+     */
+    public static void closeInsertObjects()
+    {
+        closePreparedStatement(ps);
         closeResultSet(rs);
         pool.freeConnection(connection);
     }
