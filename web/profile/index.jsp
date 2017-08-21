@@ -4,12 +4,13 @@
     Author     : mshaffer
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.thatsmyjam.constants.Action, com.thatsmyjam.constants.URL" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/includes/header.jsp" />
 
 <div class="container" >
+    <jsp:include page="includes/navbar.jsp" />
+
     <h1>Hello World!</h1>
 
     <p>
@@ -18,11 +19,22 @@
     <a href="<c:url value='/logout'/>">Logout <c:url value="/logout"/></a>
 
     <form action="createAccount" >
-
-        <input type="fname" name="fname" value="${user.firstName}"/>
-        <input type="lname" name="lname" value="${user.firstName}"/>
-        <input type="email" name="email" value="${user.firstName}"/>
-        <input type="email" name="cemail" value="${user.firstName}"/>
+        <div>
+            <label>First Name:</label>
+            <input type="fname" name="fname" value="${user.firstName}"/>
+        </div>
+        <div>
+            <label>Last Name:</label>
+            <input type="lname" name="lname" value="${user.lastName}"/>
+        </div>
+        <div>
+            <label>Email:</label>
+            <input type="email" name="email" value="${user.email}"/>
+        </div>
+        <div>
+            <label>Confirm Email:</label>
+            <input type="email" name="cemail" value="${user.email}"/>
+        </div>
         <input type="submit" value="Change"/>
     </form>
 </div>
