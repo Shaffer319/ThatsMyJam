@@ -320,13 +320,13 @@ public class InfoBean implements Serializable {
                 {
                     int songID = results.getInt("SongID");
                     String album = results.getString("AlbumName");
+                    String artist = results.getString("ArtistName");
                     String songName = results.getString("SongName");
                     String targetLink = "<a target=\"_blank\" href=http://www.google.com/search?q=youtube+" 
                                       + songName.replaceAll(" ", "+") 
                                       + "+on+album+" + album.replaceAll(" ", "+") + "&m=0>";
                     htmlOutput += "<li><div class=\"col-xs-12 col-md-8\">"
-                                + targetLink
-                                + "<div style=\"float:left\">" + songName + "</div></a>"
+                                + "<div style=\"float:left\">" + targetLink + songName + "</a> by " + artist + "</div>"
                                 + "<div style=\"float:right\">"
                                 + "<button name=\"song\" value=\"" +songName+"_"+songID + "\" title=\"Add to Playlist\" style=\"height:20px\" type=\"submit\">"
                                 + "<span class=\"glyphicon glyphicon-plus-sign\"/>"
