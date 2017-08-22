@@ -133,9 +133,6 @@ public class Playlists extends HttpServlet {
         if (playlistName == null) {
             request.setAttribute("message", "Could not add Playlist '" + playlistName + "' to database.");
 
-        } else if (playlistName.isEmpty()) {
-            request.setAttribute("message", "Could not add Playlist '" + playlistName + "' to database.");
-
         } else if (playlistName.trim().isEmpty()) {
             request.setAttribute("message", "Could not add Playlist '" + playlistName + "' to database.");
 
