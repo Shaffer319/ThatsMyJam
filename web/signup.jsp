@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.thatsmyjam.constants.Action, com.thatsmyjam.constants.URL" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/includes/header.jsp" />
 <jsp:include page="/includes/navbar.jsp" />
 <section class="login-block">
@@ -14,9 +14,7 @@
         <div class="login-sec">
             <h2 class="text-center">Create Account</h2>
             <center><span style="color:red;">${message}</span></center><br/>
-            <form method="post" action="createAccount"  class="form-horizontal" role="form" align="center" autocomplete="on">
-                <input type="hidden" name="action" value="<%= Action.ACTION_CREATE_ACCOUNT%>" />
-
+            <form method="post" action="<c:url value="/createAccount"/>"   class="form-horizontal" role="form" align="center" autocomplete="on">
                 <div class="form-group">
                     <label for="fname" class="text-uppercase">First name </label>
                     <input type="fname" id="fname" value="${fname}" class="form-control" name="fname" id="fname" placeholder="Enter First Name" autocomplete="on" required><br>

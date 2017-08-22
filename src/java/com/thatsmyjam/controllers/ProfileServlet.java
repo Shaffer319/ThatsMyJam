@@ -40,11 +40,14 @@ public class ProfileServlet extends HttpServlet {
                 
         Principal p = request.getUserPrincipal(); // if null user is not logged in
         String url = "/profile";
-
+        
+        // This may have been easier todo through a filter
         User user = getUser(request);
+        // This will bring users in to access the resoruces load the user then return them back to their action.
+        // The /profile/index.jsp is in a protected directory
         if (user == null) {
             // Error loading user form db
-            url = "/profile";
+            url = "/homepage.jsp";
         } else if (requestURI.endsWith("view")) {
             url = "/profile/index.jsp";
         } else if (requestURI.endsWith("changeName")) {

@@ -7,6 +7,7 @@ package com.thatsmyjam.servlets;
 
 import com.thatsmyjam.beans.InfoBean;
 import com.thatsmyjam.data.DBUtil;
+import com.thatsmyjam.data.PlaylistDB;
 import com.thatsmyjam.data.User;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -38,103 +39,134 @@ public class Playlists extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String playlist = request.getParameter("playlist");
-        
+
         InfoBean playlistBean = new InfoBean();
         request.getSession().setAttribute("playlistBean", playlistBean);
-        User user = (User)request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
+
         String url = "/playlists.jsp";
-        
-        if(user == null){
+        String requestURI = request.getRequestURI().split(";")[0]; // Remove the session id
+
+        if (user == null) {
             // They have to login go through profile controller then back to here
             url = "/profileController/playlists";
-        }
-        else
-        if(playlist != null && !playlist.trim().equals(""))
-        {
-            String query = "SELECT SongName, PlaylistName FROM SongsInPlaylist "
-                         + "INNER JOIN Playlist ON Playlist.PlaylistID = SongsInPlaylist.PlaylistID "
-                         + "WHERE SongsInPlaylist.PlaylistID = " + playlist
-                         + " AND Playlist.UserID = " + user.getUserID(); //InfoBean.getCurrentUser().getUserID();
             
-            try
-            {
+        } else if (requestURI.endsWith("newPlaylist")) {
+            url = handleCreateNewPlaylist(user, request, response);
+
+        } else if (requestURI.endsWith("addSongToPlaylist")) {
+            url = handleAddSongToPlaylist(user, request, response);
+
+        } // Display Songs in playlist
+        else if (playlist != null && !playlist.trim().equals("")) {
+            String query = "SELECT SongName, PlaylistName FROM SongsInPlaylist "
+                    + "INNER JOIN Playlist ON Playlist.PlaylistID = SongsInPlaylist.PlaylistID "
+                    + "WHERE SongsInPlaylist.PlaylistID = " + playlist
+                    + " AND Playlist.UserID = " + user.getUserID(); //InfoBean.getCurrentUser().getUserID();
+
+            try {
                 ResultSet results = DBUtil.executeSelect(query);
                 String html = "";
-                if(results.isBeforeFirst())
-                {
+                if (results.isBeforeFirst()) {
                     html += "<h1> " + results.getString("PlaylistName") + " </h1>";
                     html += "<ul style=\"list-style: none;\">";
-                    while(results.next())
-                    {
+                    while (results.next()) {
                         html += "<li>" + results.getString("SongName") + "</li>";
                     }
                     html += "</ul>";
-                }
-                else
-                {
+                } else {
                     html += "<h1> Playlist not found </h1>";
                 }
                 playlistBean.setPlaylistResults(html);
-            }
-            catch(SQLException e)
-            {
+            } catch (SQLException e) {
                 String html = "<p> An error occurred while processing your request, try again</p>";
                 playlistBean.setPlaylistResults(html);
-            }
-            finally
-            {
+            } finally {
                 DBUtil.closeSelectObjects();
             }
-        }
-        else
-        {
+        } else {// Display list of all playlists
             String query = "SELECT PlaylistID, PlaylistName FROM Playlist WHERE UserID = "
                     + user.getUserID();
 
-            try
-            {
+            try {
                 ResultSet results = DBUtil.executeSelect(query);
                 String html = "";
-                if(results.isBeforeFirst())
-                {
+                if (results.isBeforeFirst()) {
                     html += "<h1> Your Playlists </h1><ul style=\"list-style: none;\">";
-                    while(results.next())
-                    {
+                    while (results.next()) {
                         html += "<a href=/ThatsMyJam/Playlists?playlist=" + results.getInt("PlaylistID") + ">"
-                              + "<li>" + results.getString("PlaylistName") + "</li></a>";
-                                
+                                + "<li>" + results.getString("PlaylistName") + "</li></a>";
+
                     }
                 }
-                
+
                 // Create new Playlist link at the end of the results
-                if(html.equals(""))
-                {
+                if (html.equals("")) {
                     html += "<h1> No Playlists found </h1><ul style=\"list-style: none;\">";
                     // TODO list item to make a new playlist
                     html += "</ul>";
-                }
-                else
-                {
+                } else {
                     // TODO list item to make a new playlist
                 }
                 playlistBean.setPlaylistResults(html);
-            }
-            catch(SQLException e)
-            {
+            } catch (SQLException e) {
                 String html = "<p>An error occurred while processing your request, try again</p>";
                 playlistBean.setPlaylistResults(html);
-            }
-            finally 
-            {
+            } finally {
                 DBUtil.closeSelectObjects();
             }
         }
-        ServletContext servletContext = getServletContext();
-        RequestDispatcher dispatcher;
-        dispatcher = servletContext.getRequestDispatcher(url);
-        dispatcher.forward(request, response);
+
+        getServletContext()
+                .getRequestDispatcher(url)
+                .forward(request, response);
+    }
+
+    private String handleCreateNewPlaylist(User user, HttpServletRequest request, HttpServletResponse response) {
+        String playlistName = request.getParameter("PlaylistName");
+
+        // validation
+        if (playlistName == null) {
+            request.setAttribute("message", "Could not add Playlist '" + playlistName + "' to database.");
+
+        } else if (playlistName.isEmpty()) {
+            request.setAttribute("message", "Could not add Playlist '" + playlistName + "' to database.");
+
+        } else if (playlistName.trim().isEmpty()) {
+            request.setAttribute("message", "Could not add Playlist '" + playlistName + "' to database.");
+
+        } else if (playlistName.length() > 30) {
+            request.setAttribute("message", "Could not add Playlist '" + playlistName + "' to database greater than max length.");
+
+        } else {
+
+            // do work
+            int count = PlaylistDB.createNewPlaylist(user.getUserID(), playlistName);
+
+            // Post validation
+            // Todo check if user has a playlist with this name
+            if (count == 0) {
+                request.setAttribute("message", "Could not add Playlist '" + playlistName + "' to database.");
+            }
+        }
+        return "/Playlist";
+
+    }
+
+    private String handleAddSongToPlaylist(User user, HttpServletRequest request, HttpServletResponse response) {
+        String sPlaylistID = request.getParameter("PlaylistID");
+        String sSongID = request.getParameter("SongID");
+        try {
+            int playlistID = Integer.parseInt(sPlaylistID);
+            int songID = Integer.parseInt(sSongID);
+
+            int count = PlaylistDB.addSongToPlayList(playlistID, songID);
+        } catch (NumberFormatException e) {
+            request.setAttribute("message", "Invalid IDs.");
+        }
+        return "/Playlist";
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

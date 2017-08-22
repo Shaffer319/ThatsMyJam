@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author mshaffer
  */
-@WebServlet(name = "createaccount", urlPatterns = {"/createAccount"})
+@WebServlet(name = "createaccount", urlPatterns = {"/createAccount/*"})
 public class CreateAccountServlet extends HttpServlet {
 
     /**
@@ -37,7 +37,7 @@ public class CreateAccountServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         String url;
-
+        
         url = handleCreateUser(request, response);
 
         getServletContext()

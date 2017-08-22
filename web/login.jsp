@@ -4,8 +4,9 @@
     Author     : mshaffer
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.thatsmyjam.constants.Action, com.thatsmyjam.constants.URL" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="/includes/header.jsp" />
+<jsp:include page="includes/navbar.jsp" />
 <!--
     <div class="banner-text">
         <h2>That's My Jam!</h2>
@@ -13,7 +14,6 @@
     </div>
 -->
     <section class="login-block">
-        <jsp:include page="includes/navbar.jsp" />
         <div class="container">
             <div class="row">
                 <div class="col-md-4 login-sec">
@@ -35,8 +35,8 @@
 
                 </div>
                 <div>
-                    <form method="post" action="/ThatsMyJam/createAccount"  class="form-horizontal" role="form" align="center">
-                        <input type="hidden" name="action" value="<%= Action.ACTION_SIGNUP %>" />
+                    <form method="post" action="<c:url value="/createAccount"/>"  class="form-horizontal" role="form" align="center">
+
                         <div class="form-group">
                             <button type="submit" name="newAcct" class="btn btn-newAcct float-bottom">Create an Account</button>
                         </div>

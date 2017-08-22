@@ -31,7 +31,6 @@ public class InfoBean implements Serializable {
     private String imageName;
     private float albumPrice;
     private ArrayList<String> songList;
-//    private static User currentUser;
     private String searchResults;
     private String playlistResults;
 
