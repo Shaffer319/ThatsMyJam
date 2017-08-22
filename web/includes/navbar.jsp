@@ -42,7 +42,7 @@
                             Account
                         </c:when>
                         <c:otherwise>
-                            ${user.email}
+                            ${user.firstName} ${user.lastName}
                         </c:otherwise>
                     </c:choose>
                 </a>

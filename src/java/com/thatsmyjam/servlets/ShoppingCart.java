@@ -32,7 +32,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "ShoppingCart", urlPatterns = {"/ShoppingCart"})
 public class ShoppingCart extends HttpServlet {
-
+    
     /**
      * Handles the HTTP <code>POST</code> method.
      *

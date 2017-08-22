@@ -42,7 +42,7 @@
                         <tr>
                             <td class="col-sm-8 col-md-6">
                                 <div class="media">
-                                    <a class="thumbnail pull-left" href="#"> <img class="media-object" src="images/<%=cart.getItems().get(i).getImage()%>" style="width: 50%; height: 50%;"> </a>
+                                    <a class="thumbnail pull-left" href="#"> <img class="media-object" src="${pageContext.request.contextPath}/images/<%=cart.getItems().get(i).getImage()%>" style="width: 50%; height: 50%;"> </a>
                                     <div class="media-body">
                                         <c:url value="/info.jsp" var="albumUrl">
                                             <c:param name="album" value="<%=String.valueOf(cart.getItems().get(i).getAlbumID())%>" />

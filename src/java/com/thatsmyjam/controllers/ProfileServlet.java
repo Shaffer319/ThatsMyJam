@@ -56,7 +56,7 @@ public class ProfileServlet extends HttpServlet {
         } else if (requestURI.endsWith("mySongs")) {
             url = "/mySongs.jsp";
         } else if (requestURI.endsWith("cart")) {
-            url = "/ShoppingCart";
+            url = "/cart.jsp";
         }
 
         getServletContext()
