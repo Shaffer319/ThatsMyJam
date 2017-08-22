@@ -9,7 +9,6 @@ import static com.thatsmyjam.constants.Constants.*;
 
 import com.thatsmyjam.data.DBUtil;
 import com.thatsmyjam.data.Song;
-import com.thatsmyjam.data.User;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -6,7 +6,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="com.thatsmyjam.constants.Action, com.thatsmyjam.constants.URL" %>
 <jsp:include page="/includes/header.jsp" />
 
 <jsp:useBean id="searchBean" class="com.thatsmyjam.beans.InfoBean" scope="session" />

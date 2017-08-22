@@ -3,7 +3,6 @@ package com.thatsmyjam.data;
 import java.sql.*;
 import javax.sql.DataSource;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 
 public class ConnectionPool {
 

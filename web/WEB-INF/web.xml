@@ -40,7 +40,7 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-    
+     
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Secure Profile</web-resource-name>
@@ -57,7 +57,7 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-    
+   
     <login-config>
         <!--<auth-method>BASIC</auth-method>-->
         <!--<realm-name>Basic Authentication</realm-name>-->

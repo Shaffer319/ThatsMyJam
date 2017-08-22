@@ -1,6 +1,5 @@
 package com.thatsmyjam.data;
 
-import com.thatsmyjam.beans.InfoBean;
 import java.sql.*;
 import java.util.ArrayList;
 

@@ -5,7 +5,6 @@ package com.thatsmyjam.controllers;
  * and open the template in the editor.
  */
 
-import com.thatsmyjam.beans.InfoBean;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
