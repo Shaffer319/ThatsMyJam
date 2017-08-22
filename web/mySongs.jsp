@@ -65,19 +65,6 @@
                         </button></td>
                 </tr>
             </c:forEach>
-
-            <!--        String targetLink = "<a target=\"_blank\" href=http://www.google.com/search?q=youtube+"
-                          + songName.replaceAll(" ", "+")
-                          + "+on+album+" + album.replaceAll(" ", "+") + "&m=0>";
-                    htmlOutput += "<li><div class=\"col-xs-12 col-md-8\">"
-                          + "<div style=\"float:left\">" + targetLink + songName + "</a> by " + artist + "</div>"
-                          + "<div style=\"float:right\">"
-                          + "<button name=\"song\" value=\"" + songName + "_" + songID + "\" title=\"Add to Playlist\" style=\"height:20px\" type=\"submit\">"
-                          + "<span class=\"glyphicon glyphicon-plus-sign\"/>"
-                          + "</button></div></div></li>";-->
-
-
-            <%--<%=infoBean.getMySongs(user.getUserID())%>--%>
         </tbody>
     </table>
 </div>
