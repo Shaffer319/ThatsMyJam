@@ -17,6 +17,24 @@
 <div class="container">
 
     <h1> Songs </h1>
+       <button type="button" name="newPlaylist" class="btn btn-primary" data-toggle="collapse" data-target="#addPlaylist">
+        Create New Playlist <span class="glyphicon glyphicon-plus-sign"></span>
+    </button>
+    <div id="addPlaylist" class="collapse">
+        <form method="post" action=<%= response.encodeURL("Playlists")%>
+              <div class="row">
+                <div class="col-lg-3">
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="submit" name="addPlaylist">Go!</button>
+                        </span>
+                        <input type="text" name="playlistName" class="form-control" placeholder="Playlist Name">
+                    </div>
+                </div>
+        </form>
+    </div>
+
+    
     <%
         List<Song> myList = infoBean.getMySongsArray(user.getUserID());
         request.setAttribute("myList", myList);
