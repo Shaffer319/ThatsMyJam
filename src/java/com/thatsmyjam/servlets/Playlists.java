@@ -61,19 +61,18 @@ public class Playlists extends HttpServlet {
 
         } // Display Songs in playlist
         else if (playlist != null && !playlist.trim().equals("")) {
-            String query = "SELECT SongName, PlaylistName FROM SongsInPlaylist "
-                    + "INNER JOIN Playlist ON Playlist.PlaylistID = SongsInPlaylist.PlaylistID "
-                    + "WHERE SongsInPlaylist.PlaylistID = " + playlist
-                    + " AND Playlist.UserID = " + user.getUserID(); //InfoBean.getCurrentUser().getUserID();
+            String query = "SELECT Song.SongName FROM SongsInPlaylist "
+                    + "INNER JOIN SONG ON Song.SongID = SongsInPlaylist.SongID "
+                    + "WHERE SongsInPlaylist.PlaylistID = " + playlist;
 
             try {
                 ResultSet results = DBUtil.executeSelect(query);
                 String html = "";
                 if (results.isBeforeFirst()) {
-                    html += "<h1> " + results.getString("PlaylistName") + " </h1>";
+                    html += "<h1> " + results.getString("Playlist.PlaylistName") + " </h1>";
                     html += "<ul style=\"list-style: none;\">";
                     while (results.next()) {
-                        html += "<li>" + results.getString("SongName") + "</li>";
+                        html += "<li>" + results.getString("Song.SongName") + "</li>";
                     }
                     html += "</ul>";
                 } else {
@@ -81,7 +80,7 @@ public class Playlists extends HttpServlet {
                 }
                 playlistBean.setPlaylistResults(html);
             } catch (SQLException e) {
-                String html = "<p> An error occurred while processing your request, try again</p>";
+                String html = "<p> An error occurred while processing your request, try again</p>"  + e.getMessage();
                 playlistBean.setPlaylistResults(html);
             } finally {
                 DBUtil.closeSelectObjects();
@@ -112,7 +111,7 @@ public class Playlists extends HttpServlet {
                 }
                 playlistBean.setPlaylistResults(html);
             } catch (SQLException e) {
-                String html = "<p>An error occurred while processing your request, try again</p>";
+                String html = "<p>An error occurred while processing your request, try again</p> " + e.getMessage();
                 playlistBean.setPlaylistResults(html);
             } finally {
                 DBUtil.closeSelectObjects();
