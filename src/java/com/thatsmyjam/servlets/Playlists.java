@@ -62,7 +62,12 @@ public class Playlists extends HttpServlet {
             String query = "SELECT Song.SongName FROM SongsInPlaylist "
                     + "INNER JOIN SONG ON Song.SongID = SongsInPlaylist.SongID "
                     + "WHERE SongsInPlaylist.PlaylistID = " + playlist;
-
+            
+//            String getPlaylistname = "SELECT PlaylistName FROM Playlist "+
+//                    "WHERE PlaylistID = " + playlist;
+            
+            String playlistname = PlaylistDB.getPlaylistName(Integer.parseInt(playlist));
+            
             try {
                 ResultSet results = DBUtil.executeSelect(query);
                 String html = "";
@@ -71,7 +76,7 @@ public class Playlists extends HttpServlet {
                     while (results.next()) {
                         if(first)
                         {
-                            html += "<h1> " + results.getString("Playlist.PlaylistName") + " </h1>";
+                            html += "<h1> " + playlistname + " </h1>";
                             html += "<ul style=\"list-style: none;\">";
                             first = false;
                         }

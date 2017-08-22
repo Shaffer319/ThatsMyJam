@@ -18,6 +18,33 @@ import java.util.List;
  */
 public class PlaylistDB {
 
+    public static String getPlaylistName(int playlistID) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+
+        String query = "SELECT PlaylistName FROM Playlist "
+                + "WHERE PlaylistID = " + playlistID;
+
+        String playlistName = "";
+
+        try {
+            ps = connection.prepareStatement(query);
+            ResultSet result = ps.executeQuery(query);
+            
+            result.next();
+            playlistName = result.getString("PlaylistName");
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
+        }
+
+        return playlistName;
+    }
+
     public static List<Playlist> getPlaylistForUser(int UserID) throws SQLException {
         List<Playlist> list = new ArrayList<>();
 
