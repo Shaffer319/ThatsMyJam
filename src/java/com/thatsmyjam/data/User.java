@@ -10,8 +10,8 @@ package com.thatsmyjam.data;
  * @author mshaffer
  */
 public class User {
-
-    private int userID;
+    // default user id to an invalid value
+    private int userID = -1;
     private String firstName;
     private String lastName;
     private String email;

@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Search extends HttpServlet {
 
     private String htmlOutput = "";
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,69 +38,60 @@ public class Search extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         ServletContext servletContext = getServletContext();
         RequestDispatcher dispatcher;
         response.setContentType("text/html;charset=UTF-8");
-        
-        String searchValue = (String)request.getParameter("search");
-        
-        if(searchValue != null && !searchValue.trim().equals(""))
-        {
-            try
-            {
+
+        String searchValue = (String) request.getParameter("search");
+
+        if (searchValue != null && !searchValue.trim().equals("")) {
+            try {
                 htmlOutput = "";
-                
+
                 String query = "SELECT ArtistID, ArtistName FROM Artist "
-                             + "WHERE ArtistName LIKE '%" + searchValue + "%'";
+                        + "WHERE ArtistName LIKE '%" + searchValue + "%'";
                 ResultSet artistsFound = DBUtil.executeSelect(query);
 
                 // This checks if there is a first record otherwise the Artist section will be skipped
-                if(artistsFound.isBeforeFirst())
-                {
+                if (artistsFound.isBeforeFirst()) {
                     htmlOutput += "<h1> Artists </h1><ul style=\"list-style: none;\">";
-                    while(artistsFound.next())
-                    {
+                    while (artistsFound.next()) {
                         htmlOutput += "<a href=/ThatsMyJam/info.jsp?artist=" + artistsFound.getString("ArtistID") + ">";
                         htmlOutput += "<li>" + artistsFound.getString("ArtistName") + "</li></a>";
                     }
                     htmlOutput += "</ul>";
                 }
                 DBUtil.closeSelectObjects();
-                
+
                 query = "SELECT AlbumID, AlbumName FROM Album "
-                      + "WHERE AlbumName LIKE '%" + searchValue + "%'";
+                        + "WHERE AlbumName LIKE '%" + searchValue + "%'";
                 ResultSet albumsFound = DBUtil.executeSelect(query);
 
-                if(albumsFound.isBeforeFirst())
-                {
+                if (albumsFound.isBeforeFirst()) {
                     htmlOutput += "<h1> Albums </h1><ul style=\"list-style: none;\">";
-                    while(albumsFound.next())
-                    {
+                    while (albumsFound.next()) {
                         htmlOutput += "<a href=/ThatsMyJam/info.jsp?album=" + albumsFound.getString("AlbumID") + ">";
                         htmlOutput += "<li>" + albumsFound.getString("AlbumName") + "</li></a>";
                     }
                     htmlOutput += "</ul>";
                 }
                 DBUtil.closeSelectObjects();
-                
+
                 query = "SELECT SongID, SongName, ArtistName FROM Song "
-                      + "INNER JOIN Artist ON Artist.ArtistID = Song.ArtistID "
-                      + "WHERE SongName LIKE '%" + searchValue + "%'";
+                        + "INNER JOIN Artist ON Artist.ArtistID = Song.ArtistID "
+                        + "WHERE SongName LIKE '%" + searchValue + "%'";
                 ResultSet songsFound = DBUtil.executeSelect(query);
 
-                if(songsFound.isBeforeFirst())
-                {
+                if (songsFound.isBeforeFirst()) {
                     htmlOutput += "<h1> Songs </h1><ul style=\"list-style: none;\">";
-                    while(songsFound.next())
-                    {
+                    while (songsFound.next()) {
                         htmlOutput += "<li>" + songsFound.getString("SongName") + " by " + songsFound.getString("ArtistName") + "</li>";
                     }
                 }
                 DBUtil.closeSelectObjects();
-                
-                if(htmlOutput.equals(""))
-                {
+
+                if (htmlOutput.equals("")) {
                     htmlOutput = "<p>No results were found</p>";
                 }
                 InfoBean bean = new InfoBean();
@@ -108,20 +99,27 @@ public class Search extends HttpServlet {
                 request.getSession().setAttribute("searchBean", bean);
                 dispatcher = servletContext.getRequestDispatcher("/searchResults.jsp");
                 dispatcher.forward(request, response);
-            }
-            catch(SQLException e)
-            {
+            } catch (SQLException e) {
                 InfoBean bean = new InfoBean();
                 bean.setSearchResults(e.getMessage());
                 request.getSession().setAttribute("searchBean", bean);
                 dispatcher = servletContext.getRequestDispatcher("/searchResults.jsp");
                 dispatcher.forward(request, response);
-            }
-            finally
-            {
+            } finally {
                 DBUtil.closeSelectObjects();
             }
+
         } // Do not forward if no search is being performed
+        else {
+            InfoBean bean = new InfoBean();
+            bean.setSearchResults("<p>No results found.</p>");
+            request.getSession().setAttribute("searchBean", bean);
+            dispatcher = servletContext.getRequestDispatcher("/searchResults.jsp");
+            dispatcher.forward(request, response);
+            servletContext
+                    .getRequestDispatcher("/searchResults.jsp")
+                    .forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -166,10 +164,10 @@ public class Search extends HttpServlet {
 
     /**
      * Getter method for the htmlOutput results of the search
+     *
      * @return - HTML to display to the user
      */
-    public String getHtmlOutput()
-    {
+    public String getHtmlOutput() {
         return htmlOutput;
     }
 }

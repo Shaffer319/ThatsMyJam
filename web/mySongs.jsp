@@ -4,28 +4,58 @@
     Author     : cpournaras11
 --%>
 
+<%@page import="com.thatsmyjam.data.Song"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <jsp:useBean id="infoBean" class="com.thatsmyjam.beans.InfoBean" scope="session" />
-        <title>My Songs</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:include page="/includes/header.jsp"/>
+<jsp:include page="/includes/navbar.jsp" />
 
-        <link href="css/homepage.css" rel="stylesheet">
-    </head>
-    <body data-spy="scroll">
-        <jsp:include page="includes/navbar.jsp" />
+<jsp:useBean id="infoBean" class="com.thatsmyjam.beans.InfoBean" scope="session" />
+<jsp:useBean id="user" class="com.thatsmyjam.data.User" scope="session" />
 
-        <div class="container">
-            <%=infoBean.getMySongs()%>
-        </div>
-        <!-- Bootstrap core Javascript and jQuery  -->
-        <!-- Placed at the end for faster loading of pages -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-    </body>
-</html>
+<div class="container">
+
+    <h1> Songs </h1>
+    <ul style="list-style: none;">
+        <%
+            List<Song> myList = infoBean.getMySongsArray(user.getUserID());
+            request.setAttribute("myList", myList);
+        %>
+        <c:forEach items="<%=myList%>" var="song" >
+            <li>
+                <div class="col-xs-12 col-md-8">
+                    <div style="float:left;">
+                        <a target="_blank" 
+                           href="http://www.google.com/search?q=youtube+${song.songName.replaceAll(" ", "+")}+on+album+${song.albumName.replaceAll(" ", "+")}+&m=0"   
+                           >${song.songName}</a> by ${song.artistName}
+                    </div>
+                    <div style="float:right">
+                        <button name="song" 
+                                value="${song.songName}_${song.songID}"
+                                title="Add to Playlist" 
+                                style="height:20px" 
+                                type="submit">
+                            <span class="glyphicon glyphicon-plus-sign"/>
+                        </button>
+                    </div>
+                </div>
+            </li>
+        </c:forEach>
+    </ul>
+    <!--        String targetLink = "<a target=\"_blank\" href=http://www.google.com/search?q=youtube+"
+                  + songName.replaceAll(" ", "+")
+                  + "+on+album+" + album.replaceAll(" ", "+") + "&m=0>";
+            htmlOutput += "<li><div class=\"col-xs-12 col-md-8\">"
+                  + "<div style=\"float:left\">" + targetLink + songName + "</a> by " + artist + "</div>"
+                  + "<div style=\"float:right\">"
+                  + "<button name=\"song\" value=\"" + songName + "_" + songID + "\" title=\"Add to Playlist\" style=\"height:20px\" type=\"submit\">"
+                  + "<span class=\"glyphicon glyphicon-plus-sign\"/>"
+                  + "</button></div></div></li>";-->
+
+
+    <%--<%=infoBean.getMySongs(user.getUserID())%>--%>
+</div>
+
+<jsp:include page="/includes/footer.jsp"/>
 

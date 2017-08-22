@@ -10,24 +10,23 @@ package com.thatsmyjam.data;
  * @author bean51591
  */
 public class Song {
-    
-    
+
     /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
-
+     */
     private int songID;
     private String songName;
-    private int artistID;
+    private String artistName;
+    private String albumName;
     private int releaseYear;
     //private String imageName;
-    
+
     /**
      * Constructor
      */
-    public Song(){
+    public Song() {
     }
 
     /**
@@ -44,6 +43,10 @@ public class Song {
         this.songID = songID;
     }
 
+    public void setSongName(String songName) {
+        this.songName = songName;
+    }
+
     /**
      * @return the songName
      */
@@ -51,25 +54,20 @@ public class Song {
         return songName;
     }
 
-    /**
-     * @param songName the songName to set
-     */
-    public void setAlbumName(String songName) {
-        this.songName = songName;
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
     }
 
-    /**
-     * @return the artistID
-     */
-    public int getArtistID() {
-        return artistID;
+    public String getArtistName() {
+        return this.artistName;
     }
 
-    /**
-     * @param artistID the artistID to set
-     */
-    public void setArtistID(int artistID) {
-        this.artistID = artistID;
+    public String getAlbumName() {
+        return this.albumName;
+    }
+
+    public void setAlbumName(String albumName) {
+        this.albumName = albumName;
     }
 
     /**
@@ -88,17 +86,14 @@ public class Song {
 
     /**
      * @return the imageName
-     
-    public String getImageName() {
-        return imageName;
-    }
-
-    
+     *
+     * public String getImageName() { return imageName; }
+     *
+     *
      * @param imageName the imageName to set
-     
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
-    }
-    * */
-
+     *
+     * public void setImageName(String imageName) { this.imageName = imageName;
+     * }
+     *
+     */
 }
