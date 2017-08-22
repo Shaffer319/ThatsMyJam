@@ -21,7 +21,7 @@
         Create New Playlist <span class="glyphicon glyphicon-plus-sign"></span>
     </button>
     <div id="addPlaylist" class="collapse">
-        <form method="post" action=<%= response.encodeURL("Playlists")%>
+        <form method="post" action="<c:url value="/Playlists/CreateNewPlaylist"/>" >
               <div class="row">
                 <div class="col-lg-3">
                     <div class="input-group">
@@ -31,6 +31,7 @@
                         <input type="text" name="playlistName" class="form-control" placeholder="Playlist Name">
                     </div>
                 </div>
+              </div>
         </form>
     </div>
 

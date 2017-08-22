@@ -53,10 +53,10 @@ public class Playlists extends HttpServlet {
             // They have to login go through profile controller then back to here
             url = "/profileController/playlists";
             
-        } else if (requestURI.endsWith("newPlaylist")) {
+        } else if (requestURI.endsWith("CreateNewPlaylist")) {
             url = handleCreateNewPlaylist(user, request, response);
 
-        } else if (requestURI.endsWith("addSongToPlaylist")) {
+        } else if (requestURI.endsWith("AddSongToPlaylist")) {
             url = handleAddSongToPlaylist(user, request, response);
 
         } // Display Songs in playlist
@@ -125,7 +125,7 @@ public class Playlists extends HttpServlet {
     }
 
     private String handleCreateNewPlaylist(User user, HttpServletRequest request, HttpServletResponse response) {
-        String playlistName = request.getParameter("PlaylistName");
+        String playlistName = request.getParameter("playlistName");
 
         // validation
         if (playlistName == null) {
