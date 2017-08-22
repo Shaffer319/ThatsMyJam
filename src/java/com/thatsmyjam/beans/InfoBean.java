@@ -31,7 +31,7 @@ public class InfoBean implements Serializable {
     private String imageName;
     private float albumPrice;
     private ArrayList<String> songList;
-    private static User currentUser;
+//    private static User currentUser;
     private String searchResults;
     private String playlistResults;
 
@@ -522,19 +522,21 @@ public class InfoBean implements Serializable {
         this.artistName = artistName;
     }
 
-    /**
-     * @return the currentUser
-     */
-    public static User getCurrentUser() {
-        return currentUser;
-    }
-
-    /**
-     * @param currentUser the currentUser to set
-     */
-    public static void setCurrentUser(User currentUser) {
-        InfoBean.currentUser = currentUser;
-    }
+// Current user can not be static because it would cause everything to have the last user.
+// All of the instance run in the same VM 
+//    /**
+//     * @return the currentUser
+//     */
+//    public static User getCurrentUser() {
+//        return currentUser;
+//    }
+//
+//    /**
+//     * @param currentUser the currentUser to set
+//     */
+//    public static void setCurrentUser(User currentUser) {
+//        InfoBean.currentUser = currentUser;
+//    }
 
     /**
      * @return the searchResults

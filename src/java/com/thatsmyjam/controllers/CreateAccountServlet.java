@@ -5,7 +5,6 @@
  */
 package com.thatsmyjam.controllers;
 
-import com.thatsmyjam.constants.URL;
 import com.thatsmyjam.data.User;
 import com.thatsmyjam.data.UserDB;
 import java.io.IOException;
@@ -67,7 +66,7 @@ public class CreateAccountServlet extends HttpServlet {
         request.setAttribute("lname", lname);
         request.setAttribute("email", email);
 
-        String url = URL.URL_SIGNUP;
+        String url = "/signup.jsp";
 
         // Make sure the user info is valid
         if (!request.getMethod().equalsIgnoreCase("POST")) {
@@ -93,7 +92,7 @@ public class CreateAccountServlet extends HttpServlet {
 
             if (UserDB.emailExists(email)) {
                 request.setAttribute("message", "Email already exists!");
-                return URL.URL_SIGNUP;
+                return "/signup.jsp";
             }
 
             int count = UserDB.insert(user);
