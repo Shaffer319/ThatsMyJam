@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author cpour
  */
-@WebServlet(name = "Playlists", urlPatterns = {"/Playlists"})
+@WebServlet(name = "Playlists", urlPatterns = {"/Playlists/*"})
 public class Playlists extends HttpServlet {
 
     /**
@@ -52,7 +52,7 @@ public class Playlists extends HttpServlet {
         if (user == null) {
             // They have to login go through profile controller then back to here
             url = "/profileController/playlists";
-            
+
         } else if (requestURI.endsWith("CreateNewPlaylist")) {
             url = handleCreateNewPlaylist(user, request, response);
 
@@ -151,7 +151,7 @@ public class Playlists extends HttpServlet {
                 request.setAttribute("message", "Could not add Playlist '" + playlistName + "' to database.");
             }
         }
-        return "/Playlist";
+        return "/Playlists";
 
     }
 
@@ -166,7 +166,7 @@ public class Playlists extends HttpServlet {
         } catch (NumberFormatException e) {
             request.setAttribute("message", "Invalid IDs.");
         }
-        return "/Playlist";
+        return "/Playlists";
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
