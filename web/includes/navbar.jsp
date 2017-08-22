@@ -34,7 +34,19 @@
         </form>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="<c:url value="/cart.jsp" />" ><span class= "glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-            <li><a href="<c:url value="/profileController/view"/>" ><span class="glyphicon glyphicon-user"></span>Account</a></li>
+            <li>
+                <a href="<c:url value="/profileController/view"/>" >
+                    <span class="glyphicon glyphicon-user"></span>
+                    <c:choose>
+                        <c:when test="${empty user}">
+                            Account
+                        </c:when>
+                        <c:otherwise>
+                            ${user.email}
+                        </c:otherwise>
+                    </c:choose>
+                </a>
+            </li>
             <li><a href="<c:url value="/logout"/>"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
         </ul>
     </div>

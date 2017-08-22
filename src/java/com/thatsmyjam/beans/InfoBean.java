@@ -142,6 +142,7 @@ public class InfoBean implements Serializable {
                     }
 
                     String albumImage = IMAGE.replace(SRC_REP, results.getString("AlbumImage"))
+                            .replace(URL_REP, response.encodeURL(URL_LINK))
                             .replace(ALT_REP, results.getString("AlbumName"))
                             .replace(TYPE_REP, "album")
                             .replace(HREF_VAL, results.getString("AlbumID"))
@@ -176,7 +177,7 @@ public class InfoBean implements Serializable {
                 results.next();
                 html += "<table class=\"col-xs-12 col-md-8\"><tr></td>";
                 html += IMAGE.replace(SRC_REP, results.getString("ImageName"))
-                        .replace(URL_ENCODED, response.encodeURL(URL_LINK))
+//                        .replace(URL_REP, response.encodeURL(URL_LINK))
                         .replace(ALT_REP, results.getString("AlbumName"))
                         .replace(HREF_REP, "")
                         .replace(PIXEL_REP, "500");
@@ -212,6 +213,7 @@ public class InfoBean implements Serializable {
                 while (results.next()) {
                     if (first) {
                         album = results.getString("AlbumName");
+                        
                         html += "<h2>Songs on " + album + "<br/>by <a href=/ThatsMyJam/info.jsp?artist=" + getArtistID()
                                 + ">" + getArtistName() + "</a> released in " + getReleaseYear() + "</h2><ul style=\"list-style:none;\">";
                         first = false;
@@ -269,7 +271,7 @@ public class InfoBean implements Serializable {
         try {
             while (rs.next()) {
                 htmlOutput += IMAGE.replace(TYPE_REP, "album")
-                        .replace(URL_ENCODED, response.encodeURL(URL_LINK))
+                        .replace(URL_REP, response.encodeURL(URL_LINK))
                         .replace(HREF_VAL, rs.getString("AlbumID"))
                         .replace(SRC_REP, rs.getString("ImageName"))
                         .replace(ALT_REP, rs.getString("AlbumName"))

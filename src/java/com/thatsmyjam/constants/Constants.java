@@ -14,8 +14,8 @@ public class Constants
     public static final String TYPE_REP = "TYPE_REPLACE";
     public static final String HREF_VAL = "HREF_VALUE";
     public static final String URL_LINK = "/ThatsMyJam/info.jsp";
-    public static final String URL_ENCODED = "URL_ENCODED";
-    public static final String HREF_REP = "href=\"URL_ENCODED?" + TYPE_REP + "=" + HREF_VAL + "\"";
+    public static final String URL_REP = "URL_REPLACE";
+    public static final String HREF_REP = "href=\"URL_REPLACE?" + TYPE_REP + "=" + HREF_VAL + "\"";
     public static final String SRC_REP = "SOURCE_REPLACE";
     public static final String ALT_REP = "ALT_REPLACE";
     public static final String PIXEL_REP = "IMAGE_PIXELS_REPLACE";

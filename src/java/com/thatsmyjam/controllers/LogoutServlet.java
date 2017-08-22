@@ -32,7 +32,7 @@ public class LogoutServlet extends HttpServlet {
         InfoBean.setCurrentUser(null);
         HttpSession session= request.getSession();
         session.invalidate();
-        RequestDispatcher rd = request.getRequestDispatcher("/index.jsp"); //The url where go after logout
+        RequestDispatcher rd = request.getRequestDispatcher("/homepage.jsp"); //The url where go after logout
         rd.forward(request,response);
     }
 
