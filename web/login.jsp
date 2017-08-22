@@ -16,7 +16,7 @@
     <section class="login-block">
         <div class="container">
             <div class="row">
-                <div class="col-md-4 login-sec">
+                <div class="login-sec">
                     <h2 class="text-center">Login</h2>
                     <!-- Special Container Security Login via form -->
                     <form action="j_security_check" method="post" class="form-horizontal" role="form" align="center">
@@ -29,16 +29,15 @@
                             <input type="password" class="form-control"  name="j_password" placeholder="Password">
                         </div>
                         <div class="form-check">
-                            <input type="submit" value="Login"  class="btn btn-login float-right">
+                            <input type="submit" value="Login"  class="btn btn-success float-right" style="width: 200px;">
                         </div>
                     </form>
-
                 </div>
                 <div>
-                    <form method="post" action="<c:url value="/createAccount"/>"  class="form-horizontal" role="form" align="center">
+                    <form method="post" action="<c:url value="/signup.jsp"/>"  class="form-horizontal" style="margin: 10px;" role="form" align="center">
 
                         <div class="form-group">
-                            <button type="submit" name="newAcct" class="btn btn-newAcct float-bottom">Create an Account</button>
+                            <button type="submit" name="newAcct" class="btn btn-newAcct float-bottom" style="width: 200px;" >Create an Account</button>
                         </div>
                     </form>
                 </div>      

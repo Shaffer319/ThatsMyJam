@@ -49,7 +49,10 @@
                 </div>-->
         <input class="btn btn-success" type="submit" value="Change"/>
     </form>
-    <form action="<c:url value="/profileController/changePassword" />" class="form-horizontal" role="form" align="center" method="post">
+    <form action="<c:url value="/profileController/changePassword" />" 
+          class="form-horizontal" 
+          role="form" align="center" method="post"
+          style="margin-top: 10px">
         <div class="form-group">
             <label class="col-sm-3 control-label">Password:</label>
             <div class="col-sm-9">
