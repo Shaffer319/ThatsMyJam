@@ -17,44 +17,50 @@
 <div class="container">
 
     <h1> Songs </h1>
-    <ul style="list-style: none;">
-        <%
-            List<Song> myList = infoBean.getMySongsArray(user.getUserID());
-            request.setAttribute("myList", myList);
-        %>
-        <c:forEach items="<%=myList%>" var="song" >
-            <li>
-                <div class="col-xs-12 col-md-8">
-                    <div style="float:left;">
-                        <a target="_blank" 
-                           href="http://www.google.com/search?q=youtube+${song.songName.replaceAll(" ", "+")}+on+album+${song.albumName.replaceAll(" ", "+")}+&m=0"   
-                           >${song.songName}</a> by ${song.artistName}
-                    </div>
-                    <div style="float:right">
-                        <button name="song" 
-                                value="${song.songName}_${song.songID}"
-                                title="Add to Playlist" 
-                                style="height:20px" 
-                                type="submit">
+    <%
+        List<Song> myList = infoBean.getMySongsArray(user.getUserID());
+        request.setAttribute("myList", myList);
+    %>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Song</th>
+                <th>Album</th>
+                <th>Artist</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="<%=myList%>" var="song" >
+                <tr>
+                    <td> <a target="_blank" href="http://www.google.com/search?q=youtube+${song.songName.replaceAll(" ", "+")}+on+album+${song.albumName.replaceAll(" ", "+")}+&m=0"   
+                            >${song.songName}</a></td>
+                    <td>${song.albumName}</td>
+                    <td>${song.artistName}</td>
+                    <td>   <button name="song" 
+                                   value="${song.songName}_${song.songID}"
+                                   title="Add to Playlist" 
+                                   style="height:20px" 
+                                   type="submit">
                             <span class="glyphicon glyphicon-plus-sign"/>
-                        </button>
-                    </div>
-                </div>
-            </li>
-        </c:forEach>
-    </ul>
-    <!--        String targetLink = "<a target=\"_blank\" href=http://www.google.com/search?q=youtube+"
-                  + songName.replaceAll(" ", "+")
-                  + "+on+album+" + album.replaceAll(" ", "+") + "&m=0>";
-            htmlOutput += "<li><div class=\"col-xs-12 col-md-8\">"
-                  + "<div style=\"float:left\">" + targetLink + songName + "</a> by " + artist + "</div>"
-                  + "<div style=\"float:right\">"
-                  + "<button name=\"song\" value=\"" + songName + "_" + songID + "\" title=\"Add to Playlist\" style=\"height:20px\" type=\"submit\">"
-                  + "<span class=\"glyphicon glyphicon-plus-sign\"/>"
-                  + "</button></div></div></li>";-->
+                        </button></td>
+                </tr>
+            </c:forEach>
+
+            <!--        String targetLink = "<a target=\"_blank\" href=http://www.google.com/search?q=youtube+"
+                          + songName.replaceAll(" ", "+")
+                          + "+on+album+" + album.replaceAll(" ", "+") + "&m=0>";
+                    htmlOutput += "<li><div class=\"col-xs-12 col-md-8\">"
+                          + "<div style=\"float:left\">" + targetLink + songName + "</a> by " + artist + "</div>"
+                          + "<div style=\"float:right\">"
+                          + "<button name=\"song\" value=\"" + songName + "_" + songID + "\" title=\"Add to Playlist\" style=\"height:20px\" type=\"submit\">"
+                          + "<span class=\"glyphicon glyphicon-plus-sign\"/>"
+                          + "</button></div></div></li>";-->
 
 
-    <%--<%=infoBean.getMySongs(user.getUserID())%>--%>
+            <%--<%=infoBean.getMySongs(user.getUserID())%>--%>
+        </tbody>
+    </table>
 </div>
 
 <jsp:include page="/includes/footer.jsp"/>
