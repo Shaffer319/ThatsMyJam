@@ -12,8 +12,6 @@ import com.thatsmyjam.data.User;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -69,9 +67,14 @@ public class Playlists extends HttpServlet {
                 ResultSet results = DBUtil.executeSelect(query);
                 String html = "";
                 if (results.isBeforeFirst()) {
-                    html += "<h1> " + results.getString("Playlist.PlaylistName") + " </h1>";
-                    html += "<ul style=\"list-style: none;\">";
+                    boolean first = true;
                     while (results.next()) {
+                        if(first)
+                        {
+                            html += "<h1> " + results.getString("Playlist.PlaylistName") + " </h1>";
+                            html += "<ul style=\"list-style: none;\">";
+                            first = false;
+                        }
                         html += "<li>" + results.getString("Song.SongName") + "</li>";
                     }
                     html += "</ul>";
@@ -96,7 +99,7 @@ public class Playlists extends HttpServlet {
                     html += "<h1> Your Playlists </h1><ul style=\"list-style: none;\">";
                     while (results.next()) {
                         html += "<a href=/ThatsMyJam/Playlists?playlist=" + results.getInt("PlaylistID") + ">"
-                                + "<li>" + results.getString("PlaylistName") + "</li></a>";
+                             + "<li>" + results.getString("PlaylistName") + "</li></a>";
 
                     }
                 }
