@@ -63,29 +63,24 @@ public class Playlists extends HttpServlet {
                     + "INNER JOIN SONG ON Song.SongID = SongsInPlaylist.SongID "
                     + "WHERE SongsInPlaylist.PlaylistID = " + playlist;
             
-//            String getPlaylistname = "SELECT PlaylistName FROM Playlist "+
-//                    "WHERE PlaylistID = " + playlist;
-            
             String playlistname = PlaylistDB.getPlaylistName(Integer.parseInt(playlist));
             
             try {
                 ResultSet results = DBUtil.executeSelect(query);
                 String html = "";
+          
+                html += "<h1> Playlist: " + playlistname + " </h1>";
+                html += "<ul style=\"list-style: none;\">";
+                                
                 if (results.isBeforeFirst()) {
-                    boolean first = true;
                     while (results.next()) {
-                        if(first)
-                        {
-                            html += "<h1> " + playlistname + " </h1>";
-                            html += "<ul style=\"list-style: none;\">";
-                            first = false;
-                        }
                         html += "<li>" + results.getString("Song.SongName") + "</li>";
                     }
                     html += "</ul>";
                 } else {
-                    html += "<h1> Playlist not found </h1>";
+                    html += "<h1> Playlist is empty! </h1>";
                 }
+                
                 playlistBean.setPlaylistResults(html);
             } catch (SQLException e) {
                 String html = "<p> An error occurred while processing your request, try again</p>"  + e.getMessage();

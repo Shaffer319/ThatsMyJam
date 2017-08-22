@@ -31,10 +31,10 @@ public class PlaylistDB {
         try {
             ps = connection.prepareStatement(query);
             ResultSet result = ps.executeQuery(query);
-            
+
             result.next();
             playlistName = result.getString("PlaylistName");
-            
+
         } catch (SQLException e) {
             System.out.println(e);
         } finally {
@@ -45,21 +45,33 @@ public class PlaylistDB {
         return playlistName;
     }
 
-    public static List<Playlist> getPlaylistForUser(int UserID) throws SQLException {
+    public static List<Playlist> getPlaylistNamesForUser(int UserID) {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement ps = null;
+
         List<Playlist> list = new ArrayList<>();
 
         String query = "SELECT PlaylistID, PlaylistName FROM Playlist WHERE UserID = "
                 + UserID;
+        try {
+            ps = connection.prepareStatement(query);
+            ResultSet results = ps.executeQuery(query);
+            while (results.next()) {
+                Playlist playlist = new Playlist();
 
-        ResultSet results = DBUtil.executeSelect(query);
-        while (results.next()) {
-            Playlist playlist = new Playlist();
+                playlist.setPlaylistID(results.getInt("PlaylistID"));
+                playlist.setPlaylistName(results.getString("PlaylistName"));
 
-            playlist.setPlaylistID(results.getInt("PlaylistID"));
-            playlist.setPlaylistName(results.getString("PlaylistName"));
-
-            list.add(playlist);
+                list.add(playlist);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            DBUtil.closePreparedStatement(ps);
+            pool.freeConnection(connection);
         }
+
         return list;
     }
 
