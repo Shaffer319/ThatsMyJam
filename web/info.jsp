@@ -9,6 +9,7 @@
 <html lang="en">
     <head>
         <jsp:useBean id="infoBean" class="com.thatsmyjam.beans.InfoBean" scope="session" />
+        <jsp:useBean id="user" class="com.thatsmyjam.data.User" />
         <title>
             <% if (request.getParameter("artist") != null) {%>
             <%=infoBean.getTitle(true, request.getParameter("artist"))%>
@@ -23,7 +24,7 @@
         <link href="css/homepage.css" rel="stylesheet">
     </head>
     <body data-spy="scroll">
-        <jsp:include page="includes/navbar.jsp" />
+        <jsp:include page="/includes/navbar.jsp" />
 
         <div class="container">
             <form method="post" action=<%= response.encodeURL("ShoppingCart")%> class="form-horizontal" role="form" align="center">
@@ -32,7 +33,7 @@
                 <%} else {%>
                 <%=infoBean.getPage(response, false, request.getParameter("album"))%>
                 <br></br>
-                    <% if (!infoBean.albumOwned(request.getParameter("album"))) {%>
+                    <% if (!infoBean.albumOwned( user.getUserID(), request.getParameter("album"))) {%>
                         <button type="submit" name="addAlbumCart" class="btn btn-default">
                             Add Album to Cart <span class="glyphicon glyphicon-shopping-cart"></span>
                         </button> 
@@ -40,10 +41,6 @@
                 }%>
             </form>
         </div>
-        <!-- Bootstrap core Javascript and jQuery  -->
-        <!-- Placed at the end for faster loading of pages -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-    </body>
-</html>
+
+<jsp:include page="/includes/footer.jsp"/>
 

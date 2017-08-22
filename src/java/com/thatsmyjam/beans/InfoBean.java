@@ -376,7 +376,7 @@ public class InfoBean implements Serializable {
      *
      * @return - True if the user owns the album, false otherwise
      */
-    public boolean albumOwned(String album) {
+    public boolean albumOwned(int userID, String album) {
         int albumID = -1;
         try {
             albumID = Integer.parseInt(album);
@@ -385,7 +385,7 @@ public class InfoBean implements Serializable {
         }
 
         // TODO Fix when login is working
-        String query = "SELECT SongID FROM OwnedSongs WHERE UserID = 1"; // + InfoBean.getCurrentUser().getUserID();
+        String query = "SELECT SongID FROM OwnedSongs WHERE UserID = " + userID; // + InfoBean.getCurrentUser().getUserID();
 
         try {
             ResultSet results = DBUtil.executeSelect(query);

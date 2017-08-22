@@ -35,8 +35,9 @@ public class ProfileServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
-        String requestURI = request.getRequestURI();
+        
+        String requestURI = request.getRequestURI().split(";")[0]; // Remove the session id
+                
         Principal p = request.getUserPrincipal(); // if null user is not logged in
         String url = "/profile";
 

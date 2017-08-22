@@ -94,14 +94,7 @@ public class ShoppingCart extends HttpServlet {
             dispatcher.forward(request, response);
         } 
         else if ((request.getParameter("checkout") != null)) 
-        {
-            if(user == null)
-            {
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("profileController/cart");
-                dispatcher.forward(request, response);
-                return;
-            }
-            
+        {           
             cart.setPurchasedDate(); //maybe store the date purchased?
             ResultSet results;
             String sql_albumsong;
