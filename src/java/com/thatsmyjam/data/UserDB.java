@@ -182,7 +182,7 @@ public class UserDB {
                 user.setEmail(rs.getString("Email"));
                 user.setPassword(rs.getString("Password"));
                 user.setUserID(Integer.parseInt(rs.getString("UserID")));
-                InfoBean.setCurrentUser(user);
+                // InfoBean.setCurrentUser(user);
             }
             return user;
         } catch (SQLException e) {

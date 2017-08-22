@@ -7,6 +7,7 @@ package com.thatsmyjam.servlets;
 
 import com.thatsmyjam.beans.InfoBean;
 import com.thatsmyjam.data.DBUtil;
+import com.thatsmyjam.data.User;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,13 +43,20 @@ public class Playlists extends HttpServlet {
         
         InfoBean playlistBean = new InfoBean();
         request.getSession().setAttribute("playlistBean", playlistBean);
+        User user = (User)request.getSession().getAttribute("user");
+        String url = "/playlists.jsp";
         
+        if(user == null){
+            // They have to login go through profile controller then back to here
+            url = "/profileController/playlists";
+        }
+        else
         if(playlist != null && !playlist.trim().equals(""))
         {
             String query = "SELECT SongName, PlaylistName FROM SongsInPlaylist "
                          + "INNER JOIN Playlist ON Playlist.PlaylistID = SongsInPlaylist.PlaylistID "
                          + "WHERE SongsInPlaylist.PlaylistID = " + playlist
-                         + " AND Playlist.UserID = " + InfoBean.getCurrentUser().getUserID();
+                         + " AND Playlist.UserID = " + user.getUserID(); //InfoBean.getCurrentUser().getUserID();
             
             try
             {
@@ -83,7 +91,7 @@ public class Playlists extends HttpServlet {
         else
         {
             String query = "SELECT PlaylistID, PlaylistName FROM Playlist WHERE UserID = "
-                    + "1"; //TODO+ InfoBean.getCurrentUser().getUserID();
+                    + user.getUserID();
 
             try
             {
@@ -125,7 +133,7 @@ public class Playlists extends HttpServlet {
         }
         ServletContext servletContext = getServletContext();
         RequestDispatcher dispatcher;
-        dispatcher = servletContext.getRequestDispatcher("/playlists.jsp");
+        dispatcher = servletContext.getRequestDispatcher(url);
         dispatcher.forward(request, response);
     }
 

@@ -29,7 +29,7 @@ public class LogoutServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        InfoBean.setCurrentUser(null);
+        // InfoBean.setCurrentUser(null);
         HttpSession session= request.getSession();
         session.invalidate();
         RequestDispatcher rd = request.getRequestDispatcher("/homepage.jsp"); //The url where go after logout
