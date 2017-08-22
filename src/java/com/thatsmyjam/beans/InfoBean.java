@@ -92,7 +92,7 @@ public class InfoBean implements Serializable {
      * @param id - ID of the Artist/Album to get the page information for
      * @return - HTML to display to the user
      */
-    public String getPage(HttpServletResponse response, boolean isArtist, String id) {
+    public String getPage(HttpServletResponse response, int userID, boolean isArtist, String id) {
         try {
             Integer.parseInt(id);
         } catch (NumberFormatException e) {
@@ -193,7 +193,7 @@ public class InfoBean implements Serializable {
                 DBUtil.closeSelectObjects();
 
                 //TODO UNCOMMENT WHEN LOGIN IS WORKING SO A USER CAN BE TRACKED
-                query = "SELECT SongID FROM OwnedSongs WHERE UserID = 1";// + getCurrentUser().getUserID();
+                query = "SELECT SongID FROM OwnedSongs WHERE UserID = " + userID;
 
                 results = DBUtil.executeSelect(query);
                 ArrayList<Integer> ownedSongs = new ArrayList<Integer>();

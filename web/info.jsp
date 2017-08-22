@@ -29,9 +29,9 @@
         <div class="container">
             <form method="post" action=<%= response.encodeURL("ShoppingCart")%> class="form-horizontal" role="form" align="center">
                 <% if (request.getParameter("artist") != null) {%>
-                <%=infoBean.getPage(response, true, request.getParameter("artist"))%>
+                <%=infoBean.getPage(response, user.getUserID(), true, request.getParameter("artist"))%>
                 <%} else {%>
-                <%=infoBean.getPage(response, false, request.getParameter("album"))%>
+                <%=infoBean.getPage(response, user.getUserID(), false, request.getParameter("album"))%>
                 <br></br>
                     <% if (!infoBean.albumOwned( user.getUserID(), request.getParameter("album"))) {%>
                         <button type="submit" name="addAlbumCart" class="btn btn-default">
