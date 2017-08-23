@@ -18,6 +18,7 @@
 <div class="container">
 
     <h1> Songs </h1>
+    <center><h3><span style="color: red;">${message}</span></h3></center>
     <button type="button" name="newPlaylist" class="btn btn-primary" data-toggle="collapse" data-target="#addPlaylist">
         Create New Playlist <span class="glyphicon glyphicon-plus-sign"></span>
     </button>

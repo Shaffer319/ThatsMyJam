@@ -62,16 +62,16 @@ public class Playlists extends HttpServlet {
             String query = "SELECT Song.SongName FROM SongsInPlaylist "
                     + "INNER JOIN SONG ON Song.SongID = SongsInPlaylist.SongID "
                     + "WHERE SongsInPlaylist.PlaylistID = " + playlist;
-            
+
             String playlistname = PlaylistDB.getPlaylistName(Integer.parseInt(playlist));
-            
+
             try {
                 ResultSet results = DBUtil.executeSelect(query);
                 String html = "";
-          
+
                 html += "<h1> Playlist: " + playlistname + " </h1>";
                 html += "<ul style=\"list-style: none;\">";
-                                
+
                 if (results.isBeforeFirst()) {
                     while (results.next()) {
                         html += "<li>" + results.getString("Song.SongName") + "</li>";
@@ -80,10 +80,10 @@ public class Playlists extends HttpServlet {
                 } else {
                     html += "<h1> Playlist is empty! </h1>";
                 }
-                
+
                 playlistBean.setPlaylistResults(html);
             } catch (SQLException e) {
-                String html = "<p> An error occurred while processing your request, try again</p>"  + e.getMessage();
+                String html = "<p> An error occurred while processing your request, try again</p>" + e.getMessage();
                 playlistBean.setPlaylistResults(html);
             } finally {
                 DBUtil.closeSelectObjects();
@@ -99,7 +99,7 @@ public class Playlists extends HttpServlet {
                     html += "<h1> Your Playlists </h1><ul style=\"list-style: none;\">";
                     while (results.next()) {
                         html += "<a href=/ThatsMyJam/Playlists?playlist=" + results.getInt("PlaylistID") + ">"
-                             + "<li>" + results.getString("PlaylistName") + "</li></a>";
+                                + "<li>" + results.getString("PlaylistName") + "</li></a>";
 
                     }
                 }
@@ -132,12 +132,15 @@ public class Playlists extends HttpServlet {
         // validation
         if (playlistName == null) {
             request.setAttribute("message", "Could not add Playlist '" + playlistName + "' to database.");
+            return "/mySongs.jsp";
 
         } else if (playlistName.trim().isEmpty()) {
             request.setAttribute("message", "Could not add Playlist '" + playlistName + "' to database.");
+            return "/mySongs.jsp";
 
         } else if (playlistName.length() > 30) {
             request.setAttribute("message", "Could not add Playlist '" + playlistName + "' to database greater than max length.");
+            return "/mySongs.jsp";
 
         } else {
 
@@ -148,6 +151,8 @@ public class Playlists extends HttpServlet {
             // Todo check if user has a playlist with this name
             if (count == 0) {
                 request.setAttribute("message", "Could not add Playlist '" + playlistName + "' to database.");
+                return "/mySongs.jsp";
+
             }
         }
         return "/Playlists";
@@ -157,15 +162,24 @@ public class Playlists extends HttpServlet {
     private String handleAddSongToPlaylist(User user, HttpServletRequest request, HttpServletResponse response) {
         String sPlaylistID = request.getParameter("playlistID");
         String sSongID = request.getParameter("songID");
+        int playlistID = 0;
         try {
-            int playlistID = Integer.parseInt(sPlaylistID);
-            int songID = Integer.parseInt(sSongID);
-
-            int count = PlaylistDB.addSongToPlayList(playlistID, songID);
+            playlistID = Integer.parseInt(sPlaylistID);
         } catch (NumberFormatException e) {
-            request.setAttribute("message", "Invalid IDs.");
+            request.setAttribute("message", "Invalid playlistID.");
+            return "/mySongs.jsp";
         }
-        return "/Playlists";
+        int songID = 0;
+        try {
+            songID = Integer.parseInt(sSongID);
+        } catch (NumberFormatException e) {
+            request.setAttribute("message", "Invalid songID.");
+            return "/mySongs.jsp";
+        }
+
+        int count = PlaylistDB.addSongToPlayList(playlistID, songID);
+        return "/Playlists?playlist=" + playlistID;
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
