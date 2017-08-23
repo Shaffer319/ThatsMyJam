@@ -204,6 +204,7 @@
                 </div>
             </div>
         </div>
+    </form>
 </div>
 <jsp:include page="/includes/footer.jsp"/>
 
