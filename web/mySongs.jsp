@@ -45,7 +45,7 @@
         request.setAttribute("myPlaylistList", myPlaylistList);
 
     %>
-    <form action="<c:url value="/Playlist/AddSongToPlaylist"/>"> 
+    <form action="<c:url value="/Playlists/AddSongToPlaylist"/>"> 
         <fieldset> <legend>Playlists</legend>
         <c:forEach items="${myPlaylistList}" var="playlist" >
             <input type="radio" name="playlistID" value="${playlist.playlistID}" />${playlist.playlistName}<br/>
@@ -67,7 +67,7 @@
                                 >${song.songName}</a></td>
                         <td>${song.albumName}</td>
                         <td>${song.artistName}</td>
-                        <td>   <button name="song" 
+                        <td>   <button name="songID" 
                                        value="${song.songID}"
                                        title="Add to Playlist" 
                                        style="height:20px" 
