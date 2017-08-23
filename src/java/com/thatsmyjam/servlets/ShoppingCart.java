@@ -30,7 +30,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author bean51591
  */
-@WebServlet(name = "ShoppingCart", urlPatterns = {"/ShoppingCart"})
+@WebServlet(name = "ShoppingCart", urlPatterns = {"/ShoppingCart/*"})
 public class ShoppingCart extends HttpServlet {
     
     /**
@@ -163,12 +163,16 @@ public class ShoppingCart extends HttpServlet {
                         DBUtil.closeInsertObjects();
                     }
                 }
+                    cart.setItems(new ArrayList());
+
+                    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart.jsp");
+                    dispatcher.forward(request, response);
+                    return;
 
             }
             // Empty the cart and forward the no response message
-            cart.setItems(new ArrayList());
-            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/checkout.jsp");
+//            response.setStatus(HttpServletResponse.SC_NO_CONTENT);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/cart.jsp");
             dispatcher.forward(request, response);
         }
     }

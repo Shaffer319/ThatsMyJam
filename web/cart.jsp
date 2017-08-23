@@ -19,7 +19,7 @@
 %>
 
 <div class="container">
-    <form method="post" action=<%= response.encodeURL("ShoppingCart")%>  class="form-horizontal" role="form" align="center">
+    <form method="post" action="<c:url value="/ShoppingCart"/>" class="form-horizontal" role="form" align="center">
         <legend>Shopping Cart</legend>
         <% if (message != null) {%>
         <p><i><font color= #B1351A><%= message%></font></i></p>
@@ -174,7 +174,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-9">
-                            <form method="post" class="form-horizontal" role="form" align="center" action=<%= response.encodeURL("ShoppingCart")%>>
+                            <form method="post" class="form-horizontal" role="form" align="center" action="<c:url value="/ShoppingCart"/>" >
                                 <button type="submit" name="checkout" class="btn btn-success" data-toggle="modal" data-target="#confirmDialog">Confirm Payment</button>
                             </form>
                         </div>
