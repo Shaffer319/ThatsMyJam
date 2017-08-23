@@ -155,8 +155,8 @@ public class Playlists extends HttpServlet {
     }
 
     private String handleAddSongToPlaylist(User user, HttpServletRequest request, HttpServletResponse response) {
-        String sPlaylistID = request.getParameter("PlaylistID");
-        String sSongID = request.getParameter("SongID");
+        String sPlaylistID = request.getParameter("playlistID");
+        String sSongID = request.getParameter("songID");
         try {
             int playlistID = Integer.parseInt(sPlaylistID);
             int songID = Integer.parseInt(sSongID);

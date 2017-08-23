@@ -8,11 +8,14 @@ package com.thatsmyjam.beans;
 import static com.thatsmyjam.constants.Constants.*;
 
 import com.thatsmyjam.data.DBUtil;
+import com.thatsmyjam.data.Playlist;
+import com.thatsmyjam.data.PlaylistDB;
 import com.thatsmyjam.data.Song;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -283,6 +286,10 @@ public class InfoBean implements Serializable {
         return htmlOutput;
     }
 
+    public List<Playlist> getMyPlaylists(int userID){
+        return PlaylistDB.getPlaylistNamesForUser(userID);
+    }
+    
     public ArrayList<Song> getMySongsArray(int userID) {
         ArrayList<Song> songs = new ArrayList<>();
 
