@@ -21,6 +21,10 @@ public class User {
 
     }
 
+    public boolean isLoaded(){
+        return userID != -1;
+    }
+    
     /**
      * @return the userID
      */

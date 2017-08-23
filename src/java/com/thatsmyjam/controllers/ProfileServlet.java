@@ -35,12 +35,12 @@ public class ProfileServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+
         String requestURI = request.getRequestURI().split(";")[0]; // Remove the session id
-                
+
         Principal p = request.getUserPrincipal(); // if null user is not logged in
         String url = "/profile";
-        
+
         // This may have been easier todo through a filter
         User user = getUser(request);
         // This will bring users in to access the resoruces load the user then return them back to their action.
@@ -77,12 +77,10 @@ public class ProfileServlet extends HttpServlet {
 
         String userName = request.getUserPrincipal().getName();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+//        User user = (User) session.getAttribute("user");
 
-        if (user == null) {
-            user = UserDB.selectUser(userName);
-            session.setAttribute("user", user);
-        }
+        User user = UserDB.selectUser(userName);
+        session.setAttribute("user", user);
 
         return user;
     }

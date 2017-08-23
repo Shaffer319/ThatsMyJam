@@ -15,11 +15,19 @@ public class Album
 {
     private int albumID;
     private String albumName;
+    private String artistName;
     private int artistID;
     private int releaseYear;
     private String imageName;
     private float albumPrice;
     private ArrayList<String> songList;
+    
+    public String getArtistName(){
+        return this.artistName;
+    }
+    public void setArtistName(String artistName){
+        this.artistName = artistName;
+    }
     
     /**
      * Constructor

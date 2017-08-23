@@ -13,6 +13,8 @@
 
 <jsp:useBean id="infoBean" class="com.thatsmyjam.beans.InfoBean" scope="session" />
 <jsp:useBean id="cartBean" class="com.thatsmyjam.beans.CartBean" scope="session" />
+<jsp:useBean id="user" class="com.thatsmyjam.data.User" scope="session"/>
+
 <%
     CartBean cart = (CartBean) session.getAttribute("cartBean");
     String message = cart.getMessage();
@@ -87,16 +89,16 @@
                                 </button></td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${empty user}">
-                                        <a href="<c:url value="/profileController/cart"/>">
-                                        <button type="button" name="payment" class="btn btn-primary" data-toggle="collapse" data-target="#payment">
-                                            Add Payment <span class="glyphicon glyphicon-play"></span>
-                                        </button> </a>
-                                    </c:when>
-                                    <c:otherwise>
+                                    <c:when test="${user.loaded}">
                                         <button type="button" name="payment" class="btn btn-primary" data-toggle="collapse" data-target="#payment">
                                             Add Payment <span class="glyphicon glyphicon-play"></span>
                                         </button>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <a href="<c:url value="/profileController/cart"/>">
+                                        <div type="button" style="width: 100;" >
+                                            Login <span class="glyphicon glyphicon-play"></span>
+                                        </div> </a>
                                     </c:otherwise>
                                 </c:choose>
                             </td>
