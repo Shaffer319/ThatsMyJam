@@ -114,8 +114,6 @@ public class Search extends HttpServlet {
             InfoBean bean = new InfoBean();
             bean.setSearchResults("<p>No results found.</p>");
             request.getSession().setAttribute("searchBean", bean);
-            dispatcher = servletContext.getRequestDispatcher("/searchResults.jsp");
-            dispatcher.forward(request, response);
             servletContext
                     .getRequestDispatcher("/searchResults.jsp")
                     .forward(request, response);

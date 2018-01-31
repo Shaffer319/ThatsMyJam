@@ -4,6 +4,7 @@
     Author     : mshaffer
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="user" class="com.thatsmyjam.data.User" scope="session"/>
 
 <nav class="navbar navbar-inverse">
     <div class="container-fluid">
@@ -38,11 +39,11 @@
                 <a href="<c:url value="/profileController/view"/>" >
                     <span class="glyphicon glyphicon-user"></span>
                     <c:choose>
-                        <c:when test="${empty user}">
-                            Account
+                        <c:when test="${user.loaded}">
+                            ${user.firstName} ${user.lastName}
                         </c:when>
                         <c:otherwise>
-                            ${user.firstName} ${user.lastName}
+                            Account
                         </c:otherwise>
                     </c:choose>
                 </a>

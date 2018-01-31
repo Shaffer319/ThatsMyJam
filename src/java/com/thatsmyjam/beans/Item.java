@@ -23,6 +23,11 @@ public class Item {
     private int songID;
     private float price;
 
+    // Needs empty constructor to be a bean
+    public Item(){
+        
+    }
+    
     public  Item(String itemTitle, String image, String artistName,int artistID,String albumName,int albumID, String songName, int songID, float price){
         this.itemTitle = itemTitle;
         this.image = image;
